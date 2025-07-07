@@ -5,6 +5,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 from fastapi import FastAPI
 import uvicorn
+import json
 
 app = FastAPI()
 
@@ -12,19 +13,26 @@ class ObservationProcessorNode(Node):
     def __init__(self):
         super().__init__('observation_processor_node')
 
-        self.create_subscription(String, 'sensor_data', self.listener_callback, 10)
-        self.latest_message = {"data": None}
+        self.create_subscription(String, 'sensor_data', self.some_data_listener_callback, 10)
+        self.conditions = {}
 
-    def listener_callback(self, msg):
+    def some_data_listener_callback(self, msg):
         self.get_logger().info(f'Received: {msg.data}')
-        self.latest_message["data"] = msg.data
+        try:
+            data_json = json.loads(msg.data)
+            value = data_json.get("value")
+        except json.JSONDecodeError:
+            self.get_logger().error('Failed to decode JSON from the received message.')
+            value = None
+        # Here we should process the data and update conditions
+        self.conditions["some_condition"] = value
 
 # FastAPI edpoints
-@app.get("/probe/latest_data")
+@app.get("/probe/conditions")
 async def get_last_data():
-    if node.latest_message["data"] is None:
+    if not "some_condition" in node.conditions:
         return {"message": "No data received yet."}
-    return {"latest_data": node.latest_message["data"]}
+    return {"some_condition": node.conditions["some_condition"]}
 
 def ros2_thread():
     global node

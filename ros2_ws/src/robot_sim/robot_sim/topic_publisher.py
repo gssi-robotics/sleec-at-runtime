@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
+import json
 
 class TopicPublisherNode(Node):
     def __init__(self):
@@ -15,7 +16,7 @@ class TopicPublisherNode(Node):
 
     def publish_sensor_data(self):
         message = String()
-        message.data = f"Sensor Data #{self.counter}"
+        message.data = json.dumps({"value": f"Sensor Data #{self.counter}"})
         self.sensor_data_publisher.publish(message)
         self.counter+=1
 

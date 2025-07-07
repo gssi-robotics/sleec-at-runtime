@@ -4,18 +4,18 @@ import httpx
 async def enforcer_loop():
     try:
         async with httpx.AsyncClient() as client:
-            probe_response = await client.get("http://localhost:8000/probe/latest_data")
-            probe_data_json = probe_response.json()
+            conditions_response = await client.get("http://localhost:8000/probe/conditions")
+            conditions_data_json = conditions_response.json()
 
-            print(f"Probe data: {probe_data_json}")
+            print(f"Conditions: {conditions_data_json}")
 
-            probe_data = probe_data_json.get("latest_data")
-            if probe_data is None:
-                print("No probe data")
+            conditions_data = conditions_data_json.get("some_condition")
+            if conditions_data is None:
+                print("No conditions data")
                 return
 
             # Data analysis, then when done and if needed
-            task = "example_task"
+            task = "Some task"
 
             obligation_response = await client.post(
                 "http://localhost:8001/obligation/execute",
