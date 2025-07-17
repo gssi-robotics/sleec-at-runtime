@@ -8,6 +8,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.venv/
 
 # VSCode settings (opzionale)
 .vscode/

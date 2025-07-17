@@ -28,6 +28,15 @@ colcon build
 . install/setup.bash
 ```
 
+*OR Run ROS2 with Docker*
+
+```bash
+docker build -t ari-sleec .  
+docker run -it --rm ari-sleec
+colcon build
+. install/setup.bash
+```
+
 Run:
 ```
 ros2 launch sleec_enforcer_subsystem abstraction_communication_layer_launch.py 
@@ -61,7 +70,7 @@ Run:
 ros2 launch robot_sim robot_sim_launch.py
 ```
 
-## Installing dependencies
+## Installing dependencies (only for non-Docker deployment)
 Run
 ```
 pip install -r requirements.txt
