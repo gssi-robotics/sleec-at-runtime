@@ -51,7 +51,7 @@ def ros2_thread():
 def main(args=None):
     spin_thread = threading.Thread(target=ros2_thread, daemon=True)
     spin_thread.start()
-    uvicorn.run(app, port=8001, log_level='info')
+    uvicorn.run(app, host="0.0.0.0", port=8001, log_level='info')
 
 if __name__ == "__main__":
     main()
