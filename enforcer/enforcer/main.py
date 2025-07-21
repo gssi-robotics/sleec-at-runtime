@@ -9,6 +9,16 @@ from configuration_manager import ConfigurationManager
 from model_uploader import ModelUploader
 from enforcer import Enforcer
 
+enforcer_interventions = None
+n_step = None
+test_run_start = None
+out_action = None
+start_time = None
+start_delay = None
+stop_delay = None
+upload_delay = None
+delete_delay = None
+total_sanitisation_delay = None
 
 def read_input(input_dict):
     s = input("Insert input location values: ")
@@ -29,7 +39,16 @@ def start(enforcer:Enforcer, model_uploader:ModelUploader):
     Returns:
         None
     """
-        
+
+    global total_sanitisation_delay
+    global max_sanitisation_delay
+    global enforcer_interventions
+    global n_step
+    global start_time   
+    global start_delay
+    global upload_delay
+    global test_run_start
+
     execute_enforcer = enforcer != None
     
     if execute_enforcer:
@@ -39,7 +58,7 @@ def start(enforcer:Enforcer, model_uploader:ModelUploader):
 
     logger.info("--Starting new test run--")
     test_run_start = time.perf_counter()
-    
+  
     n_step = 0
     if execute_enforcer:
             total_sanitisation_delay = 0
@@ -90,6 +109,15 @@ def start(enforcer:Enforcer, model_uploader:ModelUploader):
     """
 
 async def enforcer_loop(enforcer:Enforcer):
+   
+    global total_sanitisation_delay
+    global max_sanitisation_delay
+    global enforcer_interventions
+    global n_step
+    global out_action
+    global start_time   
+    global start_delay
+
     try:
         async with httpx.AsyncClient() as client:
             """
@@ -144,8 +172,17 @@ async def enforcer_loop(enforcer:Enforcer):
 
 
 async def main():
-    
-    # ASM enforcement model upload
+    global total_sanitisation_delay
+    global max_sanitisation_delay
+    global enforcer_interventions
+    global n_step
+    global start_time   
+    global start_delay
+    global stop_delay
+    global upload_delay
+    global delete_delay
+
+    #Start enforcer by uploading of the ASM enforcement model
     ip, port, asm_path, asm_file_name, other_models_names = config_manager.get_server_params()
     enforcer =Enforcer(ip, port, asm_file_name)
     model_uploader = ModelUploader(ip, port, asm_path, asm_file_name, other_models_names)
@@ -156,12 +193,14 @@ async def main():
         logger.error("Failed to connect to the server - Executing the test runs WITHOUT the model")            
         #run(None, None)
     execute_enforcer = enforcer != None
-    #enforcement feedback loop
+    
+    #Run enforcement feedback loop
     if execute_enforcer:
         while True:
             logger.info("--Executing new step--")
             await enforcer_loop(enforcer)      # Run one step of the ASM enforcement model
             await asyncio.sleep(5.0)
+
     # Stop the execution of the ASM enforcement model
     if execute_enforcer:
             start_time = time.perf_counter()
@@ -200,4 +239,5 @@ if __name__ == "__main__":
     logger.info(f"Loaded config.json - Starting execution with id {execution_id}")
     config_manager.log_configuration()
 
+    # Start and run enforcer
     asyncio.run(main())
