@@ -184,6 +184,7 @@ async def main():
         # Try to run the tests again without the ASM model if at a certain point the server is down  
         logger.error("Failed to connect to the server - Executing the test runs WITHOUT the model")            
         #run(None, None)
+   
     execute_enforcer = enforcer != None
     
     #Run enforcement feedback loop
