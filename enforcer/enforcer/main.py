@@ -8,17 +8,9 @@ import logging_manager
 from configuration_manager import ConfigurationManager
 from model_uploader import ModelUploader
 from enforcer import Enforcer
+import knowledge
 
-enforcer_interventions = None
-n_step = None
-test_run_start = None
-out_action = None
-start_time = None
-start_delay = None
-stop_delay = None
-upload_delay = None
-delete_delay = None
-total_sanitisation_delay = None
+
 
 def read_input(input_dict):
     s = input("Insert input location values: ")
