@@ -26,6 +26,7 @@ setup(
             'observation_processor = sleec_enforcer_subsystem.abstraction_communication_layer.observation_processor:main',
             'actuation_processor = sleec_enforcer_subsystem.abstraction_communication_layer.actuation_processor:main',
             'enforcer = sleec_enforcer_subsystem.enforcer:main',
+            'monitor = sleec_enforcer_subsystem.firefighter_comm_layer.monitor:main',            
         ],
     },
 )

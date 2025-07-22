@@ -80,3 +80,24 @@ Run
 pip install -r requirements.txt
 ```
 to install the dependencies for the project (ROS2 is excluded. Follow the [ROS2 documentation](https://docs.ros.org/en/humble/Installation.html) to install ROS2)
+
+
+# Examples
+
+## Firefighter Example
+
+Build ROS docker image:
+```bash
+docker build -t ari-sleec .  
+docker run -it -p 8000:8000 -p 8001:8001 --rm --name ari-sleec ari-sleec
+```
+
+Launch firefighter simulation:
+```bash
+ros2 launch firefighter_sim firefighter_sim_launch.py
+```
+
+Run monitor:
+```bash
+ros2 run sleec_enforcer_subsystem monitor
+```
