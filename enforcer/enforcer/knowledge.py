@@ -8,3 +8,6 @@ stop_delay = None
 upload_delay = None
 delete_delay = None
 total_sanitisation_delay = None
+input_conditions = {} #dict function name : value
+out_obligations = {} #dict CapabilityID : (TCType,Integer,TimerUnit,CapabilityID)
+                     #examples: GOHOME: (AFTER,5,MIN,undef), GOHOME: (WITHIN,8,MIN,SOUNDALARM), GOHOME: undef

@@ -66,7 +66,7 @@ definitions:
 	 	forall $c in Capability do 
 	 		par
 				info($c) := (undef,undef,undef,undef,undef)
-				outConstraint(id($c)) := (undef,undef,undef,undef)
+				outConstraint(id($c)) := undef //(undef,undef,undef,undef)
 				doObligation := undef
 			    outObligation := undef
 				constraint($c) := undef

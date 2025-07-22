@@ -39,6 +39,7 @@ class Enforcer(RestClient):
             self.logger.error(f"Failed to stop execution: {e}")
             raise
 
+    '''
     #First input for an initialization step (if necessary) of the ASM enforcement model 
     def initialize_enforcement_model(self,input_dict):
         endpoint = "step"
@@ -59,12 +60,13 @@ class Enforcer(RestClient):
         except Exception as e:
             self.logger.error("ASM step execution failed: %s", e)
             raise    
-    
+    '''
+
     #Your output sanitization logic goes here. This is application-specific and depends on the
     #I/O interfaces (and also on Probe/Effector interfaces in case of gray-box enforcement).
     def sanitise_output(self, input_dict):
         """
-        Perform a step on the ASM and repair (if necessary) the system action (i.e. output sanitisation).
+        Perform an ASM step and repair (if necessary) the system action (i.e. output sanitisation).
         """
         endpoint = "step"
         json_data = {}
@@ -77,20 +79,28 @@ class Enforcer(RestClient):
             delay = (time.perf_counter() - start_time) * 1000
             self.logger.info(f"ASM step performed for ID {self.exec_id} with delay {delay:.2f} ms")
             # Check if dictionary of out locations is empty
-            enforced_actions = response.json()["runOutput"]["outvalues"] #all out locations of the ASM are collected
-            if not enforced_actions: # outAction not set (should never happen)
+            out_locations = response.json()["runOutput"]["outvalues"] #all out locations of the ASM are collected
+            self.logger.info(f"ASM output: {out_locations}")
+            if not out_locations: # out locations not set (should never happen; typically when the input for the ASM is ill formed)
                 self.logger.error("The ASM returned no outAction but should always return something.")
-                return None
-            """if len(enforced_actions) <= 1:  replaced with the next sentence"""
-            if enforced_actions['outObligation'] == 'undef':
+                return None #return None
+            """if len(out_locations) <= 1:  replaced with the next sentence"""
+            if out_locations['outObligation'] == 'undef':
                 self.logger.info("Enforcement not applied.")
-                self.logger.info(f"ASM output: {enforced_actions['outObligation']}")
-                return None
+                self.logger.info(f"ASM output: {out_locations}")
+                return None #Return None
             else:
-                self.logger.info("Enforcement applied - changing action.")
-                self.logger.info(f"ASM output: {enforced_actions['outObligation']} {enforced_actions['outConstraint('+enforced_actions['outObligation']+')']}")
-            return enforced_actions #returns all out locations
+                self.logger.info("Enforcement applied.")
+                #Filtering of the out locations of the ASM for the obligation and its time constraints (if any)
+                #Current version works only for single obligation; so the returned dict has a single key
+                #Examples: {GOHOME: (AFTER,5,MIN,undef)}, {GOHOME: (WITHIN,8,MIN,SOUNDALARM)}, {GOHOME: undef}
+                time_constraint_tuple = out_locations['outConstraint('+out_locations['outObligation']+')']
+                enforced_obligations = {out_locations['outObligation']:time_constraint_tuple} 
+                
+                #Return the obligations to actuate, as filtered from the out locations of the ASM model
+                #self.logger.info(f"ASM output: {out_locations['outObligation']} {out_locations['outConstraint('+out_locations['outObligation']+')']}")
+                self.logger.info(f"ASM output (as filtered): {enforced_obligations}")
+                return enforced_obligations
         except Exception as e:
             self.logger.error("ASM step execution failed: %s", e)
             raise    
-        

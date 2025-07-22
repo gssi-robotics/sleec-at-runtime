@@ -59,47 +59,7 @@ def start(enforcer:Enforcer, model_uploader:ModelUploader):
             start_time = time.perf_counter()
             enforcer.begin_enforcement()
             start_delay = (time.perf_counter() - start_time) * 1000
-            """
-             #Initialization step is not necessary
-            input_dict = {} #to prepare the dict for ASM inputs
-            logger.info("Invoke the initialization step...")
-            #Read the inputs for initializing the ASM model (a dict: the name of the function is the key, the value is the function's value)
-            read_input(input_dict)
-            #Invoke the initialization step
-            out_state = enforcer.initialize_enforcement_model(input_dict)
-            logger.info(f"ASM out_state: {out_state}")
-            """
-    
-    
-    """
-    done = False
-    while not done:
-        logger.info("--Executing new step--")
-        if execute_enforcer:
-            # Observe the environment and the target system: your logics goes here (it's application-specific).
-            #Read the inputs for the ASM model (a dict: the name of the function is the key, the value is the function's value)
-            input_dict = {} #to prepare the dict for ASM inputs
-            read_input(input_dict)       
-            # If the enforcer is running, try to sanitise the system's output with the ASM enforcement model
-            start_time = time.perf_counter()
-            n_step+=1
-            #invoke the output sanitization step
-            enforced_action = enforcer.sanitise_output(input_dict)
-            #some stats 
-            sanitisation_delay = (time.perf_counter() - start_time) * 1000
-            max_sanitisation_delay = max(max_sanitisation_delay, sanitisation_delay)
-            total_sanitisation_delay += sanitisation_delay
-            # Change the action if the enforcer returns a new different one
-            if enforced_action != None: 
-                out_action = enforced_action
-                enforcer_interventions += 1
-            #else:
-             #   logger.info(f"Action: {out_action}")
-        # Run the step on the environment using the effector interface
-        # No target system exists in this version, so we do nothing.  
-        done = input('Do you want to stop execution (enter T to stop, any other character to continue)?: ') == 'T'  #for running a certain number of tests
-    """
-
+            
 async def enforcer_loop(enforcer:Enforcer):
    
     global total_sanitisation_delay
@@ -109,6 +69,8 @@ async def enforcer_loop(enforcer:Enforcer):
     global out_action
     global start_time   
     global start_delay
+    global input_conditions
+    global out_obligations
 
     try:
         async with httpx.AsyncClient() as client:
@@ -128,20 +90,20 @@ async def enforcer_loop(enforcer:Enforcer):
             """
             #do enforcement task
             #Read the inputs for the ASM model (a dict: the name of the function is the key, the value is the function's value)
-            input_dict = {} #to prepare the dict for ASM inputs
-            read_input(input_dict)       
+            input_conditions = {} #input for ASM
+            read_input(input_conditions)
             # If the enforcer is running, try to sanitise the system's output with the ASM enforcement model
             start_time = time.perf_counter()
             n_step+=1
             #invoke the output sanitization step
-            enforced_action = enforcer.sanitise_output(input_dict)
+            out_obligations = enforcer.sanitise_output(input_conditions) #returns a dict of obligation id :time constraint
             #some stats 
             sanitisation_delay = (time.perf_counter() - start_time) * 1000
             max_sanitisation_delay = max(max_sanitisation_delay, sanitisation_delay)
             total_sanitisation_delay += sanitisation_delay
             # Change the action if the enforcer returns a new different one
-            if enforced_action != None: 
-                out_action = enforced_action
+            if out_obligations != None: 
+                logger.info(f"Obligations to enforce: {out_obligations}")
                 enforcer_interventions += 1
             #else:
              #   logger.info(f"Action: {out_action}")

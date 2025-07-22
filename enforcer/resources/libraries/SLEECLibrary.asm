@@ -7,7 +7,7 @@ import StandardLibrary
 export *
 
 signature:
-	enum domain TimerUnit={NANOSEC, MILLISEC, SEC, MIN, HOUR}//lib
+	enum domain TimerUnit={NANOSEC | MILLISEC | SEC | MIN | HOUR}//lib
 	enum domain TCType = {AFTER | WITHIN} //lib
 	abstract domain Capability //lib
 	dynamic abstract domain TimeConstraint //lib
@@ -19,7 +19,7 @@ signature:
 	static doNothing : Capability //lib	
 	static none : TimeConstraint //lib	
 	
-	//Obligation to act
+	//Obligation to actuate
 	controlled doObligation: Capability //lib; one obligation as output
 	
 
@@ -36,7 +36,6 @@ definitions:
 			unit($tc) := $u
 			type($tc) := $type 
 			constraint($c) := $tc
-			//constraint($c) := append(constraint($c),$tc)
 		endpar
 		
 	
