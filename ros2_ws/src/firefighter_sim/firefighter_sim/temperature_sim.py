@@ -8,11 +8,11 @@ class TemperatureSimulator(Node):
         super().__init__('temperature_simulator')
         self.publisher_ = self.create_publisher(Temperature, 'temperature', 10)
         self.base_temp = 22.0  # Celsius
-        self.timer = self.create_timer(1.0, self.publish_temperature)
+        self.timer = self.create_timer(60.0, self.publish_temperature)
 
     def publish_temperature(self):
         msg = Temperature()
-        msg.temperature = self.base_temp + random.uniform(-2, 2)  # simulate fluctuation
+        msg.temperature = self.base_temp + random.uniform(-2, 2)  # simulate variation
         self.publisher_.publish(msg)
         self.get_logger().info(f"Temperature: {msg.temperature:.2f} °C")
 

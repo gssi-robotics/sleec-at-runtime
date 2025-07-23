@@ -18,7 +18,7 @@ class Capability(str, Enum):
     SOUNDALARM = "soundAlarm"
 
 @dataclass
-class Probe:
+class Condition:
     batteryCritical: bool
     cameraStart: bool
     alarmRinging: bool
