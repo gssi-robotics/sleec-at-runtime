@@ -5,7 +5,7 @@ FROM ros:humble-ros-base
 WORKDIR /ros2_ws
 
 # Copy your source code
-COPY ./ros2_ws/src /ros2_ws/src
+COPY ./src /ros2_ws/src
 
 # Install dependencies and build
 RUN apt update && apt install -y \

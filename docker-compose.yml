@@ -1,0 +1,41 @@
+name: sleec-runtime-enforcer
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - enforcer-network
+
+  asmeta-server:
+    build:
+      context: ./asmeta_server
+    ports:
+      - "8080:8080"
+    networks:
+      - enforcer-network
+
+  enforcer:
+    build:
+      context: ./enforcer
+    environment:
+      - SERVER_IP=asmeta-server
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - asmeta-server
+    networks:
+      - enforcer-network
+
+  abstraction-comm-layer:
+    build:
+      context: ./ros2_ws
+    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch sleec_enforcer_subsystem abstraction_communication_layer_launch.py'"
+    networks:
+      - enforcer-network
+
+networks:
+  enforcer-network:
+    # driver: bridge

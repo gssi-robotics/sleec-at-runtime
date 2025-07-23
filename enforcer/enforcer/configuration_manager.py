@@ -18,6 +18,10 @@ class ConfigurationManager:
         enf_param = self.json_data["asmeta_server"]
         return enf_param.get("ip", None), enf_param["base_port"], enf_param["spec_path"], enf_param["runtime_model"], enf_param["other_models"]
 
+    def get_rabbitmq_params(self):
+        rabbitmq_param = self.json_data["rabbitmq"]
+        return rabbitmq_param["host"], rabbitmq_param["port"], rabbitmq_param["conditions_queue_name"], rabbitmq_param["obligations_queue_name"]
+
     def get_logging_params(self):
         log_param = self.json_data["logging"]
         return log_param["level"], log_param["target_folder"]

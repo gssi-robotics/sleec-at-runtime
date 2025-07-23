@@ -9,7 +9,7 @@ from configuration_manager import ConfigurationManager
 from model_uploader import ModelUploader
 from enforcer import Enforcer
 import knowledge
-
+import aio_pika
 
 
 def read_input(input_dict):
@@ -72,6 +72,8 @@ async def enforcer_loop(enforcer:Enforcer):
     global input_conditions
     global out_obligations
 
+    global obligations_queue
+
     try:
         async with httpx.AsyncClient() as client:
             """
@@ -90,8 +92,10 @@ async def enforcer_loop(enforcer:Enforcer):
             """
             #do enforcement task
             #Read the inputs for the ASM model (a dict: the name of the function is the key, the value is the function's value)
-            input_conditions = {} #input for ASM
-            read_input(input_conditions)
+            ### UPDATE HERE: read the input conditions from the knowledge
+            # input_conditions = {} #input for ASM
+            # read_input(input_conditions)
+            input_conditions = {"temperature": 30.0, "personNearby": True, "alarmRinging": True} # This is hard-coded, need to remove!
             # If the enforcer is running, try to sanitise the system's output with the ASM enforcement model
             start_time = time.perf_counter()
             n_step+=1
@@ -120,6 +124,7 @@ async def enforcer_loop(enforcer:Enforcer):
 
             print(f"Obligation service response: {obligation_response_json}")
             """
+            await obligations_queue.publish(out_obligations)
 
     except Exception as e:
         print(f"Error in REST call: {e}")
@@ -136,6 +141,8 @@ async def main():
     global upload_delay
     global delete_delay
 
+    global obligations_queue
+
     #Start enforcer by uploading of the ASM enforcement model
     ip, port, asm_path, asm_file_name, other_models_names = config_manager.get_server_params()
     enforcer =Enforcer(ip, port, asm_file_name)
@@ -148,13 +155,58 @@ async def main():
         #run(None, None)
    
     execute_enforcer = enforcer != None
+
+    # Connecting to RabbitMQ
+    rabbitmq_host, rabbitmq_port, conditions_queue_name, obligations_queue_name = config_manager.get_rabbitmq_params()
+    try:
+        # Try multiple times for robustness
+        retries = 10
+        delay = 3
+        for attempt in range(retries):
+            try:
+                connection = await aio_pika.connect_robust(host=rabbitmq_host, port=rabbitmq_port)
+                logger.info("Connected to RabbitMQ")
+            except Exception as e:
+                logger.info(f"Attempt {attempt+1}/{retries}: RabbitMQ not ready, retrying in {delay}s...")
+                await asyncio.sleep(delay)
+        channel = await connection.channel()
+        await channel.set_qos(prefetch_count=1)
+
+        conditions_queue = await channel.declare_queue(conditions_queue_name, durable=True)
+        obligations_queue = await channel.declare_queue(obligations_queue_name, durable=True)
+    
+        logger.info(f"Connected to RabbitMQ at {rabbitmq_host}:{rabbitmq_port}")
+        loop_ready = True
+    except Exception as e:
+        logger.error(f"Failed to connect to RabbitMQ: {e}")
+        loop_ready = False
     
     #Run enforcement feedback loop
-    if execute_enforcer:
-        while True:
+    if execute_enforcer and loop_ready:
+        # while True:
+        #     logger.info("--Executing new step--")
+        #     await enforcer_loop(enforcer)      # Run one step of the ASM enforcement model
+        #     await asyncio.sleep(5.0)
+        # Subtituting with the connection with RabbitMQ
+        logger.info("Starting RabbitMQ consumer for enforcement loop")
+
+        # Define callback for handling condition messages
+        async def handle_condition_change(message: aio_pika.IncomingMessage):
             logger.info("--Executing new step--")
-            await enforcer_loop(enforcer)      # Run one step of the ASM enforcement model
-            await asyncio.sleep(5.0)
+            async with message.process():
+                logger.info(f"Received condition change: {message.body.decode()}")
+                # Write here the input conditions into the knowledge, then:
+                await enforcer_loop(enforcer)
+        try:
+            await conditions_queue.consume(handle_condition_change)
+
+            logger.info("Awaiting messages (CTRL‑C to stop)...")
+            await asyncio.get_running_loop().create_future()
+
+        except asyncio.CancelledError:
+            logger.info("Stopping RabbitMQ consumer")
+        finally:
+            await connection.close()
 
     # Stop the execution of the ASM enforcement model
     if execute_enforcer:
