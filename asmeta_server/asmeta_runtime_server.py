@@ -5,7 +5,7 @@ import threading
 import time
 
 JAR_FILE = "AsmetaServer.jar"
-SRC_FOLDER = "src"
+SRC_FOLDER = os.path.join(os.getcwd(), "src")
 BASE_FOLDER = os.path.join(SRC_FOLDER, "main/resources")
 MODEL_FOLDER = os.path.join(BASE_FOLDER, "models")
 LIBRARIES_FOLDER = os.path.join(BASE_FOLDER, "libraries")
