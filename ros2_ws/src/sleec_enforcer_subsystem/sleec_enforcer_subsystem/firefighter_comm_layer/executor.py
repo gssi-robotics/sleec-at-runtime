@@ -24,11 +24,15 @@ class Executor(Node):
         go_msg.data = "home"
         self.go_pub.publish(go_msg)
         self.get_logger().info("Published: Go home")
+
     
     
 def main(args=None):
     rclpy.init(args=args)
     node = Executor()
+    #mqtt_listener = MQTTListener(executor_node=node) # Start MQTT listener
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
+

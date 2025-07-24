@@ -16,6 +16,7 @@ class CapabilityID(str, Enum):
 class Capability(str, Enum):
     GOHOME = "goHome"
     SOUNDALARM = "soundAlarm"
+    DONOTHING = "doNothing"
 
 @dataclass
 class Condition:
@@ -29,12 +30,14 @@ class Condition:
 
 @dataclass
 class Obligation:
-    capability: Capability
+    capability_id: CapabilityID
 
-    def get_id(self) -> CapabilityID:
-        mapping = {
-            Capability.DONOTHING: CapabilityID.DONOTHING,
-            Capability.GOHOME: CapabilityID.GOHOME,
-            Capability.SOUNDALARM: CapabilityID.SOUNDALARM,
-        }
-        return mapping[self.capability]
+    mapping = {
+        CapabilityID.DONOTHING: Capability.DONOTHING.value,
+        CapabilityID.GOHOME: Capability.GOHOME.value,
+        CapabilityID.SOUNDALARM: Capability.SOUNDALARM.value,
+    }
+
+    def get_capability(self) -> str:
+        return self.mapping[self.capability_id]
+    

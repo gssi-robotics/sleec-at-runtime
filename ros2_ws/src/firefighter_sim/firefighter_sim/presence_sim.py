@@ -13,7 +13,7 @@ class PersonPresenceSimulator(Node):
         presence = Bool()
         presence.data = random.random() < 0.3  # 30% chance of presence
         self.publisher_.publish(presence)
-        self.get_logger().info(f"Person Detected: {presence.data}")
+        #self.get_logger().info(f"Person Detected: {presence.data}")
 
 def main(args=None):
     rclpy.init(args=args)

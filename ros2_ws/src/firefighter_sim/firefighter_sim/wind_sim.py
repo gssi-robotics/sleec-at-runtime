@@ -17,7 +17,7 @@ class WindSimulator(Node):
         msg = Float32()
         msg.data = wind_speed
         self.publisher_.publish(msg)
-        self.get_logger().info(f"Wind Speed: {msg.data:.2f} m/s")
+        #self.get_logger().info(f"Wind Speed: {msg.data:.2f} m/s")
 
 def main(args=None):
     rclpy.init(args=args)

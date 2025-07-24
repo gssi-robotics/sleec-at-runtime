@@ -14,7 +14,7 @@ class TemperatureSimulator(Node):
         msg = Temperature()
         msg.temperature = self.base_temp + random.uniform(-2, 2)  # simulate variation
         self.publisher_.publish(msg)
-        self.get_logger().info(f"Temperature: {msg.temperature:.2f} °C")
+        #self.get_logger().info(f"Temperature: {msg.temperature:.2f} °C")
 
 def main(args=None):
     rclpy.init(args=args)

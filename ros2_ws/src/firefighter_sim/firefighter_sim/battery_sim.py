@@ -14,7 +14,7 @@ class BatterySimulator(Node):
         msg = BatteryState()
         msg.percentage = max(self.battery_level, 0.0)
         self.publisher_.publish(msg)
-        self.get_logger().info(f"Battery Level: {msg.percentage:.2f}")
+        #self.get_logger().info(f"Battery Level: {msg.percentage:.2f}")
         self.battery_level -= 0.005  # Deplete slowly
 
 def main(args=None):
