@@ -10,6 +10,7 @@ from model_uploader import ModelUploader
 from enforcer import Enforcer
 import knowledge
 import aio_pika
+import json
 
 
 def read_input(input_dict):
@@ -76,26 +77,9 @@ async def enforcer_loop(enforcer:Enforcer):
 
     try:
         async with httpx.AsyncClient() as client:
-            """
-            conditions_response = await client.get("http://localhost:8000/probe/conditions")
-            conditions_data_json = conditions_response.json()
-
-            print(f"Conditions: {conditions_data_json}")
-
-            conditions_data = conditions_data_json.get("some_condition")
-            if conditions_data is None:
-                print("No conditions data")
-                return
-
-            # Data analysis, then when done and if needed
-            task = "Some task"
-            """
             #do enforcement task
             #Read the inputs for the ASM model (a dict: the name of the function is the key, the value is the function's value)
-            ### UPDATE HERE: read the input conditions from the knowledge
-            # input_conditions = {} #input for ASM
-            # read_input(input_conditions)
-            input_conditions = {"temperature": 30.0, "personNearby": True, "alarmRinging": True} # This is hard-coded, need to remove!
+            # Input conditions are read from the "knowledge"
             # If the enforcer is running, try to sanitise the system's output with the ASM enforcement model
             start_time = time.perf_counter()
             n_step+=1
@@ -109,25 +93,12 @@ async def enforcer_loop(enforcer:Enforcer):
             if out_obligations != None: 
                 logger.info(f"Obligations to enforce: {out_obligations}")
                 enforcer_interventions += 1
-            #else:
-             #   logger.info(f"Action: {out_action}")
-        # Run the step on the environment using the effector interface
-        # No target system exists in this version, so we do nothing. 
-
-            """
-            obligation_response = await client.post(
-                "http://localhost:8001/obligation/execute",
-                json={"task": task}
-            )
-            obligation_response_json = obligation_response.json()
-            
-
-            print(f"Obligation service response: {obligation_response_json}")
-            """
-            await obligations_queue.publish(out_obligations)
+                await obligations_queue.publish(out_obligations)
+            else:
+                logger.info("No obligations to enforce returned by asmeta server...")
 
     except Exception as e:
-        print(f"Error in REST call: {e}")
+        print(f"Error in the enforcement loop: {e}")
 
 
 async def main():
@@ -140,6 +111,7 @@ async def main():
     global stop_delay
     global upload_delay
     global delete_delay
+    global input_conditions
 
     global obligations_queue
 
@@ -195,7 +167,7 @@ async def main():
             logger.info("--Executing new step--")
             async with message.process():
                 logger.info(f"Received condition change: {message.body.decode()}")
-                # Write here the input conditions into the knowledge, then:
+                input_conditions = json.loads(message.body.decode()) # Assume that the monitor sends all the set of defined conditions
                 await enforcer_loop(enforcer)
         try:
             await conditions_queue.consume(handle_condition_change)
