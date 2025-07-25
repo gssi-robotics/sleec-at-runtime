@@ -12,8 +12,8 @@ class TemperatureSimulator(Node):
 
     def publish_temperature(self):
         msg = Temperature()
-        msg.temperature = self.base_temp + random.uniform(-2, 2)  # simulate variation
-        self.publisher_.publish(msg)
+        msg.temperature = round(self.base_temp + random.uniform(-2, 2))  # simulate variation
+        self.publisher_.publish(float(msg))
         #self.get_logger().info(f"Temperature: {msg.temperature:.2f} °C")
 
 def main(args=None):

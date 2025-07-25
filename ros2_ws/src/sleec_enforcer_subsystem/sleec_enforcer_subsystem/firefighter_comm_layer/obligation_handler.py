@@ -1,7 +1,8 @@
-from sleec_enforcer_subsystem.firefighter_comm_layer.model_structures import Capability
+from sleec_enforcer_subsystem.firefighter_comm_layer.model_structures import CapabilityID
 
 def process_obligations(outObligations, executor_node):
-    '''Processes the obligations received from the MQTT topic and triggers capabilities based on constraints.'''
+    '''Processes the obligations received from the RabbitMQ and triggers capabilities based on constraints.'''
+    
     for capability, constraint in outObligations.items():
         executor_node.get_logger().info(f"[Obligation] Processing capability: {capability}")
         
@@ -9,8 +10,9 @@ def process_obligations(outObligations, executor_node):
             executor_node.get_logger().info(f"No time constraint for {capability}")
             trigger_capability(capability, executor_node)
             continue
+        
 
-        tc_type, amount, unit, follow_up = constraint
+        tc_type, amount, unit, follow_up = parse_constraint(constraint)
 
         executor_node.get_logger().info(
             f"Constraint on {capability}: {tc_type} {amount} {unit}, follow-up: {follow_up}"
@@ -38,9 +40,41 @@ def process_obligations(outObligations, executor_node):
         
 def trigger_capability(capability, executor_node):
     '''Triggers the specified capability on the executor node.'''
-    if capability == Capability.GOHOME:
+    if capability == CapabilityID.GOHOME:
         executor_node.go_home()
-    elif capability == Capability.SOUNDALARM:
-        executor_node.activate_alarm()
+    elif capability == CapabilityID.SOUNDALARM:
+        executor_node.activate_alarm(True)
     else:
         executor_node.get_logger().warn(f"[Unknown capability] {capability}")
+
+
+def parse_constraint(constraint):
+    '''Parses a time constraint string into tuple structured format.'''
+    if constraint is None or constraint == 'undef':
+        return None
+
+    # Already structured
+    if isinstance(constraint, (list, tuple)):
+        if len(constraint) != 4:
+            raise ValueError(f"Expected 4 elements, got {len(constraint)}")
+        tc_type, amount, unit, follow_up = constraint
+        return str(tc_type), int(amount), str(unit), str(follow_up)
+
+    if not isinstance(constraint, str):
+        raise TypeError(f"Unsupported type: {type(constraint)}")
+
+    # String like "(AFTER,5,MIN,DONOTHING)"
+    s = constraint.strip()
+    if s.startswith("(") and s.endswith(")"):
+        s = s[1:-1]
+
+    parts = [p.strip() for p in s.split(",")]
+    if len(parts) != 4:
+        raise ValueError(f"Expected 4 comma-separated items, got {len(parts)} in {constraint}")
+
+    tc_type, amount, unit, follow_up = parts
+    try:
+        amount = int(amount)
+    except ValueError: pass
+
+    return tc_type, amount, unit, follow_up

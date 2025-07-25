@@ -1,14 +1,34 @@
+import json
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Bool
+from sleec_enforcer_subsystem.firefighter_comm_layer.pika_subscriber import PikaSubscriber
+from sleec_enforcer_subsystem.firefighter_comm_layer.obligation_handler import process_obligations
 
 class Executor(Node):
     def __init__(self):
         super().__init__('executor_node')
         self.go_pub = self.create_publisher(String, 'go_to', 10)
         self.alarm_pub = self.create_publisher(Bool, 'activate_alarm', 10)
-
+        
+        # Initialize RabbitMQ subscriber
+        sub = PikaSubscriber(
+            host="rabbitmq",
+            port=5672,
+            queue="obligations",
+            on_message=self.on_msg,
+            auto_ack=False,          
+            requeue_on_error=True,
+        )
+                
         self.get_logger().info("Executor ready...")
+        
+    def on_msg(self, body: bytes):
+        '''Callback for RabbitMQ messages. Processes obligations received from the queue.'''
+        payload = json.loads(body.decode("utf-8"))
+        self.get_logger().info("[Executor] Received obligations")
+        process_obligations(payload, self)
+
 
     def activate_alarm(self, activate: bool):
         # Publish alarm activation
@@ -30,9 +50,9 @@ class Executor(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = Executor()
-    #mqtt_listener = MQTTListener(executor_node=node) # Start MQTT listener
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
 
 

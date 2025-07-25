@@ -9,10 +9,10 @@ def generate_launch_description():
             name='monitor',
             output='screen'
         ),
-        # Node(
-        #     package='sleec_enforcer_subsystem',
-        #     executable='executor',
-        #     name='executor',
-        #     output='screen'
-        # ),
+        Node(
+            package='sleec_enforcer_subsystem',
+            executable='executor',
+            name='executor',
+            output='screen'
+        ),
     ])

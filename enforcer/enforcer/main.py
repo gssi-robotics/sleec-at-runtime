@@ -5,12 +5,13 @@ import sys
 import uuid
 import time
 import logging_manager
+import aio_pika
+import json
+import random
 from configuration_manager import ConfigurationManager
 from model_uploader import ModelUploader
 from enforcer import Enforcer
-import knowledge
-import aio_pika
-import json
+from knowledge import knowledge, rabbit_mq_param
 
 
 def read_input(input_dict):
@@ -33,67 +34,48 @@ def start(enforcer:Enforcer, model_uploader:ModelUploader):
         None
     """
 
-    global total_sanitisation_delay
-    global max_sanitisation_delay
-    global enforcer_interventions
-    global n_step
-    global start_time   
-    global start_delay
-    global upload_delay
-    global test_run_start
-
     execute_enforcer = enforcer != None
     
     if execute_enforcer:
-        start_time = time.perf_counter()
+        knowledge.start_time = time.perf_counter()
         model_uploader.upload_runtime_model()
-        upload_delay = (time.perf_counter() - start_time) * 1000
+        knowledge.upload_delay = (time.perf_counter() - knowledge.start_time) * 1000
 
     logger.info("--Starting new test run--")
-    test_run_start = time.perf_counter()
+    knowledge.test_run_start = time.perf_counter()
   
-    n_step = 0
+    knowledge.n_step = 0
     if execute_enforcer:
-            total_sanitisation_delay = 0
-            max_sanitisation_delay = 0
-            enforcer_interventions = 0 # Number of step in which the enforcer changed the input action to a different action
-            start_time = time.perf_counter()
+            knowledge.total_sanitisation_delay = 0
+            knowledge.max_sanitisation_delay = 0
+            knowledge.enforcer_interventions = 0 # Number of step in which the enforcer changed the input action to a different action
+            knowledge.start_time = time.perf_counter()
             enforcer.begin_enforcement()
-            start_delay = (time.perf_counter() - start_time) * 1000
+            knowledge.start_delay = (time.perf_counter() - knowledge.start_time) * 1000
             
-async def enforcer_loop(enforcer:Enforcer):
-   
-    global total_sanitisation_delay
-    global max_sanitisation_delay
-    global enforcer_interventions
-    global n_step
-    global out_action
-    global start_time   
-    global start_delay
-    global input_conditions
-    global out_obligations
-
-    global obligations_queue
-
+async def enforcer_loop(enforcer:Enforcer, input_conditions):
+    '''Activate the enforcement loop, which is invoked when the input conditions change.'''   
+    
+   # logger.info(f"[INFO-2] Input conditions: {input_conditions}")
+    
     try:
         async with httpx.AsyncClient() as client:
             #do enforcement task
             #Read the inputs for the ASM model (a dict: the name of the function is the key, the value is the function's value)
-            # Input conditions are read from the "knowledge"
             # If the enforcer is running, try to sanitise the system's output with the ASM enforcement model
-            start_time = time.perf_counter()
-            n_step+=1
+            knowledge.start_time = time.perf_counter()
+            knowledge.n_step+=1
             #invoke the output sanitization step
-            out_obligations = enforcer.sanitise_output(input_conditions) #returns a dict of obligation id :time constraint
+            knowledge.out_obligations = enforcer.sanitise_output(input_conditions) #returns a dict of obligation id :time constraint
             #some stats 
-            sanitisation_delay = (time.perf_counter() - start_time) * 1000
-            max_sanitisation_delay = max(max_sanitisation_delay, sanitisation_delay)
-            total_sanitisation_delay += sanitisation_delay
+            sanitisation_delay = (time.perf_counter() - knowledge.start_time) * 1000
+            knowledge.max_sanitisation_delay = max(knowledge.max_sanitisation_delay, sanitisation_delay)
+            knowledge.total_sanitisation_delay += sanitisation_delay
             # Change the action if the enforcer returns a new different one
-            if out_obligations != None: 
-                logger.info(f"Obligations to enforce: {out_obligations}")
-                enforcer_interventions += 1
-                await obligations_queue.publish(out_obligations)
+            if knowledge.out_obligations != None: 
+                logger.info(f"[INFO] Obligations to enforce: {knowledge.out_obligations}")
+                knowledge.enforcer_interventions += 1
+                await publish_obligations(knowledge.out_obligations)
             else:
                 logger.info("No obligations to enforce returned by asmeta server...")
 
@@ -102,18 +84,6 @@ async def enforcer_loop(enforcer:Enforcer):
 
 
 async def main():
-    global total_sanitisation_delay
-    global max_sanitisation_delay
-    global enforcer_interventions
-    global n_step
-    global start_time   
-    global start_delay
-    global stop_delay
-    global upload_delay
-    global delete_delay
-    global input_conditions
-
-    global obligations_queue
 
     #Start enforcer by uploading of the ASM enforcement model
     ip, port, asm_path, asm_file_name, other_models_names = config_manager.get_server_params()
@@ -129,14 +99,14 @@ async def main():
     execute_enforcer = enforcer != None
 
     # Connecting to RabbitMQ
-    rabbitmq_host, rabbitmq_port, conditions_queue_name, obligations_queue_name = config_manager.get_rabbitmq_params()
+    rabbit_mq_param.host, rabbit_mq_param.port, rabbit_mq_param.conditions_queue_name, rabbit_mq_param.obligations_queue_name = config_manager.get_rabbitmq_params()
     try:
         # Try multiple times for robustness
         retries = 10
         delay = 3
         for attempt in range(retries):
             try:
-                connection = await aio_pika.connect_robust(host=rabbitmq_host, port=rabbitmq_port)
+                connection = await aio_pika.connect_robust(host=rabbit_mq_param.host, port=rabbit_mq_param.port)
                 logger.info("Connected to RabbitMQ")
             except Exception as e:
                 logger.info(f"Attempt {attempt+1}/{retries}: RabbitMQ not ready, retrying in {delay}s...")
@@ -144,10 +114,16 @@ async def main():
         channel = await connection.channel()
         await channel.set_qos(prefetch_count=1)
 
-        conditions_queue = await channel.declare_queue(conditions_queue_name, durable=True)
-        obligations_queue = await channel.declare_queue(obligations_queue_name, durable=True)
+        rabbit_mq_param.exchange = channel.default_exchange
+
+        rabbit_mq_param.conditions_queue = await channel.declare_queue(
+            rabbit_mq_param.conditions_queue_name, durable=True
+        )
+        rabbit_mq_param.obligations_queue = await channel.declare_queue(
+            rabbit_mq_param.obligations_queue_name, durable=True
+        )
     
-        logger.info(f"Connected to RabbitMQ at {rabbitmq_host}:{rabbitmq_port}")
+        logger.info(f"Connected to RabbitMQ at {rabbit_mq_param.host}:{rabbit_mq_param.port}")
         loop_ready = True
     except Exception as e:
         logger.error(f"Failed to connect to RabbitMQ: {e}")
@@ -166,11 +142,21 @@ async def main():
         async def handle_condition_change(message: aio_pika.IncomingMessage):
             logger.info("--Executing new step--")
             async with message.process():
-                logger.info(f"Received condition change: {message.body.decode()}")
                 input_conditions = json.loads(message.body.decode()) # Assume that the monitor sends all the set of defined conditions
-                await enforcer_loop(enforcer)
+                knowledge.input_conditions = input_conditions  # Update the knowledge with the received conditions
+                logger.info(f"[INFO] Received input conditions: {input_conditions}")
+                # NOTE: Condition publishing works, but we cannot guarantee that the monitored condition values align with the SLEEC-ASM rule
+                # For testing, we can use a randomly selected set of conditions that are compatible with the ruleno
+                input_conditions_list = [
+                    {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': True, 'temperature': 36.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30},
+                    {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': False, 'temperature': 30.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30},
+                    {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': True, 'temperature': 30.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30}
+                ]
+                input_conditions = random.choice(input_conditions_list)
+                
+                await enforcer_loop(enforcer, input_conditions)
         try:
-            await conditions_queue.consume(handle_condition_change)
+            await rabbit_mq_param.conditions_queue.consume(handle_condition_change)
 
             logger.info("Awaiting messages (CTRL‑C to stop)...")
             await asyncio.get_running_loop().create_future()
@@ -182,27 +168,36 @@ async def main():
 
     # Stop the execution of the ASM enforcement model
     if execute_enforcer:
-            start_time = time.perf_counter()
+            knowledge.start_time = time.perf_counter()
             enforcer.end_enforcement()
-            stop_delay = (time.perf_counter() - start_time) * 1000
+            knowledge.stop_delay = (time.perf_counter() - knowledge.start_time) * 1000
             logger.info("Enforcer delays:")
-            logger.info(f"* Start delay: {start_delay:.2f}ms")
-            logger.info(f"* Total sanitisation delay: {total_sanitisation_delay:.2f}ms (max {max_sanitisation_delay:.2f}ms)")
-            logger.info(f"* Stop delay: {stop_delay:.2f}ms")
-            logger.info(f"Number of enforcer interventions: {enforcer_interventions} (out of {n_step})")
+            logger.info(f"* Start delay: {knowledge.start_delay:.2f}ms")
+            logger.info(f"* Total sanitisation delay: {knowledge.total_sanitisation_delay:.2f}ms (max {knowledge.max_sanitisation_delay:.2f}ms)")
+            logger.info(f"* Stop delay: {knowledge.stop_delay:.2f}ms")
+            logger.info(f"Number of enforcer interventions: {knowledge.enforcer_interventions} (out of {knowledge.n_step})")
 
-    test_execution_time = (time.perf_counter() - test_run_start) * 1000
+    test_execution_time = (time.perf_counter() - knowledge.test_run_start) * 1000
     #logger.info(f"Test run {i} completed in {test_execution_time:.2f}ms:")
     logger.info(f"Test run completed in {test_execution_time:.2f}ms:")
-    logger.info(f"* Model simulation steps: {n_step}")
+    logger.info(f"* Model simulation steps: {knowledge.n_step}")
     logger.info("")
     # Delete the runtime models
     if execute_enforcer:
-        start_time = time.perf_counter()
+        knowledge.start_time = time.perf_counter()
         model_uploader.delete_runtime_model()
-        delete_delay = (time.perf_counter() - start_time) * 1000
-        logger.info(f"Upload model delay: {upload_delay:.2f}ms")
-        logger.info(f"Delete model delay: {delete_delay:.2f}ms")
+        knowledge.delete_delay = (time.perf_counter() - knowledge.start_time) * 1000
+        logger.info(f"Upload model delay: {knowledge.upload_delay:.2f}ms")
+        logger.info(f"Delete model delay: {knowledge.delete_delay:.2f}ms")
+
+
+async def publish_obligations(payload: dict):
+    body = json.dumps(payload).encode("utf-8")
+    await rabbit_mq_param.exchange.publish(
+        aio_pika.Message(body=body, delivery_mode=aio_pika.DeliveryMode.PERSISTENT),
+        routing_key=rabbit_mq_param.obligations_queue.name,
+    )
+    logger.info(f"[RabbitMQ] Published obligations: {payload}")
 
 
 if __name__ == "__main__":
@@ -220,3 +215,5 @@ if __name__ == "__main__":
 
     # Start and run enforcer
     asyncio.run(main())
+    
+    
