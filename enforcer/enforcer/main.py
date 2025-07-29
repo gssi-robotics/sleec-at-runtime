@@ -147,12 +147,12 @@ async def main():
                 logger.info(f"[INFO] Received input conditions: {input_conditions}")
                 # NOTE: Condition publishing works, but we cannot guarantee that the monitored condition values align with the SLEEC-ASM rule
                 # For testing, we can use a randomly selected set of conditions that are compatible with the ruleno
-                input_conditions_list = [
-                    {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': True, 'temperature': 36.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30},
-                    {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': False, 'temperature': 30.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30},
-                    {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': True, 'temperature': 30.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30}
-                ]
-                input_conditions = random.choice(input_conditions_list)
+                # input_conditions_list = [
+                #     {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': True, 'temperature': 36.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30},
+                #     {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': False, 'temperature': 30.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30},
+                #     {'batteryCritical': True, 'cameraStart': True, 'alarmRinging': True, 'personNearby': True, 'temperature': 30.0, 'windSpeed': "LIGHT", 'alarmdeadline': 30}
+                # ]
+                # input_conditions = random.choice(input_conditions_list)
                 
                 await enforcer_loop(enforcer, input_conditions)
         try:

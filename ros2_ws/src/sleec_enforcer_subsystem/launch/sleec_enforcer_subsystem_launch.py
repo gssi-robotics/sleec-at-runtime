@@ -15,4 +15,10 @@ def generate_launch_description():
             name='actuation_processor',
             output='screen'
         ),
+        Node(
+            package='sleec_enforcer_subsystem',
+            executable='enforcer',
+            name='enforcer',
+            output='screen'
+        )
     ])

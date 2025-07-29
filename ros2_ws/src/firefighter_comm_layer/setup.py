@@ -2,7 +2,7 @@ import os
 from glob import glob
 from setuptools import find_packages, setup
 
-package_name = 'sleec_enforcer_subsystem'
+package_name = 'firefighter_comm_layer'
 
 setup(
     name=package_name,
@@ -18,14 +18,13 @@ setup(
     zip_safe=True,
     maintainer='Gianluca Filippone',
     maintainer_email='gianluca.filippone@gssi.it',
-    description='SLEEC Rules Enforcer Subsystem',
+    description='Abstract communication layer for Firefighter example SLEEC rules enforcer',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'observation_processor = sleec_enforcer_subsystem.abstraction_communication_layer.observation_processor:main',
-            'actuation_processor = sleec_enforcer_subsystem.abstraction_communication_layer.actuation_processor:main',
-            'enforcer = sleec_enforcer_subsystem.enforcer:main'
+            'monitor = firefighter_comm_layer.monitor:main',            
+            'executor = firefighter_comm_layer.executor:main',            
         ],
     },
 )

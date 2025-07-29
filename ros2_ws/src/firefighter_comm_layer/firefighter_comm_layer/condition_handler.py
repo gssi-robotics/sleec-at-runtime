@@ -1,4 +1,4 @@
-from sleec_enforcer_subsystem.firefighter_comm_layer.model_structures import Condition, WindScale
+from firefighter_comm_layer.model_structures import Condition, WindScale
 
 def init_condition():
     '''Initialize the condition with default values.'''

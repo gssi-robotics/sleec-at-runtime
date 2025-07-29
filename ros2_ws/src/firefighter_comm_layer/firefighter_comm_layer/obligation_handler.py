@@ -1,4 +1,4 @@
-from sleec_enforcer_subsystem.firefighter_comm_layer.model_structures import CapabilityID
+from firefighter_comm_layer.model_structures import CapabilityID
 
 def process_obligations(outObligations, executor_node):
     '''Processes the obligations received from the RabbitMQ and triggers capabilities based on constraints.'''

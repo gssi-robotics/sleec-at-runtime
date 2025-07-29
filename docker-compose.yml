@@ -32,7 +32,7 @@ services:
   firefighter-comm-layer:
     build:
       context: ./ros2_ws
-    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch sleec_enforcer_subsystem firefighter_comm_launch.py'"
+    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch firefighter_comm_layer firefighter_comm_layer_launch.py'"
     networks:
       - enforcer-network
 

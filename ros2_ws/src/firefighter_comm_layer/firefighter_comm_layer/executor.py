@@ -2,8 +2,8 @@ import json
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Bool
-from sleec_enforcer_subsystem.firefighter_comm_layer.pika_subscriber import PikaSubscriber
-from sleec_enforcer_subsystem.firefighter_comm_layer.obligation_handler import process_obligations
+from firefighter_comm_layer.pika_subscriber import PikaSubscriber
+from firefighter_comm_layer.obligation_handler import process_obligations
 
 class Executor(Node):
     def __init__(self):

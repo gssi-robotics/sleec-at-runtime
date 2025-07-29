@@ -21,5 +21,8 @@ RUN pip install aio-pika
 # Build the workspace
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
 
+RUN chmod +x /ros2_ws/src/firefighter_sim/run/prompt_data.sh
+RUN chmod +x /ros2_ws/src/firefighter_sim/run/start_simulator.sh
+
 # Source the workspace when starting the container
 ENTRYPOINT ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && bash"]

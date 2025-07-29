@@ -4,8 +4,8 @@ from rclpy.node import Node
 from std_msgs.msg import Bool, Float32, String
 from sensor_msgs.msg import BatteryState, Temperature
 from dataclasses import asdict
-from sleec_enforcer_subsystem.firefighter_comm_layer.condition_handler import *
-from sleec_enforcer_subsystem.firefighter_comm_layer.pika_publisher import PikaPublisher
+from firefighter_comm_layer.condition_handler import *
+from firefighter_comm_layer.pika_publisher import PikaPublisher
 
     
 def publish_on_change(func):
