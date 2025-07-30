@@ -13,7 +13,8 @@ cd ari-ros2-sleec-runtime-enforcer
 docker compose up
 ```
 
-**Start the Firefighter scenario:**
+**Start the [Firefighter scenario](#firefighter-example):**
+
 Open a new terminal
 ```
 docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
@@ -63,7 +64,7 @@ python3 enforcer.py
 ```
 
 > [!NOTE]
-> `httpx`, `requests`, and `aio-pika` packages are required. [Installing dependencies](#installing-dependencies)
+> `httpx`, `requests`, and `aio-pika` packages are required. [Installing dependencies](#installing-dependencies-(only-for-standalone-deployment))
 
 #### Running the enforcer (Docker)
 Build the Docker image
@@ -196,18 +197,14 @@ to install the dependencies for the project (ROS2 is excluded. Follow the [ROS2 
 
 ## Firefighter Example
 
-Build ROS docker image:
-```bash
-docker build -t ari-sleec .  
-docker run -it -p 8000:8000 -p 8001:8001 --rm --name ari-sleec ari-sleec
+Build the Docker images and start the containers:
+```
+docker compose up
 ```
 
 Launch firefighter simulation:
-```bash
-ros2 launch firefighter_sim firefighter_sim_launch.py
 ```
-
-Run monitor:
-```bash
-ros2 run sleec_enforcer_subsystem monitor
+docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
+. install/setup.bash
+cd src/firefighter_sim/run/start_simulator.sh
 ```
