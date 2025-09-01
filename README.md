@@ -23,13 +23,13 @@ docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
 Choose if running a simulated scenario:
 ```
 . install/setup.bash
-cd src/firefighter_sim/run/start_simulator.sh
+source src/firefighter_sim/run/start_simulator.sh
 ```
 
 ...or if manually setting conditions
 ```
 . install/setup.bash
-cd src/firefighter_sim/run/prompt_data.sh
+source src/firefighter_sim/run/prompt_data.sh
 ```
 
 ## Components detail
