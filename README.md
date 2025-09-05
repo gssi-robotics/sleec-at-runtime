@@ -15,7 +15,9 @@ docker compose up
 
 **Start the [Firefighter scenario](#firefighter-example):**
 
-Open a new terminal
+> [IMPORTANT]
+> Run the following commands in new terminal window after launching the system
+
 ```
 docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
 ```
@@ -23,13 +25,13 @@ docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
 Choose if running a simulated scenario:
 ```
 . install/setup.bash
-source src/firefighter_sim/run/start_simulator.sh
+./src/firefighter_sim/run/start_simulator.sh
 ```
 
 ...or if manually setting conditions
 ```
 . install/setup.bash
-source src/firefighter_sim/run/prompt_data.sh
+./src/firefighter_sim/run/prompt_data.sh
 ```
 
 ## Components detail
@@ -203,8 +205,12 @@ docker compose up
 ```
 
 Launch firefighter simulation:
+
+> [IMPORTANT]
+> Run the following commands in new terminal window
+
 ```
 docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
 . install/setup.bash
-cd src/firefighter_sim/run/start_simulator.sh
+./src/firefighter_sim/run/start_simulator.sh
 ```
