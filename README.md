@@ -15,7 +15,7 @@ docker compose up
 
 **Start the [Firefighter scenario](#firefighter-example):**
 
-> [IMPORTANT]
+> [!IMPORTANT]
 > Run the following commands in new terminal window after launching the system
 
 ```
@@ -206,7 +206,7 @@ docker compose up
 
 Launch firefighter simulation:
 
-> [IMPORTANT]
+> [!IMPORTANT]
 > Run the following commands in new terminal window
 
 ```
