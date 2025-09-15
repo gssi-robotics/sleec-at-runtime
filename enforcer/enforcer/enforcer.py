@@ -85,7 +85,9 @@ class Enforcer(RestClient):
                 self.logger.error("The ASM returned no outAction but should always return something.")
                 return None #return None
             """if len(out_locations) <= 1:  replaced with the next sentence"""
-            if out_locations['outObligation'] == 'undef':
+            #if out_locations['outObligation'] == 'undef':  #OLD: single obligation
+            #NEW if for multi obligation
+            if all(value == "false" for key, value in out_locations.items() if key.startswith("outObligation")):
                 self.logger.info("Enforcement not applied.")
                 self.logger.info(f"ASM output: {out_locations}")
                 return None #Return None
@@ -94,9 +96,19 @@ class Enforcer(RestClient):
                 #Filtering of the out locations of the ASM for the obligation and its time constraints (if any)
                 #Current version works only for single obligation; so the returned dict has a single key
                 #Examples: {GOHOME: (AFTER,5,MIN,undef)}, {GOHOME: (WITHIN,8,MIN,SOUNDALARM)}, {GOHOME: undef}
-                time_constraint_tuple = out_locations['outConstraint('+out_locations['outObligation']+')']
-                enforced_obligations = {out_locations['outObligation']:time_constraint_tuple} 
-                
+                #OLD single obligation
+                #time_constraint_tuple = out_locations['outConstraint('+out_locations['outObligation']+')']
+                #enforced_obligations = {out_locations['outObligation']:time_constraint_tuple} 
+                #NEW multi obligation
+                # Select keys that start with "outObligation" and have the value "true"
+                #valid_keys = [key for key, value in out_locations.items()
+                #              if key.startswith("outObligation") and value.lower() == "true"]
+                enforced_obligations = {}
+                for key in out_locations:
+                    if key.startswith("outObligation") and out_locations[key] == "true":
+                        obligationID = key.split("(", 1)[1].rstrip(")")
+                        time_constraint_tuple = out_locations['outConstraint('+obligationID+')']
+                        enforced_obligations[obligationID] = time_constraint_tuple
                 #Return the obligations to actuate, as filtered from the out locations of the ASM model
                 #self.logger.info(f"ASM output: {out_locations['outObligation']} {out_locations['outConstraint('+out_locations['outObligation']+')']}")
                 self.logger.info(f"ASM output (as filtered): {enforced_obligations}")
