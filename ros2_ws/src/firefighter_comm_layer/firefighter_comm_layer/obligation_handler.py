@@ -32,7 +32,7 @@ def process_obligations(outObligations, executor_node):
 
             if follow_up != "undef":
                 executor_node.get_logger().info(f"Scheduling follow-up: {follow_up} in {delay} seconds")
-                executor_node.create_timer(delay, lambda: trigger_capability(follow_up, executor_node))
+                executor_node.create_timer(delay, lambda: trigger_capability(follow_up, executor_node), oneshot=True)
 
         else:
             executor_node.get_logger().warn(f"Unknown constraint type: {tc_type}")
@@ -44,9 +44,10 @@ def trigger_capability(capability, executor_node):
         executor_node.go_home()
     elif capability == CapabilityID.SOUNDALARM:
         executor_node.activate_alarm(True)
+    elif capability == CapabilityID.DONOTHING:
+        executor_node.get_logger().info("No action (DONOTHING).")
     else:
         executor_node.get_logger().warn(f"[Unknown capability] {capability}")
-
 
 def parse_constraint(constraint):
     '''Parses a time constraint string into tuple structured format.'''

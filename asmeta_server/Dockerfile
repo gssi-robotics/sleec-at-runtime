@@ -4,9 +4,7 @@ WORKDIR /asmeta_server
 
 COPY . /asmeta_server
 
-RUN apt-get update && \
-    apt-get install -y bash python3 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /asmeta_server/src/main/resources/models
+RUN mkdir -p /asmeta_server/src/main/resources/libraries
 
-ENTRYPOINT ["/bin/bash", "-c", "python3 asmeta_runtime_server.py"]
+ENTRYPOINT ["java", "-jar", "AsmetaServer.jar"]

@@ -1,5 +1,5 @@
 // definition of SLEEC rule 
-//version 2.0: Single obligation
+//version: Multi obligation
 module SLEECLibrary
 
 
@@ -7,6 +7,8 @@ import StandardLibrary
 export *
 
 signature:
+	enum domain TimerUnit={NANOSEC, MILLISEC, SEC, MIN, HOUR}//lib
+	enum domain TCType = {AFTER, WITHIN} //lib
 	enum domain TimerUnit={NANOSEC, MILLISEC, SEC, MIN, HOUR}//lib
 	enum domain TCType = {AFTER, WITHIN} //lib
 	abstract domain Capability //lib
@@ -19,6 +21,10 @@ signature:
 	static doNothing : Capability //lib	
 	static none : TimeConstraint //lib	
 	
+	//Obligations to act
+	//controlled doObligation: Capability //lib; one obligation as output
+	//NEW
+	controlled doObligation: Capability -> Boolean //lib; to allow more obligations as output; only capabilities flagged to true are to be executed
 	
 
 definitions:
