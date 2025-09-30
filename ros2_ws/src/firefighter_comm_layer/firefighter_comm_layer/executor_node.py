@@ -3,9 +3,9 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Bool
 from firefighter_comm_layer.pika_subscriber import PikaSubscriber
-from firefighter_comm_layer.obligation_handler import process_obligations
+from firefighter_comm_layer.obligation_processor import process_obligations
 
-class Executor(Node):
+class ExecutorNode(Node):
     def __init__(self):
         super().__init__('executor_node')
         self.go_pub = self.create_publisher(String, 'go_to', 10)
@@ -49,7 +49,7 @@ class Executor(Node):
     
 def main(args=None):
     rclpy.init(args=args)
-    node = Executor()
+    node = ExecutorNode()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

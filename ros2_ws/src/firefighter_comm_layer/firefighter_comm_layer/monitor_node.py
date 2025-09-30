@@ -1,35 +1,15 @@
 import json
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Bool, Float32, String
+from std_msgs.msg import Bool, Float32
 from sensor_msgs.msg import BatteryState, Temperature
 from dataclasses import asdict
-from firefighter_comm_layer.condition_handler import *
+from firefighter_comm_layer.condition_processor import *
 from firefighter_comm_layer.pika_publisher import PikaPublisher
-
     
-def publish_on_change(func):
-    '''Decorator to publish the condition via RabbitMQ if it has changed after executing the function.'''
-    def wrapper(self, *args, **kwargs):
-        # copy of the old condition
-        prev = init_condition()
-        prev.__dict__.update(self.condition.__dict__)
 
-        # run the function
-        func(self, *args, **kwargs)
 
-        # publish if changed
-        if has_condition_changed(self.condition, prev):
-            json_str = json.dumps(asdict(self.condition), default=str)
-            try:
-                self.rabbit_publisher.publish(json_str)
-                self.get_logger().info(f"[RabbitMQ] Published: {json_str}")
-            except Exception as e:
-                self.get_logger().error(f"[RabbitMQ] publish failed: {e}")
-
-    return wrapper
-
-class Monitor(Node):
+class MonitorNode(Node):
     def __init__(self):
         super().__init__('monitor')
         self.condition = init_condition()
@@ -102,7 +82,7 @@ class Monitor(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = Monitor()
+    node = MonitorNode()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

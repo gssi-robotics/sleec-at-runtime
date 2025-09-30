@@ -4,7 +4,7 @@
   <name>firefighter_sim</name>
   <version>0.0.0</version>
   <description>Firefighter robot sim package</description>
-  <maintainer email="sara.pettinari@gssi.it">Sara Pettinari</maintainer>
+  <maintainer email="name.surname@email.com">Name Surname</maintainer>
   <license>Apache-2.0</license>
 
   <depend>rclpy</depend>

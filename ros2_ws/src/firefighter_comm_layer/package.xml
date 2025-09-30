@@ -4,7 +4,7 @@
   <name>firefighter_comm_layer</name>
   <version>0.0.0</version>
   <description>Abstract communication layer for Firefighter example SLEEC rules enforcer</description>
-  <maintainer email="gianluca.filippone@gssi.it">Gianluca Filippone</maintainer>
+  <maintainer email="name.surname@email.com">Name Surname</maintainer>
   <license>Apache-2.0</license>
 
   <exec_depend>rclpy</exec_depend>

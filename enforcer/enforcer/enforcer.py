@@ -1,7 +1,4 @@
-"""
-    Author:      Patrizia Scandurra
-    Created:     18/07/2025
-"""
+
 import time
 import logging_manager
 from rest_client import RestClient

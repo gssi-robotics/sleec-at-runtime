@@ -16,15 +16,15 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Gianluca Filippone',
-    maintainer_email='gianluca.filippone@gssi.it',
+    maintainer='Name Surname',
+    maintainer_email='name.surname@email.com',
     description='Abstract communication layer for Firefighter example SLEEC rules enforcer',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'monitor = firefighter_comm_layer.monitor:main',            
-            'executor = firefighter_comm_layer.executor:main',            
+            'monitor = firefighter_comm_layer.monitor_node:main',            
+            'executor = firefighter_comm_layer.executor_node:main',            
         ],
     },
 )

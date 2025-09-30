@@ -4,7 +4,7 @@
   <name>robot_sim_interfaces</name>
   <version>0.0.0</version>
   <description>Robot Sim Interfaces</description>
-  <maintainer email="gianluca.filippone@gssi.it">Gianluca Filippone</maintainer>
+  <maintainer email="name.surname@email.com">Name Surname</maintainer>
   <license>Apache-2.0</license>
 
   <depend>std_msgs</depend>
