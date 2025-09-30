@@ -9,8 +9,8 @@ signature:
     
     //domains
 	domain Temperature subsetof Real
-	enum domain WindScale = {LIGHT | MODERATE | STRONG}
-	enum domain CapabilityID = {DONOTHING | SOUNDALARM | GOHOME}
+	enum domain WindScale = {LIGHT,MODERATE,STRONG}
+	enum domain CapabilityID = {DONOTHING,SOUNDALARM,GOHOME}
 	
 	//Events and sensed variables
 	monitored batteryCritical: Boolean

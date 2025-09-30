@@ -124,7 +124,7 @@ def main(asmHeaderFile):
     full_code = generate_data_struct(probe, obligation, id_mapping)
 
     # Save to single output file
-    output_path = os.path.join(CURRENT_DIR, 'data', "model_structures.py")
+    output_path = os.path.join(CURRENT_DIR, 'data', "ARI-model_structures.py")
     with open(output_path, "w") as f:
         f.write(full_code)
 
@@ -133,4 +133,4 @@ def main(asmHeaderFile):
 
 
 if __name__ == "__main__":
-    main("firefighterHeader.asm")
+    main("ARIECHeader.asm")

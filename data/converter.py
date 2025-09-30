@@ -39,7 +39,7 @@ def parse_signature_block(signature: str):
             probe.domains[name] = base
         elif line.startswith('enum domain'):
             name, values = re.findall(r'enum domain (\w+)\s*=\s*{(.+)}', line)[0]
-            enum_values = [v.strip() for v in values.split('|')]
+            enum_values = [v.strip() for v in values.split(',')]
             probe.enums[name] = enum_values
         elif line.startswith('monitored'):
             var, var_type = re.findall(r'monitored (\w+):\s*(\w+)', line)[0]
