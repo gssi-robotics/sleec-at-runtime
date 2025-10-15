@@ -2,7 +2,7 @@ import os
 from glob import glob
 from setuptools import find_packages, setup
 
-package_name = 'firefighter_comm_layer'
+package_name = 'ari_sim_comm_layer'
 
 setup(
     name=package_name,
@@ -16,15 +16,15 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Name Surname',
-    maintainer_email='name.surname@email.com',
-    description='Abstract communication layer for Firefighter example SLEEC rules enforcer',
+    maintainer='Gianluca Filippone',
+    maintainer_email='gianluca.filippone@gssi.it',
+    description='Abstract communication layer for simulated Ari\'s SLEEC rules enforcer',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'monitor = firefighter_comm_layer.monitor_node:main',            
-            'executor = firefighter_comm_layer.executor_node:main',            
+            'monitor = ari_sim_comm_layer.monitor.monitor_node:main',            
+            'executor = ari_sim_comm_layer.executor.executor_node:main',            
         ],
     },
 )

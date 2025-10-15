@@ -214,3 +214,6 @@ docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
 . install/setup.bash
 ./src/firefighter_sim/run/start_simulator.sh
 ```
+
+## Launching with .env files
+docker compose --profile ari-sim --env-file .env.ari-si up --build

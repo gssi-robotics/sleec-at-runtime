@@ -9,8 +9,6 @@ export *
 signature:
 	enum domain TimerUnit={NANOSEC, MILLISEC, SEC, MIN, HOUR}//lib
 	enum domain TCType = {AFTER, WITHIN} //lib
-	enum domain TimerUnit={NANOSEC, MILLISEC, SEC, MIN, HOUR}//lib
-	enum domain TCType = {AFTER, WITHIN} //lib
 	abstract domain Capability //lib
 	dynamic abstract domain TimeConstraint //lib
 	controlled value: TimeConstraint -> Integer //lib

@@ -15,7 +15,7 @@ class PikaSubscriber:
         *,
         prefetch: int = 10,
         auto_ack: bool = False,
-        requeue_on_error: bool = True,
+        requeue_on_error: bool = False,
     ):
         self.host = host
         self.port = port

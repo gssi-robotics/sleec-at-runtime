@@ -3,7 +3,11 @@
 SERVER_IP=${SERVER_IP:-localhost}
 RABBITMQ_HOST=${RABBITMQ_HOST:-localhost}
 
-sed -e "s/\${SERVER_IP}/$SERVER_IP/g" -e "s/\${RABBITMQ_HOST}/$RABBITMQ_HOST/g" ./config.template.json > ./enforcer/config.json
+sed -e "s/\${SERVER_IP}/$SERVER_IP/g" \
+  -e "s/\${RABBITMQ_HOST}/$RABBITMQ_HOST/g" \
+  -e "s/\${MODEL}/$MODEL/g" \
+  -e "s/\${MODEL_HEADER}/$MODEL_HEADER/g" \
+  ./config.template.json > ./enforcer/config.json
 
 RETRIES=30
 until curl -s "http://$SERVER_IP:8080" > /dev/null; do

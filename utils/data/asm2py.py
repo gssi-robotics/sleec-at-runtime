@@ -2,6 +2,7 @@ import os
 import json
 from converter import *
 from typing import Dict
+import sys
 
 # base paths
 CURRENT_DIR = os.getcwd()
@@ -43,6 +44,14 @@ def asm_to_py_type(asm_type: str, domain_map: Dict[str, str]) -> str:
 
     return base_types.get(asm_type, asm_type)  # Fall back to original if unknown
 
+def get_base_value(type_name: str):
+    base_values = {
+        "bool": "False",
+        "int": 0,
+        "float": 0.0
+    }
+    return base_values.get(type_name, None) # Return none if custom asm_type
+
 def extract_id_function_mapping(content: str) -> Dict[str, str]:
     '''Extract the mapping from the id() capability function in ASMETA content.'''
     match = re.search(r'function id\(.*?\)\s*=\s*switch.*?endswitch', content, re.DOTALL)
@@ -76,15 +85,19 @@ def generate_data_struct(probe: Condition, obligation: Obligation, id_mapping: D
         lines.append(f"    {cap.upper()} = \"{cap}\"")
     lines.append("")
 
-    # Condition class
+    # Conditions class
     lines.append("@dataclass")
-    lines.append("class Condition:")
+    lines.append("class Conditions:")
     for var, typ in probe.monitored.items():
         py_type = asm_to_py_type(typ, probe.domains)
-        lines.append(f"    {var}: {py_type}")
-    for var, typ in probe.constants.items():
-        py_type = asm_to_py_type(typ, probe.domains)
-        lines.append(f"    {var}: {py_type}")
+        base_value = get_base_value(py_type)
+        lines.append(f"    {var}: {py_type} = {base_value}" if base_value else f"    {var}: {py_type}")
+    # for var, typ in probe.constants.items():
+    #     py_type = asm_to_py_type(typ, probe.domains)
+    #     lines.append(f"    {var}: {py_type}")
+    lines.append("")
+    lines.append("    def export_dict(self):")
+    lines.append("        return vars(self).copy()")
     lines.append("")
 
     # Obligation dataclass with get_capability() from id
@@ -101,7 +114,7 @@ def generate_data_struct(probe: Condition, obligation: Obligation, id_mapping: D
     return "\n".join(lines)
 
 
-def main(asmHeaderFile):
+def main(asmHeaderFile, output_filename):
     config = load_config(CONFIG_PATH)
     other_models = config.get("asmeta_server", {}).get("other_models", [])
     
@@ -124,7 +137,7 @@ def main(asmHeaderFile):
     full_code = generate_data_struct(probe, obligation, id_mapping)
 
     # Save to single output file
-    output_path = os.path.join(CURRENT_DIR, 'data', "ARI-model_structures.py")
+    output_path = os.path.join(CURRENT_DIR, 'utils', 'data', f"{output_filename}.py")
     with open(output_path, "w") as f:
         f.write(full_code)
 
@@ -133,4 +146,7 @@ def main(asmHeaderFile):
 
 
 if __name__ == "__main__":
-    main("ARIECHeader.asm")
+    if len(sys.argv) < 3:
+        print("Usage: python3 asm2py.py <ASMHeader_file> <output_file_name>")
+        sys.exit(1)
+    main(sys.argv[1], sys.argv[2])

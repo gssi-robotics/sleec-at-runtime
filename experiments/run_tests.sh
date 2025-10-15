@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <test_name>"
+    exit 1
+fi
+
+TEST_NAME="$1"
+TEST_DIR="./test_cases"
+TEST_FILE="$TEST_DIR/$TEST_NAME.json"
+
+
+if [ ! -f "$TEST_FILE" ]; then
+    echo "No such file: $TEST_FILE"
+    exit 1
+fi
+
+
+if command -v realpath >/dev/null 2>&1; then
+    TEST_FILE_ABS=$(realpath "$TEST_FILE")
+else
+    TEST_FILE_ABS="$(cd "$(dirname "$TEST_FILE")"; pwd)/$(basename "$TEST_FILE")"
+fi
+
+echo "Running with test file: $TEST_FILE_ABS"
+
+ros2 run ari_test_runner test_runner_node --ros-args -p testcase_file:="$TEST_FILE_ABS"

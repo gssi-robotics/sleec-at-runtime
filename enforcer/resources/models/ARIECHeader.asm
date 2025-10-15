@@ -12,11 +12,11 @@ signature:
 	/* DOMAIN-SPECIFIC SIGNATURE */
     
 	//domains
-	enum domain GlucoseLevel = {LOW, NORMAL, HIGH}
+	enum domain GlucoseLevel = {VERYLOW, LOW, NORMAL, HIGH}
 	//A value representing a specific time during the daily routine; ANOTHER TIME is any other time excluding the previous ones 
 	enum domain TimeOfDay = {MEALTIME, STARTTRAININGTIME, TRAININGTIME, ANOTHERTIME} 
 	
-	enum domain CapabilityID = {SHOWNEXTEXERCISE, ENCOURAGE, ASKUSERINTENT, ENDSESSION, STARTTRAININGSESSION, CLOSEDOOR, OPENDOOR, INFORMNURSE, ALERTNURSE, SHAREDATA, DONOTHING, DENYDATASHARINGWITHEXPLANATION, REMINDMEALTIME, WAKEUPUSER, EXPLAINNOFOOD, DELIVERMEAL, EXPLAINDIETADHERENCE, DELIVERDIETARYCHEATMEAL, GREETINUSERLANGUAGE, EXPLAINWARMSTART, GIVEDIETARYSNACK}
+	enum domain CapabilityID = {GREETINUSERLANGUAGE, STARTTRAININGSESSION, CLOSEDOOR, ASKPERMISSIONFOROPENDOOR, ALERTNURSE, SHOWNEXTEXERCISE, ENCOURAGE, ASKUSERINTENT, NOTIFYSESSIONEND, DONOTHING, SHAREDATA, DENYDATASHARINGWITHEXPLANATION, REMINDUSERMEALTIME, WAKEUPUSER, INFORMNURSE, EXPLAINNOFOOD, GIVEDIETARYSNACK, DELIVERMEAL, EXPLAINDIETADHERENCEREASON, DELIVERDIETARYALTERNATIVE}
 	
 	domain RoomTemperatureRange subsetof Integer
 	
@@ -24,49 +24,63 @@ signature:
 	
 	//functions
 	//Events and sensed variables
-	//SLEEC1:
+	//SLEEC 1:
+	monitored timeOfDay: TimeOfDay // There's the function to compute if it's time for exercising
+	monitored userPrefersPrivacy: Boolean
+	monitored roomTemperature: RoomTemperatureRange // There's the function to compute if the room is too hot
+	//SLEEC 1a + SLEEC 1b:
+	monitored userDoorOpenConsent: Boolean
+	//SLEEC 2:
 	monitored userExercising: Boolean
 	monitored fewerExerciseRepetitions: Boolean
 	monitored userEncouraged: Boolean
-	monitored userIsTired: Boolean 
+	monitored userPhysicalIssues: Boolean 
+	//SLEEC 2a:
 	monitored userComplains: Boolean
-	monitored userReadyToEat: Boolean
-	monitored userPrefersPrivacy: Boolean 
-	monitored medicalEmergencyAlert: Boolean
+	monitored userSilentExercisePreference: Boolean
+	//SLEEC 3:
 	monitored requestUserData: Boolean
-	monitored userConsentGranted: Boolean
+	monitored userDataConsentGranted: Boolean
 	monitored unauthorizedPerson: Boolean
+	//SLEEC 4:
+	monitored userReadyToEat: Boolean
 	monitored userIsSleeping: Boolean
 	monitored userInRemSleep: Boolean
-	monitored riskOfHypoglycemia: Boolean
-	monitored userRequestsFood: Boolean
-	monitored userDietRefusal: Boolean
-	monitored morningExerciseAllowsCheatMeal: Boolean
 	monitored glucoseLevel: GlucoseLevel
-	monitored roomTemperature: RoomTemperatureRange 
-	monitored timeOfDay: TimeOfDay
+	//SLEEC 5:
+	monitored userRequestsFood: Boolean
+	//SLEEC 6:
+	monitored medicalEmergencyAlert: Boolean
+	monitored userDietRefusal: Boolean
+	monitored differentFoodAllowed: Boolean
 	
 	//Capabilities
+	//SLEEC 1 + 1a:
+	static greetInUserLanguage: Capability
+	static startTrainingSession: Capability
+	static closeDoor: Capability
+	static askPermissionForOpenDoor: Capability
+	//SLEEC 1b:
+	static alertNurse: Capability
+	//SLEEC 2:
 	static showNextExercise: Capability
 	static encourage: Capability
 	static askUserIntent: Capability
 	static notifySessionEnd: Capability
-	static greetInUserLanguage: Capability
-	static closeDoor: Capability
-	static openDoor: Capability
-	static startTrainingSession: Capability
-	static informNurse: Capability
-	static alertNurse: Capability //includes sound alarm
+	//SLEEC 3:
 	static shareData: Capability
 	static denyDataSharingWithExplanation: Capability
+	//SLEEC 4:
 	static remindUserMealTime: Capability
 	static wakeUpUser: Capability
+	static informNurse: Capability
+	//SLEEC 5:
 	static explainNoFood: Capability
+	static giveDietarySnack: Capability
+	//SLEEC 6:
 	static deliverMeal: Capability
 	static explainDietAdherenceReason: Capability
-	static deliverDietaryCheatMeal:Capability
-	static explainUserWarmStart: Capability //explainWarmStart — indicates that the session begins with a delay and door open due to excessive heat.
-	static giveDietarySnack: Capability
+	static deliverDietaryAlternative:Capability
 	
 	static id: Capability -> CapabilityID
 
@@ -91,26 +105,26 @@ definitions:
 	
 	function id($c in Capability) = 
 		switch $c
-			case showNextExercise : SHOWNEXTEXERCISE
-			case encourage : ENCOURAGE
-			case askUserIntent : ASKUSERINTENT
-			case notifySessionEnd: ENDSESSION
+			case greetInUserLanguage: GREETINUSERLANGUAGE
 			case startTrainingSession: STARTTRAININGSESSION
 			case closeDoor: CLOSEDOOR
-			case openDoor: OPENDOOR
-			case informNurse: INFORMNURSE
+			case askPermissionForOpenDoor: ASKPERMISSIONFOROPENDOOR
 			case alertNurse: ALERTNURSE
+			case showNextExercise: SHOWNEXTEXERCISE
+			case encourage: ENCOURAGE
+			case askUserIntent: ASKUSERINTENT
+			case notifySessionEnd: NOTIFYSESSIONEND
+			case doNothing: DONOTHING
 			case shareData: SHAREDATA
 			case denyDataSharingWithExplanation: DENYDATASHARINGWITHEXPLANATION
-			case remindUserMealTime: REMINDMEALTIME
+			case remindUserMealTime: REMINDUSERMEALTIME
 			case wakeUpUser: WAKEUPUSER
+			case informNurse: INFORMNURSE
 			case explainNoFood: EXPLAINNOFOOD
-			case deliverMeal: DELIVERMEAL
-			case explainDietAdherenceReason: EXPLAINDIETADHERENCE
-			case deliverDietaryCheatMeal: DELIVERDIETARYCHEATMEAL
-			case greetInUserLanguage: GREETINUSERLANGUAGE
-			case explainUserWarmStart: EXPLAINWARMSTART
 			case giveDietarySnack: GIVEDIETARYSNACK
+			case deliverMeal: DELIVERMEAL
+			case explainDietAdherenceReason: EXPLAINDIETADHERENCEREASON
+			case deliverDietaryAlternative: DELIVERDIETARYALTERNATIVE
 		endswitch	
 	
     function tooWarm($t in RoomTemperatureRange) =  ($t>=26) //Above 26°C → Too warm — can cause discomfort or heat stress

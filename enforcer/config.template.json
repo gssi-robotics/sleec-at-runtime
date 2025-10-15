@@ -3,8 +3,8 @@
     "ip": "${SERVER_IP}",
     "base_port": 8080,
     "spec_path": "../resources/models",
-    "runtime_model": "firefighter.asm", 
-    "other_models" : ["firefighterHeader.asm"]
+    "runtime_model": "${MODEL}", 
+    "other_models" : ["${MODEL_HEADER}"]
   },
   "rabbitmq": {
     "host": "${RABBITMQ_HOST}",

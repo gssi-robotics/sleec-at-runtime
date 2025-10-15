@@ -24,12 +24,15 @@ services:
     environment:
       - SERVER_IP=asmeta-server
       - RABBITMQ_HOST=rabbitmq
+      - MODEL=${MODEL}
+      - MODEL_HEADER=${MODEL_HEADER}
     depends_on:
       - asmeta-server
     networks:
       - enforcer-network
 
   firefighter-comm-layer:
+    profiles: ["firefighter"]
     build:
       context: ./ros2_ws
     entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch firefighter_comm_layer firefighter_comm_layer_launch.py'"
@@ -37,9 +40,26 @@ services:
       - enforcer-network
 
   firefighter-sim:
+    profiles: ["firefighter"]
     build:
       context: ./ros2_ws    
     entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch firefighter_sim firefighter_sim_launch.py'"
+    networks:
+      - enforcer-network
+
+  ari-sim-comm-layer:
+    profiles: ["ari-sim", "ari-sim-test"]
+    build:
+      context: ./ros2_ws
+    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py'"
+    networks:
+      - enforcer-network
+
+  ari-sim:
+    profiles: ["ari-sim"]
+    build:
+      context: ./ros2_ws    
+    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch ari_sim ari_sim_launch.py'"
     networks:
       - enforcer-network
 
