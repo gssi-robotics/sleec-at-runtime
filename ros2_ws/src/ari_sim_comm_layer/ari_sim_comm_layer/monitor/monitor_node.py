@@ -21,6 +21,7 @@ class MonitorNode(Node):
         # ======== START PROBE SUBSCRIBERS ======== #
         self.create_subscription(String, 'time', self.conditions_processor.time_callback, 10)
         self.create_subscription(Bool, 'user_privacy_concern', self.conditions_processor.user_privacy_concern_callback, 10)
+        self.create_subscription(String, 'user_open_door_permission', self.conditions_processor.user_open_door_permission_callback, 10)
         self.create_subscription(Temperature, 'room_temperature', self.conditions_processor.room_temperature_callback, 10)
         self.create_subscription(Bool, 'user_exercising', self.conditions_processor.user_exercising_callback, 10)
         self.create_subscription(Int32, 'exercise_count', self.conditions_processor.exercise_count_callback, 10)

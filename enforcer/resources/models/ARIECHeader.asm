@@ -15,6 +15,7 @@ signature:
 	enum domain GlucoseLevel = {VERYLOW, LOW, NORMAL, HIGH}
 	//A value representing a specific time during the daily routine; ANOTHER TIME is any other time excluding the previous ones 
 	enum domain TimeOfDay = {MEALTIME, STARTTRAININGTIME, TRAININGTIME, ANOTHERTIME} 
+	enum domain Permission = {GRANTED, DENIED, UNKNOWN} 
 	
 	enum domain CapabilityID = {GREETINUSERLANGUAGE, STARTTRAININGSESSION, CLOSEDOOR, ASKPERMISSIONFOROPENDOOR, ALERTNURSE, SHOWNEXTEXERCISE, ENCOURAGE, ASKUSERINTENT, NOTIFYSESSIONEND, DONOTHING, SHAREDATA, DENYDATASHARINGWITHEXPLANATION, REMINDUSERMEALTIME, WAKEUPUSER, INFORMNURSE, EXPLAINNOFOOD, GIVEDIETARYSNACK, DELIVERMEAL, EXPLAINDIETADHERENCEREASON, DELIVERDIETARYALTERNATIVE}
 	
@@ -29,7 +30,7 @@ signature:
 	monitored userPrefersPrivacy: Boolean
 	monitored roomTemperature: RoomTemperatureRange // There's the function to compute if the room is too hot
 	//SLEEC 1a + SLEEC 1b:
-	monitored userDoorOpenConsent: Boolean
+	monitored userDoorOpenConsent: Permission
 	//SLEEC 2:
 	monitored userExercising: Boolean
 	monitored fewerExerciseRepetitions: Boolean
@@ -86,6 +87,8 @@ signature:
 
 	//utility functions
 	static tooWarm: RoomTemperatureRange  -> Boolean
+	static isDoorOpenPermissionAsked: Permission  -> Boolean
+	static isDoorOpenConsentGranted: Permission  -> Boolean
 	static isMealTime: TimeOfDay -> Boolean
 	static isTimeForStartingTrainingSession: TimeOfDay -> Boolean
 	static isTrainingTime: TimeOfDay -> Boolean
@@ -128,6 +131,8 @@ definitions:
 		endswitch	
 	
     function tooWarm($t in RoomTemperatureRange) =  ($t>=26) //Above 26°C → Too warm — can cause discomfort or heat stress
+    function isDoorOpenPermissionAsked($t in Permission) = ($t != UNKNOWN)
+    function isDoorOpenConsentGranted($t in Permission) = ($t = GRANTED)
     function isMealTime($t in TimeOfDay) = ($t = MEALTIME) 
     function isTimeForStartingTrainingSession($t in TimeOfDay) = ($t = STARTTRAININGTIME)
     function isTrainingTime($t in TimeOfDay) = ($t = TRAININGTIME)

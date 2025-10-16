@@ -14,6 +14,11 @@ class TimeOfDay(str, Enum):
     TRAININGTIME = "TRAININGTIME"
     ANOTHERTIME = "ANOTHERTIME"
 
+class Permission(str, Enum):
+    GRANTED = "GRANTED"
+    DENIED = "DENIED"
+    UNKNOWN = "UNKNOWN"
+
 class CapabilityID(str, Enum):
     GREETINUSERLANGUAGE = "GREETINUSERLANGUAGE"
     STARTTRAININGSESSION = "STARTTRAININGSESSION"
@@ -63,7 +68,7 @@ class Conditions:
     timeOfDay: TimeOfDay = TimeOfDay.ANOTHERTIME # Added as custom default
     userPrefersPrivacy: bool = False
     roomTemperature: int = 18 # Added as custom default
-    userDoorOpenConsent: bool = False
+    userDoorOpenConsent: Permission = Permission.UNKNOWN # Added as custom deafult
     userExercising: bool = False
     fewerExerciseRepetitions: bool = False
     userEncouraged: bool = False

@@ -4,131 +4,206 @@ import random
 import sys
 from datetime import datetime
 
-def get_daisy_addressing_obligation(userNameUnknown, userDirectsOtherwise, domain):
-    if (domain == "hospital"):
-        if userNameUnknown and not userDirectsOtherwise:
-            return "AddressSirOrMadam"
-        if userNameUnknown and userDirectsOtherwise:
-                return "UseUserChosenName"
-        return "UsePreferredName"
-    return "not_specified"
+meal_times = ["12:30", "18:30"]
+start_session_times = ["10:00", "16:00"]
+training_times = ["10:15", "16:15"]
+other_times = ["09:00", "14:00", "20:00"]
 
-def get_daisy_instruction_fail_obligation(instructionRepeat, timeElapsed, domain):
-    if (domain == "hospital"):
-        if (instructionRepeat >=3 or timeElapsed > 20):
-            return "CallSupport"
-        return "RepeatInstruction"
-    return "not_specified"
+coverage = {
+    "SLEEC1 - default rule": 0,
+    "SLEEC1 - hedge clause 1": 0,
+    "SLEEC1 - hedge clause 2": 0,
+    "SLEEC1a - default rule": 0,
+    "SLEEC1b - default rule": 0,
+    "SLEEC2 - default rule": 0,
+    "SLEEC2 - hedge clause 1": 0,
+    "SLEEC2 - hedge clause 2": 0,
+    "SLEEC2 - hedge clause 3": 0,
+    "SLEEC2a - default rule": 0,
+    "SLEEC2a - hedge clause 1": 0,
+    "SLEEC3 - default rule": 0,
+    "SLEEC3 - hedge clause 1": 0,
+    "SLEEC4 - default rule": 0,
+    "SLEEC4 - hedge clause 1": 0,
+    "SLEEC4 - hedge clause 2": 0,
+    "SLEEC4 - hedge clause 3": 0,
+    "SLEEC5 - default rule": 0,
+    "SLEEC5 - hedge clause 1": 0,
+    "SLEEC6 - default rule": 0,
+    "SLEEC6 - hedge clause 1": 0,
+    "SLEEC6 - hedge clause 2": 0
+}
 
-def get_daisy_preparing_examination_obligation(UserAge, legalAge, domain):
-    if (domain == "hospital"):
-        if (UserAge < legalAge):
-            return "EnsureLegalPresence"
-        return "EnsurePrivateSpace"
-    return "not_specified"
+def get_SLEEC1(time, user_privacy_concern, room_temperature, user_open_door_permission):
+    if (time in start_session_times) and not user_privacy_concern:
+        return ("greetInUserLanguage AND startTrainingSession", "SLEEC1 - default rule")
+    if (time in start_session_times) and user_privacy_concern and not (room_temperature >= 26):
+        return ("greetInUserLanguage AND closeDoor AND startTrainingSession", "SLEEC1 - hedge clause 1")
+    if (time in start_session_times) and user_privacy_concern and (room_temperature >= 26) and (user_open_door_permission == "Unknown"):
+        return ("askPermissionForOpenDoor", "SLEEC1 - hedge clause 2")
+    if (time in start_session_times) and user_privacy_concern and (room_temperature >= 26) and (user_open_door_permission != "Unknown"):
+        return None
+    return None
 
-def get_dressassist_curtain_opening_obligation(userUndressed, userDistressed, domain):
-    if (domain == "house"):
-        if (userUndressed and not userDistressed):
-            return "RefuseRequest AND ExplainReason"
-        if (userUndressed and userDistressed):
-            return "WarnUser AND OpenCurtains"
-        return "OpenCurtains"
-    return "not_specified"
+def get_SLEEC1a(time, room_temperature, user_open_door_permission):
+    if (time in start_session_times) and (room_temperature >= 26) and (user_open_door_permission == "Yes"):
+        return ("greetInUserLanguage AND startTrainingSession", "SLEEC1a - default rule")
+    return None
 
-def get_dressassist_dresing_started_obligation(medicalEmergency, userAdvices, domain):
-    if (domain == "house"):
-        if (medicalEmergency or userAdvices):
-            return "doNothing"
-        return "CloseDoor"
-    return "not_specified"
+def get_SLEEC1b(time, room_temperature, user_open_door_permission):
+    if (time in start_session_times) and (room_temperature >= 26) and (user_open_door_permission == "No"):
+        return ("alertNurse AND closeDoor", "SLEEC1b - default rule")
+    return None
 
-def get_dressassist_dressing_stop_obligation(riskLevel, r_low, domain):
-    if (domain == "house"):
-        if (riskLevel < r_low):
-            return "AskToFinishFirst"
-        return "RobotStop"
-    return "not_specified"
+def get_SLEEC2(time, user_exercising, exercise_count, user_encouraged, user_physical_alerts):
+    if (time in training_times) and (not user_exercising) and not (exercise_count < 5):
+        return ("showNextExercise", "SLEEC2 - default rule")
+    if (time in training_times) and (not user_exercising) and (exercise_count < 5) and not user_encouraged:
+        return ("encourage", "SLEEC2 - hedge clause 1")
+    if (time in training_times) and (not user_exercising) and (exercise_count < 5) and user_encouraged and not user_physical_alerts:
+        return ("askUserIntent", "SLEEC2 - hedge clause 2")
+    if (time in training_times) and (not user_exercising) and (exercise_count < 5) and user_encouraged and user_physical_alerts:
+        return ("notifySessionEnd AND alertNurse", "SLEEC2 - hedge clause 3")
+    return None
 
-def get_human_on_floor_obligation(userResponsive, userWithCompanion, domain):
-    if (userResponsive and not userWithCompanion):
-        return "AskForUserStatus"
-    if (userResponsive and userWithCompanion):
-        return "AskCompanionToCheck"
-    return "CallEmergencyServices"
+def get_SLEEC2a(user_exercising, user_complains, user_exercise_preferences):
+    if user_exercising and user_complains and not user_exercise_preferences:
+        return ("encourage", "SLEEC2a - default rule")
+    if user_exercising and user_complains and user_exercise_preferences:
+        return (None, "SLEEC2a - hedge clause 1")
+    return None
 
-def get_mealtime_monitoring_obligation(userOccupied, domain):
-    if (userOccupied):
-        return "RemindLater"
-    return "InformUser"
+def get_SLEEC3(data_request, user_consent_granted, authorized_access):
+    if data_request and not (not user_consent_granted or not authorized_access):
+        return ("shareData", "SLEEC3 - default rule")
+    if data_request and (not user_consent_granted or not authorized_access):
+        return ("denyDataSharingWithExplanation", "SLEEC3 - hedge clause 1")
+    return None
+
+def get_SLEEC4(time, user_ready, user_sleep_status, glucose_value):
+    if (time in meal_times) and not user_ready and user_sleep_status == "No":
+        return ("remindUserMealTime", "SLEEC4 - default rule")
+    if (time in meal_times) and not user_ready and user_sleep_status == "Light":
+        return ("wakeUpUser", "SLEEC4 - hedge clause 1")
+    if (time in meal_times) and not user_ready and user_sleep_status == "REM" and not (glucose_value <= 70):
+        return ("informNurse", "SLEEC4 - hedge clause 2")
+    if (time in meal_times) and not user_ready and user_sleep_status == "REM" and (glucose_value <= 70):
+        return ("alertNurse", "SLEEC4 - hedge clause 3")
+    return None
+
+def get_SLEEC5(time, user_request_food, glucose_value):
+    if user_request_food and not (time in meal_times) and not (glucose_value <= 85):
+        return ("remindUserMealTime AND explainNoFood", "SLEEC5 - default rule")
+    if user_request_food and not (time in meal_times) and (glucose_value <= 85):
+        return ("giveDietarySnack AND informNurse", "SLEEC5 - hedge clause 1")
+    return None
+
+def get_SLEEC6(time, user_ready, user_refuse_diet, exercise_result):
+    if (time in meal_times) and user_ready and not user_refuse_diet:
+        return ("deliverMeal", "SLEEC6 - default rule")
+    if (time in meal_times) and user_ready and user_refuse_diet and not (exercise_result in ["Good", "Excellent"]):
+        return ("explainDietAdherenceReason AND deliverMeal", "SLEEC6 - hedge clause 1")
+    if (time in meal_times) and user_ready and user_refuse_diet and (exercise_result in ["Good", "Excellent"]):
+        return ("deliverDietaryAlternative", "SLEEC6 - hedge clause 2")
+    return None
 
 def generate_test_cases(n):
-    test_cases = {"test_cases": []}
+    test_cases = {"coverage": coverage, "test_cases": []}
 
     for i in range(1, n + 1):
 
-        time = random.choice(["09:00", "10:00", "10:15", "12:30", "18:30"])
+        time = random.choice(meal_times + start_session_times + training_times + other_times)
+
+        # Used in SLEEC 1, 1a, 1b, 2, 2a
         user_privacy_concern = random.choice([True, False])
         room_temperature = random.randint(19, 28)
-        user_exercising = random.choice([True, False])
-        exercise_count = random.randint(3, 6)
-        user_encouraged = random.choice([True, False])
-        user_physical_alerts = random.choice([True, False])
-        user_complains = random.choice([True, False])
+        user_open_door_permission = random.choice(["Yes", "No", "Unknown"]) if user_privacy_concern else "Unknown"
+        user_exercising = random.choice([True, False]) if time in training_times else False # If during exercising, otherwise is False
+        exercise_count = random.randint(3, 6) if time in training_times else 0 # If during exercising, otherwise is 0
+        user_encouraged = random.choice([True, False]) if time in training_times else False # If during exercising, otherwise is False
+        user_physical_alerts = random.choice([True, False]) if time in training_times else False # If during exercising, otherwise is False
+        user_complains = random.choice([True, False]) if time in training_times else False # If during exercising, otherwise is False
         user_exercise_preferences = random.choice([True, False])
-        data_request = random.choice([True, False])
-        user_consent_granted = random.choice([True, False])
-        authorized_access = random.choice([True, False])
-        user_ready = random.choice([True, False])
-        user_sleep_status = random.choice(["REM", "Light", "NO"])
+
+        # Used in SLEEC 3
+        data_request = random.choice([True, False]) if time in other_times else False # Simulate request data only if not during meal time or training time
+        user_consent_granted = random.choice([True, False]) # For data sharing
+        authorized_access = random.choice([True, False]) if data_request else False
+
+        # Used in SLEEC 4, 5, 6
+        user_ready = random.choice([True, False]) if time in meal_times else False # Check only if at meal time
+        user_sleep_status = random.choice(["REM", "Light", "No"]) if time in meal_times else "NO" # Simulate sleep only during meal time... can't happen while training!
         glucose_value = random.randint(60, 120)
-        user_request_food = random.choice([True, False])
+        user_request_food = random.choice([True, False]) if not data_request and time in other_times else False # Handle a request at a time: if there is no data request, then there can be a food request
         medical_emergency = random.choice([True, False])
-        user_refuse_diet = random.choice([True, False])
+        user_refuse_diet = random.choice([True, False]) if time in meal_times else False # Diet can be refused only during meal time
         exercise_result = random.choice(["Poor", "Sufficient", "Good", "Excellent"])
 
-        case = {
+        def compute_expected_behaviours():
+            sleec_results = [
+                get_SLEEC1(time, user_privacy_concern, room_temperature, user_open_door_permission),
+                get_SLEEC1a(time, room_temperature, user_open_door_permission),
+                get_SLEEC1b(time, room_temperature, user_open_door_permission),
+                get_SLEEC2(time, user_exercising, exercise_count, user_encouraged, user_physical_alerts),
+                get_SLEEC2a(user_exercising, user_complains, user_exercise_preferences),
+                get_SLEEC3(data_request, user_consent_granted, authorized_access),
+                get_SLEEC4(time, user_ready, user_sleep_status, glucose_value),
+                get_SLEEC5(time, user_request_food, glucose_value),
+                get_SLEEC6(time, user_ready, user_refuse_diet, exercise_result)
+            ]
+            return [b for b in sleec_results if b is not None]
+
+        expected_behaviours = compute_expected_behaviours()
+
+        if len(expected_behaviours) > 1:
+            print(f"Test case {i} has more than one expected behaviour!")
+        if len(expected_behaviours) < 1:
+            print(f"Test case {i} has no expected behaviour!")
+
+        expected_obligation = []
+        expected_rule = []
+        for (obligation, rule) in expected_behaviours:
+            if obligation:
+                expected_obligation.append(obligation)
+            expected_rule.append(rule)
+            coverage[rule] = coverage[rule]+1
+
+        case = { # First the conditions are provided, then the time, then the user's actions
             "id": i,
             'time': time,
-            'user_consent_granted': user_consent_granted,
-            'data_request': data_request,
-            "context_conditions": {
+            "interactions":{
+                'data_request': data_request,
+                'user_request_food': user_request_food,
+                'user_complains': user_complains
+            },
+            "conditions": {
                 'user_privacy_concern': user_privacy_concern,
                 'room_temperature': room_temperature,
+                'user_open_door_permission':user_open_door_permission,
                 'user_exercising': user_exercising,
                 'exercise_count': exercise_count,
                 'user_encouraged': user_encouraged,
                 'user_physical_alerts': user_physical_alerts,
-                'user_complains': user_complains,
                 'user_exercise_preferences': user_exercise_preferences,
+                'user_consent_granted': user_consent_granted,
                 'authorized_access': authorized_access,
                 'user_ready': user_ready,
                 'user_sleep_status': user_sleep_status,
                 'glucose_value': glucose_value,
-                'user_request_food': user_request_food,
                 'medical_emergency': medical_emergency,
                 'user_refuse_diet': user_refuse_diet,
                 'exercise_result': exercise_result,
             },
-            "expected_behaviours": {
-                # "daisy_addressing": get_daisy_addressing_obligation(userNameUnknown, userDirectsOtherwise, domain),
-                # "daisy_instruction_fail": get_daisy_instruction_fail_obligation(instructionRepeat, timeElapsed, domain),
-                # "daisy_preparing_examination": get_daisy_preparing_examination_obligation(UserAge, legalAge, domain),
-                # "dressassist_curtain_opening":  get_dressassist_curtain_opening_obligation(userUndressed, userDistressed, domain),
-                # "dressassist_dresing_started": get_dressassist_dresing_started_obligation(medicalEmergency, userAdvices, domain),
-                # "dressassist_dressing_stop":get_dressassist_dressing_stop_obligation(riskLevel, r_low, domain),
-                # "human_on_floor": get_human_on_floor_obligation(userResponsive, userWithCompanion, domain),
-                # "mealtime_monitoring": get_mealtime_monitoring_obligation(userOccupied, domain)
-            }
+            "expected_obligation": expected_obligation,
+            "expected_rule": expected_rule
         }
         test_cases["test_cases"].append(case)
-
     return test_cases
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 2 or len(sys.argv) > 3:
-        sys.exit("Usage: python test_cases_generator.py <number_of_test_cases> [<name>]")
+        sys.exit("Usage: python3 test_cases_generator.py <number_of_test_cases> [<name>]")
 
     try:
         N = int(sys.argv[1])

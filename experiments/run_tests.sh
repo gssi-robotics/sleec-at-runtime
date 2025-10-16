@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
+. ./install/setup.bash
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <test_name>"
@@ -26,4 +27,4 @@ fi
 
 echo "Running with test file: $TEST_FILE_ABS"
 
-ros2 run ari_test_runner test_runner_node --ros-args -p testcase_file:="$TEST_FILE_ABS"
+ros2 run ari_test_runner test_runner --ros-args -p testcase_file:="$TEST_FILE_ABS"
