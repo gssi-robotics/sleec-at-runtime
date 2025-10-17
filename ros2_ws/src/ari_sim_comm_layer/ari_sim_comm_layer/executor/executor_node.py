@@ -126,7 +126,7 @@ class ExecutorNode(Node):
         self.get_logger().info("Executing giveDietarySnack")
         msg = String()
         msg.data = json.dumps({"action": "giveDietarySnack", "body": "deliver_snack"})
-        self.meal_cmd_pub(msg)
+        self.meal_cmd_pub.publish(msg)
 
     def deliver_meal(self):
         self.get_logger().info("Executing deliverMeal")
@@ -144,7 +144,7 @@ class ExecutorNode(Node):
         self.get_logger().info("Executing deliverDietaryAlternative")
         msg = String()
         msg.data = json.dumps({"action": "deliverDietaryAlternative", "body": "deliver_alt_meal"})
-        self.meal_cmd_pub(msg)
+        self.meal_cmd_pub.publish(msg)
     
 def main(args=None):
     rclpy.init(args=args)

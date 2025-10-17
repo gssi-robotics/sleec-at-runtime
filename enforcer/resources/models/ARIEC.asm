@@ -60,25 +60,27 @@ definitions:
     
     /*
 	 * IF It's time for an exercise session THEN (Greet in the user language AND Start session
-	 * UNLESS  The user cares about privacy  IN WHICH CASE (Greet in the user language AND Close the door AND Start session
-	 * UNLESS The room is too warm IN WHICH CASE (Ask for permission to keep the door open)))
+	 * UNLESS The user cares about privacy  IN WHICH CASE (Greet in the user language AND Close the door AND Start session
+	 * UNLESS The room is too warm IN WHICH CASE (Ask for permission to keep the door open
+	 * UNLESS The permission has beed already asked IN WHICH CASE (do nothing))))
 	 */
 	rule r_Rule1 = 
 		r_SLEEC[isTimeForStartingTrainingSession(timeOfDay), <<r_greetAndStartTraining>>, 
 				userPrefersPrivacy, <<r_greetCloseAndStartTraining>>, 
-				tooWarm(roomTemperature), <<r_askPermissionForOpenDoor>>] 
+				tooWarm(roomTemperature), <<r_askPermissionForOpenDoor>>,
+				isDoorOpenPermissionAsked(userDoorOpenConsent), <<r_doNothing>>] 
 
 	/*
-	 * IF It is time for an exercise session AND The room is too warm AND The user agrees to keep the door open THEN (Greet in the user's language AND Start the session)
+	 * IF It is time for an exercise session AND The room is too warm AND The permission for keeping door open has already been asked AND The user agrees to keep the door open THEN (Greet in the user's language AND Start the session)
 	 */
 	 rule r_Rule1a = 
-	 	r_SLEEC[isTimeForStartingTrainingSession(timeOfDay) and tooWarm(roomTemperature) and userDoorOpenConsent, <<r_greetAndStartTraining>>]
+	 	r_SLEEC[isTimeForStartingTrainingSession(timeOfDay) and tooWarm(roomTemperature) and isDoorOpenPermissionAsked(userDoorOpenConsent) and isDoorOpenConsentGranted(userDoorOpenConsent), <<r_greetAndStartTraining>>]
 
 	/*
-	 * IF It is time for an exercise session AND The room is too warm AND The user does not agree to keep the door open THEN (Alert the nurse AND Close the door)
+	 * IF It is time for an exercise session AND The room is too warm AND The permission for keeping door open has already been asked AND The user does not agree to keep the door open THEN (Alert the nurse AND Close the door)
 	 */
 	 rule r_Rule1b =
-	 	r_SLEEC[isTimeForStartingTrainingSession(timeOfDay) and tooWarm(roomTemperature) and not userDoorOpenConsent, <<r_alertAndCloseDoor>>]
+	 	r_SLEEC[isTimeForStartingTrainingSession(timeOfDay) and tooWarm(roomTemperature) and isDoorOpenPermissionAsked(userDoorOpenConsent) and not isDoorOpenConsentGranted(userDoorOpenConsent), <<r_alertAndCloseDoor>>]
 
     /*
      * IF The user is not exercising THEN (Show the next exercise AFTER 1 min, 
@@ -98,7 +100,7 @@ definitions:
 	 * UNLESS The user expressed the preference to exercise in silence IN WHICH CASE doNothing	
 	 */
 	rule r_Rule2a = 
-		r_SLEEC[isTrainingTime(timeOfDay) and userExercising and userComplains, <<r_encourage>>,
+		r_SLEEC[userExercising and userComplains, <<r_encourage>>,
 				userSilentExercisePreference, <<r_doNothing>>]
 		
     /*

@@ -2,8 +2,12 @@ import json
 from std_msgs.msg import Bool, Float32, String, Int32
 from sensor_msgs.msg import Temperature
 
-from ari_sim_comm_layer.ARI_model_structures import Conditions, GlucoseLevel, TimeOfDay
+from ari_sim_comm_layer.ARI_model_structures import Conditions, GlucoseLevel, TimeOfDay, Permission
 # from ari_sim_comm_layer.monitor.monitor_utils import publish_on_change
+
+meal_times = ["12:30", "18:30"]
+start_session_times = ["10:00", "16:00"]
+training_times = ["10:15", "16:15"]
 
 class ConditionsProcessor():
     def __init__(self, node, publisher):
@@ -48,11 +52,11 @@ class ConditionsProcessor():
     def time_callback(self, msg: String):
         time = msg.data
         self.get_logger().info(f"Received time data: {time}")
-        if time == "12:30":
+        if time in meal_times:
             self.conditions.timeOfDay = TimeOfDay.MEALTIME
-        elif time == "10:00":
+        elif time in start_session_times:
             self.conditions.timeOfDay = TimeOfDay.STARTTRAININGTIME
-        elif time in ["10:10", "10:15", "10:20", "10:25"]:
+        elif time in training_times:
             self.conditions.timeOfDay = TimeOfDay.TRAININGTIME
         else:
             self.conditions.timeOfDay = TimeOfDay.ANOTHERTIME
@@ -61,6 +65,16 @@ class ConditionsProcessor():
     def user_privacy_concern_callback(self, msg: Bool):
         self.get_logger().info(f"Received user privacy concern: {msg.data}")
         self.conditions.userPrefersPrivacy = msg.data
+
+    @publish_on_change
+    def user_open_door_permission_callback(self, msg: String):
+        self.get_logger().info(f"Received user permission: {msg.data}")
+        if msg.data == "Yes":
+            self.conditions.userDoorOpenConsent = Permission.GRANTED
+        elif msg.data == "No":
+            self.conditions.userDoorOpenConsent = Permission.DENIED
+        else:
+            self.conditions.userDoorOpenConsent = Permission.UNKNOWN
 
     @publish_on_change
     def room_temperature_callback(self, msg: Temperature):
@@ -115,7 +129,7 @@ class ConditionsProcessor():
     @publish_on_change
     def authorized_access_callback(self, msg: Bool):
         self.get_logger().info(f"Received access autorization: {msg.data}")
-        self.conditions.unauthorizedPerson = msg.data
+        self.conditions.unauthorizedPerson = not msg.data
 
     @publish_on_change
     def user_ready_callback(self, msg):
@@ -124,7 +138,7 @@ class ConditionsProcessor():
 
     @publish_on_change
     def user_sleep_status_callback(self, msg: String):
-        sleep_status = msg.data # "REM", "Light", "NO"
+        sleep_status = msg.data # "REM", "Light", "No"
         self.get_logger().info(f"Received user sleep status: {msg.data}")
         if sleep_status == "REM":
             self.conditions.userIsSleeping = True
@@ -171,4 +185,4 @@ class ConditionsProcessor():
         if result in ["Good", "Excellent"]:
             self.conditions.differentFoodAllowed = True
         else:
-            self.conditions.differentFoodAllowed = True
+            self.conditions.differentFoodAllowed = False

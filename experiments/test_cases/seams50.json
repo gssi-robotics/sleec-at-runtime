@@ -1,0 +1,1658 @@
+{
+    "coverage": {
+        "SLEEC1 - default rule": 3,
+        "SLEEC1 - hedge clause 1": 1,
+        "SLEEC1 - hedge clause 2": 2,
+        "SLEEC1a - default rule": 1,
+        "SLEEC1b - default rule": 1,
+        "SLEEC2 - default rule": 4,
+        "SLEEC2 - hedge clause 1": 1,
+        "SLEEC2 - hedge clause 2": 0,
+        "SLEEC2 - hedge clause 3": 0,
+        "SLEEC2a - default rule": 4,
+        "SLEEC2a - hedge clause 1": 4,
+        "SLEEC3 - default rule": 1,
+        "SLEEC3 - hedge clause 1": 8,
+        "SLEEC4 - default rule": 3,
+        "SLEEC4 - hedge clause 1": 2,
+        "SLEEC4 - hedge clause 2": 0,
+        "SLEEC4 - hedge clause 3": 0,
+        "SLEEC5 - default rule": 2,
+        "SLEEC5 - hedge clause 1": 1,
+        "SLEEC6 - default rule": 5,
+        "SLEEC6 - hedge clause 1": 0,
+        "SLEEC6 - hedge clause 2": 4
+    },
+    "test_cases": [
+        {
+            "id": 1,
+            "time": "14:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 23,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 116,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [],
+            "expected_rule": []
+        },
+        {
+            "id": 2,
+            "time": "16:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 27,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": true,
+                "exercise_count": 4,
+                "user_encouraged": true,
+                "user_physical_alerts": true,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 104,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "encourage"
+            ],
+            "expected_rule": [
+                "SLEEC2a - default rule"
+            ]
+        },
+        {
+            "id": 3,
+            "time": "12:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 24,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "No",
+                "glucose_value": 68,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "deliverMeal"
+            ],
+            "expected_rule": [
+                "SLEEC6 - default rule"
+            ]
+        },
+        {
+            "id": 4,
+            "time": "20:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 22,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 93,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [],
+            "expected_rule": []
+        },
+        {
+            "id": 5,
+            "time": "12:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 25,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "No",
+                "glucose_value": 77,
+                "medical_emergency": true,
+                "user_refuse_diet": true,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "deliverDietaryAlternative"
+            ],
+            "expected_rule": [
+                "SLEEC6 - hedge clause 2"
+            ]
+        },
+        {
+            "id": 6,
+            "time": "20:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 27,
+                "user_open_door_permission": "Yes",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": true,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 76,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "denyDataSharingWithExplanation"
+            ],
+            "expected_rule": [
+                "SLEEC3 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 7,
+            "time": "12:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 27,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "Light",
+                "glucose_value": 91,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "deliverMeal"
+            ],
+            "expected_rule": [
+                "SLEEC6 - default rule"
+            ]
+        },
+        {
+            "id": 8,
+            "time": "18:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 24,
+                "user_open_door_permission": "Yes",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "No",
+                "glucose_value": 106,
+                "medical_emergency": false,
+                "user_refuse_diet": true,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "remindUserMealTime"
+            ],
+            "expected_rule": [
+                "SLEEC4 - default rule"
+            ]
+        },
+        {
+            "id": 9,
+            "time": "14:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 27,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 99,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "denyDataSharingWithExplanation"
+            ],
+            "expected_rule": [
+                "SLEEC3 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 10,
+            "time": "12:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 25,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "Light",
+                "glucose_value": 60,
+                "medical_emergency": true,
+                "user_refuse_diet": true,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "deliverDietaryAlternative"
+            ],
+            "expected_rule": [
+                "SLEEC6 - hedge clause 2"
+            ]
+        },
+        {
+            "id": 11,
+            "time": "09:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 22,
+                "user_open_door_permission": "No",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 109,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [],
+            "expected_rule": []
+        },
+        {
+            "id": 12,
+            "time": "10:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 25,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": true,
+                "exercise_count": 5,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 91,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [],
+            "expected_rule": [
+                "SLEEC2a - hedge clause 1"
+            ]
+        },
+        {
+            "id": 13,
+            "time": "12:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 28,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "No",
+                "glucose_value": 119,
+                "medical_emergency": true,
+                "user_refuse_diet": true,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "deliverDietaryAlternative"
+            ],
+            "expected_rule": [
+                "SLEEC6 - hedge clause 2"
+            ]
+        },
+        {
+            "id": 14,
+            "time": "14:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 20,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 71,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "denyDataSharingWithExplanation"
+            ],
+            "expected_rule": [
+                "SLEEC3 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 15,
+            "time": "18:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 26,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "No",
+                "glucose_value": 77,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "deliverMeal"
+            ],
+            "expected_rule": [
+                "SLEEC6 - default rule"
+            ]
+        },
+        {
+            "id": 16,
+            "time": "14:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 23,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 91,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "denyDataSharingWithExplanation"
+            ],
+            "expected_rule": [
+                "SLEEC3 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 17,
+            "time": "10:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 27,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 72,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "askPermissionForOpenDoor"
+            ],
+            "expected_rule": [
+                "SLEEC1 - hedge clause 2"
+            ]
+        },
+        {
+            "id": 18,
+            "time": "20:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": true,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 21,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 93,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "remindUserMealTime AND explainNoFood"
+            ],
+            "expected_rule": [
+                "SLEEC5 - default rule"
+            ]
+        },
+        {
+            "id": 19,
+            "time": "10:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 28,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": true,
+                "exercise_count": 6,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 78,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "encourage"
+            ],
+            "expected_rule": [
+                "SLEEC2a - default rule"
+            ]
+        },
+        {
+            "id": 20,
+            "time": "12:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 23,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "Light",
+                "glucose_value": 68,
+                "medical_emergency": true,
+                "user_refuse_diet": true,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "deliverDietaryAlternative"
+            ],
+            "expected_rule": [
+                "SLEEC6 - hedge clause 2"
+            ]
+        },
+        {
+            "id": 21,
+            "time": "16:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 25,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 5,
+                "user_encouraged": true,
+                "user_physical_alerts": true,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 68,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "showNextExercise"
+            ],
+            "expected_rule": [
+                "SLEEC2 - default rule"
+            ]
+        },
+        {
+            "id": 22,
+            "time": "16:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 27,
+                "user_open_door_permission": "Yes",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 66,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "greetInUserLanguage AND startTrainingSession"
+            ],
+            "expected_rule": [
+                "SLEEC1a - default rule"
+            ]
+        },
+        {
+            "id": 23,
+            "time": "10:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 21,
+                "user_open_door_permission": "No",
+                "user_exercising": true,
+                "exercise_count": 4,
+                "user_encouraged": true,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 111,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [],
+            "expected_rule": [
+                "SLEEC2a - hedge clause 1"
+            ]
+        },
+        {
+            "id": 24,
+            "time": "18:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 25,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "Light",
+                "glucose_value": 77,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "wakeUpUser"
+            ],
+            "expected_rule": [
+                "SLEEC4 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 25,
+            "time": "09:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 23,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 89,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "denyDataSharingWithExplanation"
+            ],
+            "expected_rule": [
+                "SLEEC3 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 26,
+            "time": "18:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 24,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "No",
+                "glucose_value": 93,
+                "medical_emergency": true,
+                "user_refuse_diet": true,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "remindUserMealTime"
+            ],
+            "expected_rule": [
+                "SLEEC4 - default rule"
+            ]
+        },
+        {
+            "id": 27,
+            "time": "16:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 21,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 76,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "greetInUserLanguage AND startTrainingSession"
+            ],
+            "expected_rule": [
+                "SLEEC1 - default rule"
+            ]
+        },
+        {
+            "id": 28,
+            "time": "10:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 21,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": true,
+                "exercise_count": 4,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 96,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "encourage"
+            ],
+            "expected_rule": [
+                "SLEEC2a - default rule"
+            ]
+        },
+        {
+            "id": 29,
+            "time": "16:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 21,
+                "user_open_door_permission": "Yes",
+                "user_exercising": true,
+                "exercise_count": 4,
+                "user_encouraged": false,
+                "user_physical_alerts": true,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 117,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [],
+            "expected_rule": [
+                "SLEEC2a - hedge clause 1"
+            ]
+        },
+        {
+            "id": 30,
+            "time": "10:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 24,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": true,
+                "exercise_count": 3,
+                "user_encouraged": true,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 120,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [],
+            "expected_rule": [
+                "SLEEC2a - hedge clause 1"
+            ]
+        },
+        {
+            "id": 31,
+            "time": "09:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": true,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 24,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 80,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "giveDietarySnack AND informNurse"
+            ],
+            "expected_rule": [
+                "SLEEC5 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 32,
+            "time": "10:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 28,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 82,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "greetInUserLanguage AND startTrainingSession"
+            ],
+            "expected_rule": [
+                "SLEEC1 - default rule"
+            ]
+        },
+        {
+            "id": 33,
+            "time": "10:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 20,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 6,
+                "user_encouraged": true,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 76,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "showNextExercise"
+            ],
+            "expected_rule": [
+                "SLEEC2 - default rule"
+            ]
+        },
+        {
+            "id": 34,
+            "time": "20:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 23,
+                "user_open_door_permission": "Yes",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": true,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 79,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "denyDataSharingWithExplanation"
+            ],
+            "expected_rule": [
+                "SLEEC3 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 35,
+            "time": "10:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 26,
+                "user_open_door_permission": "No",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 78,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "alertNurse AND closeDoor"
+            ],
+            "expected_rule": [
+                "SLEEC1b - default rule"
+            ]
+        },
+        {
+            "id": 36,
+            "time": "10:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 20,
+                "user_open_door_permission": "No",
+                "user_exercising": false,
+                "exercise_count": 3,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 112,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "encourage"
+            ],
+            "expected_rule": [
+                "SLEEC2 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 37,
+            "time": "20:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": true,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 22,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 117,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "remindUserMealTime AND explainNoFood"
+            ],
+            "expected_rule": [
+                "SLEEC5 - default rule"
+            ]
+        },
+        {
+            "id": 38,
+            "time": "16:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 27,
+                "user_open_door_permission": "No",
+                "user_exercising": true,
+                "exercise_count": 4,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 101,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "encourage"
+            ],
+            "expected_rule": [
+                "SLEEC2a - default rule"
+            ]
+        },
+        {
+            "id": 39,
+            "time": "09:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 20,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": true,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 62,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "denyDataSharingWithExplanation"
+            ],
+            "expected_rule": [
+                "SLEEC3 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 40,
+            "time": "16:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 27,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 91,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "askPermissionForOpenDoor"
+            ],
+            "expected_rule": [
+                "SLEEC1 - hedge clause 2"
+            ]
+        },
+        {
+            "id": 41,
+            "time": "12:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 19,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "Light",
+                "glucose_value": 114,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "deliverMeal"
+            ],
+            "expected_rule": [
+                "SLEEC6 - default rule"
+            ]
+        },
+        {
+            "id": 42,
+            "time": "20:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 20,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": true,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 75,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "shareData"
+            ],
+            "expected_rule": [
+                "SLEEC3 - default rule"
+            ]
+        },
+        {
+            "id": 43,
+            "time": "09:00",
+            "interactions": {
+                "data_request": true,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 28,
+                "user_open_door_permission": "No",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 115,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Sufficient"
+            },
+            "expected_obligation": [
+                "denyDataSharingWithExplanation"
+            ],
+            "expected_rule": [
+                "SLEEC3 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 44,
+            "time": "12:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 20,
+                "user_open_door_permission": "No",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": true,
+                "user_sleep_status": "Light",
+                "glucose_value": 113,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "deliverMeal"
+            ],
+            "expected_rule": [
+                "SLEEC6 - default rule"
+            ]
+        },
+        {
+            "id": 45,
+            "time": "18:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 24,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "Light",
+                "glucose_value": 98,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "wakeUpUser"
+            ],
+            "expected_rule": [
+                "SLEEC4 - hedge clause 1"
+            ]
+        },
+        {
+            "id": 46,
+            "time": "18:30",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 28,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "No",
+                "glucose_value": 67,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "remindUserMealTime"
+            ],
+            "expected_rule": [
+                "SLEEC4 - default rule"
+            ]
+        },
+        {
+            "id": 47,
+            "time": "16:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": true
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 20,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 6,
+                "user_encouraged": true,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": true,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 95,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "showNextExercise"
+            ],
+            "expected_rule": [
+                "SLEEC2 - default rule"
+            ]
+        },
+        {
+            "id": 48,
+            "time": "16:15",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 19,
+                "user_open_door_permission": "No",
+                "user_exercising": false,
+                "exercise_count": 5,
+                "user_encouraged": true,
+                "user_physical_alerts": true,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 113,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Poor"
+            },
+            "expected_obligation": [
+                "showNextExercise"
+            ],
+            "expected_rule": [
+                "SLEEC2 - default rule"
+            ]
+        },
+        {
+            "id": 49,
+            "time": "10:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": false,
+                "room_temperature": 23,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": false,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 113,
+                "medical_emergency": false,
+                "user_refuse_diet": false,
+                "exercise_result": "Good"
+            },
+            "expected_obligation": [
+                "greetInUserLanguage AND startTrainingSession"
+            ],
+            "expected_rule": [
+                "SLEEC1 - default rule"
+            ]
+        },
+        {
+            "id": 50,
+            "time": "16:00",
+            "interactions": {
+                "data_request": false,
+                "user_request_food": false,
+                "user_complains": false
+            },
+            "conditions": {
+                "user_privacy_concern": true,
+                "room_temperature": 20,
+                "user_open_door_permission": "Unknown",
+                "user_exercising": false,
+                "exercise_count": 0,
+                "user_encouraged": false,
+                "user_physical_alerts": false,
+                "user_exercise_preferences": true,
+                "user_consent_granted": false,
+                "authorized_access": false,
+                "user_ready": false,
+                "user_sleep_status": "NO",
+                "glucose_value": 87,
+                "medical_emergency": true,
+                "user_refuse_diet": false,
+                "exercise_result": "Excellent"
+            },
+            "expected_obligation": [
+                "greetInUserLanguage AND closeDoor AND startTrainingSession"
+            ],
+            "expected_rule": [
+                "SLEEC1 - hedge clause 1"
+            ]
+        }
+    ]
+}

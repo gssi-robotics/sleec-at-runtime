@@ -12,6 +12,7 @@ class RobotUserInterface(Node):
             'time': self.create_publisher(String, 'time', 10),
             'user_privacy_concern': self.create_publisher(Bool, 'user_privacy_concern', 10),
             'room_temperature': self.create_publisher(Temperature, 'room_temperature', 10),
+            'user_open_door_permission': self.create_publisher(String, 'user_open_door_permission', 10),
             'user_exercising': self.create_publisher(Bool, 'user_exercising', 10),
             'exercise_count': self.create_publisher(Int32, 'exercise_count', 10),
             'user_encouraged': self.create_publisher(Empty, 'user_encouraged', 10),

@@ -63,6 +63,15 @@ services:
     networks:
       - enforcer-network
 
+  ari-sim-test-runner:
+    profiles: ["ari-sim-test"]
+    build:
+      context: .
+      dockerfile: ./experiments/Dockerfile
+    entrypoint: ["sleep", "infinity"]
+    networks:
+      - enforcer-network
+
 networks:
   enforcer-network:
     # driver: bridge

@@ -63,7 +63,8 @@ class ObligationsProcessor():
 
                 if type == "AFTER":
                     self.get_logger().info(f"Delaying {capability} by {delay} seconds")
-                    self.node.create_timer(delay, lambda: self.trigger_capability(capability), oneShot=True)
+                    # self.node.create_timer(delay, lambda: self.trigger_capability(capability), oneShot=True)
+                    self.trigger_capability(capability)
 
                 elif type == "WITHIN":
                     # Execute now, then start deadline timer for follow-up
@@ -71,7 +72,7 @@ class ObligationsProcessor():
 
                     if follow_up != "undef":
                         self.get_logger().info(f"Scheduling follow-up: {follow_up} in {delay} seconds")
-                        self.node.create_timer(delay, lambda: self.trigger_capability(follow_up), oneshot=True)
+                        # self.node.create_timer(delay, lambda: self.trigger_capability(follow_up), oneshot=True)
 
                 else:
                     self.node.get_logger().warn(f"Unknown constraint type: {type}")
@@ -89,7 +90,7 @@ class ObligationsProcessor():
         except Exception as e:
             self.get_logger().error(f"[Obligation Processor] Error executing capability {capability}: {e}")
 
-    def parse_constraint(constraint):
+    def parse_constraint(self, constraint):
         '''Parses a time constraint string into tuple structured format.'''
         if constraint is None or constraint == 'undef':
             return None
