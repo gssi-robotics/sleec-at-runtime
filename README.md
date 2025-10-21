@@ -8,7 +8,7 @@ SLEEC rules enforcer @ runtime for Ari over ROS2 using Asmeta
 
 **Run over Docker Compose:**
 ```
-git clone https://github.com/gianlucafilippone/ari-ros2-sleec-runtime-enforcer.git
+git clone <REPO_URL>
 cd ari-ros2-sleec-runtime-enforcer
 docker compose up
 ```

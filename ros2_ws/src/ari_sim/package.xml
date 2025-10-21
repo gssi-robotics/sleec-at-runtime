@@ -4,7 +4,7 @@
   <name>ari_sim</name>
   <version>0.0.0</version>
   <description>Ari robot sim package</description>
-  <maintainer email="gianluca.filippone@gssi.it">Gianluca Filippone</maintainer>
+  <maintainer email="name.surname@gssi.it">name surname</maintainer>
   <license>Apache-2.0</license>
 
   <exec_depend>rclpy</exec_depend>
