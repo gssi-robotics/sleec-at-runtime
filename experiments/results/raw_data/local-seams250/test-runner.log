@@ -1,0 +1,256 @@
+[INFO] [1760651984.264512435] [ari_sim_test_runner]: Test #1: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.265721787] [ari_sim_test_runner]: Test #2: expected ['encourage'], executed ['encourage'] (check: True), time: 208 ms
+[INFO] [1760651984.267598231] [ari_sim_test_runner]: Test #3: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 364 ms
+[INFO] [1760651984.269592780] [ari_sim_test_runner]: Test #4: expected ['wakeUpUser'], executed ['wakeUpUser'] (check: True), time: 263 ms
+[INFO] [1760651984.271258149] [ari_sim_test_runner]: Test #5: expected ['encourage'], executed ['encourage'] (check: True), time: 115 ms
+[INFO] [1760651984.272478214] [ari_sim_test_runner]: Test #6: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 116 ms
+[INFO] [1760651984.274042382] [ari_sim_test_runner]: Test #7: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.275120782] [ari_sim_test_runner]: Test #8: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'greetInUserLanguage', 'startTrainingSession'] (check: True), time: 115 ms
+[INFO] [1760651984.276448989] [ari_sim_test_runner]: Test #9: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 97 ms
+[INFO] [1760651984.277276324] [ari_sim_test_runner]: Test #10: expected ['explainDietAdherenceReason', 'deliverMeal'], executed ['deliverMeal', 'explainDietAdherenceReason'] (check: True), time: 105 ms
+[INFO] [1760651984.278422479] [ari_sim_test_runner]: Test #11: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 100 ms
+[INFO] [1760651984.279366402] [ari_sim_test_runner]: Test #12: expected ['giveDietarySnack', 'informNurse'], executed ['informNurse', 'giveDietarySnack'] (check: True), time: 105 ms
+[INFO] [1760651984.280337327] [ari_sim_test_runner]: Test #13: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 106 ms
+[INFO] [1760651984.281414569] [ari_sim_test_runner]: Test #14: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.282413795] [ari_sim_test_runner]: Test #15: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 108 ms
+[INFO] [1760651984.283292171] [ari_sim_test_runner]: Test #16: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 113 ms
+[INFO] [1760651984.284227568] [ari_sim_test_runner]: Test #17: expected ['shareData'], executed ['shareData'] (check: True), time: 95 ms
+[INFO] [1760651984.285351572] [ari_sim_test_runner]: Test #18: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.286498758] [ari_sim_test_runner]: Test #19: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 109 ms
+[INFO] [1760651984.287425522] [ari_sim_test_runner]: Test #20: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 99 ms
+[INFO] [1760651984.288219008] [ari_sim_test_runner]: Test #21: expected ['shareData'], executed ['shareData'] (check: True), time: 111 ms
+[INFO] [1760651984.289054190] [ari_sim_test_runner]: Test #22: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 118 ms
+[INFO] [1760651984.289536511] [ari_sim_test_runner]: Test #23: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 102 ms
+[INFO] [1760651984.290511766] [ari_sim_test_runner]: Test #24: expected ['encourage'], executed ['encourage', 'encourage'] (check: True), time: -901 ms
+[INFO] [1760651984.291341534] [ari_sim_test_runner]: Test #25: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 124 ms
+[INFO] [1760651984.292146857] [ari_sim_test_runner]: Test #26: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -907 ms
+[INFO] [1760651984.292881024] [ari_sim_test_runner]: Test #27: expected ['alertNurse', 'closeDoor'], executed ['alertNurse', 'closeDoor'] (check: True), time: 100 ms
+[INFO] [1760651984.293460649] [ari_sim_test_runner]: Test #28: expected ['informNurse'], executed ['informNurse'] (check: True), time: 101 ms
+[INFO] [1760651984.294043841] [ari_sim_test_runner]: Test #29: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 119 ms
+[INFO] [1760651984.294787240] [ari_sim_test_runner]: Test #30: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 106 ms
+[INFO] [1760651984.295492941] [ari_sim_test_runner]: Test #31: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 97 ms
+[INFO] [1760651984.296081006] [ari_sim_test_runner]: Test #32: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.297012742] [ari_sim_test_runner]: Test #33: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 114 ms
+[INFO] [1760651984.297593278] [ari_sim_test_runner]: Test #34: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 100 ms
+[INFO] [1760651984.298350105] [ari_sim_test_runner]: Test #35: expected ['shareData'], executed ['shareData'] (check: True), time: 80 ms
+[INFO] [1760651984.298956732] [ari_sim_test_runner]: Test #36: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -901 ms
+[INFO] [1760651984.299344420] [ari_sim_test_runner]: Test #37: expected ['informNurse'], executed ['informNurse'] (check: True), time: 96 ms
+[INFO] [1760651984.300015861] [ari_sim_test_runner]: Test #38: expected ['remindUserMealTime'], executed ['remindUserMealTime'] (check: True), time: 105 ms
+[INFO] [1760651984.300454845] [ari_sim_test_runner]: Test #39: expected ['wakeUpUser'], executed ['wakeUpUser'] (check: True), time: 102 ms
+[INFO] [1760651984.301263760] [ari_sim_test_runner]: Test #40: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.302026141] [ari_sim_test_runner]: Test #41: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.302666322] [ari_sim_test_runner]: Test #42: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 117 ms
+[INFO] [1760651984.303451387] [ari_sim_test_runner]: Test #43: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.303982654] [ari_sim_test_runner]: Test #44: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 121 ms
+[INFO] [1760651984.304454985] [ari_sim_test_runner]: Test #45: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 115 ms
+[INFO] [1760651984.305120868] [ari_sim_test_runner]: Test #46: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -894 ms
+[INFO] [1760651984.305884675] [ari_sim_test_runner]: Test #47: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -900 ms
+[INFO] [1760651984.306500196] [ari_sim_test_runner]: Test #48: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.306995919] [ari_sim_test_runner]: Test #49: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 112 ms
+[INFO] [1760651984.307426926] [ari_sim_test_runner]: Test #50: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -870 ms
+[INFO] [1760651984.308023603] [ari_sim_test_runner]: Test #51: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 105 ms
+[INFO] [1760651984.308485694] [ari_sim_test_runner]: Test #52: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage', 'closeDoor'] (check: True), time: 174 ms
+[INFO] [1760651984.309092501] [ari_sim_test_runner]: Test #53: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 116 ms
+[INFO] [1760651984.309555881] [ari_sim_test_runner]: Test #54: expected ['alertNurse', 'closeDoor'], executed ['closeDoor', 'alertNurse'] (check: True), time: 108 ms
+[INFO] [1760651984.310134019] [ari_sim_test_runner]: Test #55: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.310777437] [ari_sim_test_runner]: Test #56: expected ['askPermissionForOpenDoor'], executed ['askPermissionForOpenDoor'] (check: True), time: 112 ms
+[INFO] [1760651984.311301027] [ari_sim_test_runner]: Test #57: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 102 ms
+[INFO] [1760651984.312026782] [ari_sim_test_runner]: Test #58: expected ['remindUserMealTime', 'explainNoFood'], executed ['remindUserMealTime', 'explainNoFood'] (check: True), time: 135 ms
+[INFO] [1760651984.313040407] [ari_sim_test_runner]: Test #59: expected ['shareData'], executed ['shareData'] (check: True), time: 117 ms
+[INFO] [1760651984.313522526] [ari_sim_test_runner]: Test #60: expected ['encourage'], executed ['encourage', 'encourage'] (check: True), time: -896 ms
+[INFO] [1760651984.314058076] [ari_sim_test_runner]: Test #61: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 124 ms
+[INFO] [1760651984.314597951] [ari_sim_test_runner]: Test #62: expected ['wakeUpUser'], executed ['wakeUpUser'] (check: True), time: 108 ms
+[INFO] [1760651984.315073252] [ari_sim_test_runner]: Test #63: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.315436393] [ari_sim_test_runner]: Test #64: expected ['explainDietAdherenceReason', 'deliverMeal'], executed ['deliverMeal', 'explainDietAdherenceReason'] (check: True), time: 105 ms
+[INFO] [1760651984.315972289] [ari_sim_test_runner]: Test #65: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 104 ms
+[INFO] [1760651984.316306276] [ari_sim_test_runner]: Test #66: expected ['informNurse'], executed ['informNurse'] (check: True), time: 86 ms
+[INFO] [1760651984.316648914] [ari_sim_test_runner]: Test #67: expected ['askUserIntent'], executed ['askUserIntent', 'askUserIntent'] (check: True), time: -889 ms
+[INFO] [1760651984.317124927] [ari_sim_test_runner]: Test #68: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 93 ms
+[INFO] [1760651984.317497191] [ari_sim_test_runner]: Test #69: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 119 ms
+[INFO] [1760651984.318084237] [ari_sim_test_runner]: Test #70: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 101 ms
+[INFO] [1760651984.318477804] [ari_sim_test_runner]: Test #71: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['startTrainingSession', 'closeDoor', 'greetInUserLanguage'] (check: True), time: 119 ms
+[INFO] [1760651984.319022603] [ari_sim_test_runner]: Test #72: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 119 ms
+[INFO] [1760651984.319538639] [ari_sim_test_runner]: Test #73: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 121 ms
+[INFO] [1760651984.320162869] [ari_sim_test_runner]: Test #74: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 135 ms
+[INFO] [1760651984.320759021] [ari_sim_test_runner]: Test #75: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 109 ms
+[INFO] [1760651984.321123488] [ari_sim_test_runner]: Test #76: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.321739457] [ari_sim_test_runner]: Test #77: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.322227385] [ari_sim_test_runner]: Test #78: expected ['encourage'], executed ['encourage'] (check: True), time: 109 ms
+[INFO] [1760651984.322768501] [ari_sim_test_runner]: Test #79: expected ['giveDietarySnack', 'informNurse'], executed ['informNurse', 'giveDietarySnack'] (check: True), time: 111 ms
+[INFO] [1760651984.323139104] [ari_sim_test_runner]: Test #80: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 115 ms
+[INFO] [1760651984.323758989] [ari_sim_test_runner]: Test #81: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 113 ms
+[INFO] [1760651984.324529831] [ari_sim_test_runner]: Test #82: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 107 ms
+[INFO] [1760651984.325015635] [ari_sim_test_runner]: Test #83: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 106 ms
+[INFO] [1760651984.325576878] [ari_sim_test_runner]: Test #84: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 115 ms
+[INFO] [1760651984.326059099] [ari_sim_test_runner]: Test #85: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -890 ms
+[INFO] [1760651984.326445197] [ari_sim_test_runner]: Test #86: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 124 ms
+[INFO] [1760651984.327012717] [ari_sim_test_runner]: Test #87: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 124 ms
+[INFO] [1760651984.327470286] [ari_sim_test_runner]: Test #88: expected ['wakeUpUser'], executed ['wakeUpUser'] (check: True), time: 119 ms
+[INFO] [1760651984.328121787] [ari_sim_test_runner]: Test #89: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 149 ms
+[INFO] [1760651984.328503412] [ari_sim_test_runner]: Test #90: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 111 ms
+[INFO] [1760651984.328980707] [ari_sim_test_runner]: Test #91: expected ['encourage'], executed ['encourage'] (check: True), time: 109 ms
+[INFO] [1760651984.329291529] [ari_sim_test_runner]: Test #92: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 124 ms
+[INFO] [1760651984.329864429] [ari_sim_test_runner]: Test #93: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 108 ms
+[INFO] [1760651984.330303609] [ari_sim_test_runner]: Test #94: expected ['informNurse'], executed ['informNurse'] (check: True), time: 99 ms
+[INFO] [1760651984.330973416] [ari_sim_test_runner]: Test #95: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 114 ms
+[INFO] [1760651984.331343650] [ari_sim_test_runner]: Test #96: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 110 ms
+[INFO] [1760651984.331929622] [ari_sim_test_runner]: Test #97: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 152 ms
+[INFO] [1760651984.332379754] [ari_sim_test_runner]: Test #98: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 111 ms
+[INFO] [1760651984.332920043] [ari_sim_test_runner]: Test #99: expected ['encourage'], executed ['encourage', 'encourage'] (check: True), time: -894 ms
+[INFO] [1760651984.333357926] [ari_sim_test_runner]: Test #100: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'greetInUserLanguage', 'startTrainingSession'] (check: True), time: 126 ms
+[INFO] [1760651984.333926465] [ari_sim_test_runner]: Test #101: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 116 ms
+[INFO] [1760651984.334339425] [ari_sim_test_runner]: Test #102: expected ['askPermissionForOpenDoor'], executed ['askPermissionForOpenDoor'] (check: True), time: 93 ms
+[INFO] [1760651984.335016330] [ari_sim_test_runner]: Test #103: expected ['encourage'], executed ['encourage'] (check: True), time: 104 ms
+[INFO] [1760651984.335357840] [ari_sim_test_runner]: Test #104: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 122 ms
+[INFO] [1760651984.335951034] [ari_sim_test_runner]: Test #105: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 116 ms
+[INFO] [1760651984.336332328] [ari_sim_test_runner]: Test #106: expected ['encourage'], executed ['encourage'] (check: True), time: 106 ms
+[INFO] [1760651984.336909885] [ari_sim_test_runner]: Test #107: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 128 ms
+[INFO] [1760651984.337302515] [ari_sim_test_runner]: Test #108: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 104 ms
+[INFO] [1760651984.337643950] [ari_sim_test_runner]: Test #109: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 131 ms
+[INFO] [1760651984.338114978] [ari_sim_test_runner]: Test #110: expected ['askPermissionForOpenDoor'], executed ['askPermissionForOpenDoor'] (check: True), time: 106 ms
+[INFO] [1760651984.338603611] [ari_sim_test_runner]: Test #111: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 96 ms
+[INFO] [1760651984.339199274] [ari_sim_test_runner]: Test #112: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage', 'closeDoor'] (check: True), time: 129 ms
+[INFO] [1760651984.339598962] [ari_sim_test_runner]: Test #113: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.340336905] [ari_sim_test_runner]: Test #114: expected ['shareData'], executed ['shareData'] (check: True), time: 100 ms
+[INFO] [1760651984.340981276] [ari_sim_test_runner]: Test #115: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage', 'closeDoor'] (check: True), time: 129 ms
+[INFO] [1760651984.341771749] [ari_sim_test_runner]: Test #116: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.342286057] [ari_sim_test_runner]: Test #117: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 117 ms
+[INFO] [1760651984.343201177] [ari_sim_test_runner]: Test #118: expected ['askPermissionForOpenDoor'], executed ['askPermissionForOpenDoor'] (check: True), time: 108 ms
+[INFO] [1760651984.343978026] [ari_sim_test_runner]: Test #119: expected ['encourage'], executed ['encourage'] (check: True), time: 107 ms
+[INFO] [1760651984.344372125] [ari_sim_test_runner]: Test #120: expected ['askUserIntent'], executed ['askUserIntent'] (check: True), time: 99 ms
+[INFO] [1760651984.344758686] [ari_sim_test_runner]: Test #121: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 116 ms
+[INFO] [1760651984.345132641] [ari_sim_test_runner]: Test #122: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 107 ms
+[INFO] [1760651984.345506897] [ari_sim_test_runner]: Test #123: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 113 ms
+[INFO] [1760651984.346156701] [ari_sim_test_runner]: Test #124: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 136 ms
+[INFO] [1760651984.346860139] [ari_sim_test_runner]: Test #125: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 115 ms
+[INFO] [1760651984.347280538] [ari_sim_test_runner]: Test #126: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 125 ms
+[INFO] [1760651984.347825760] [ari_sim_test_runner]: Test #127: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 120 ms
+[INFO] [1760651984.348304278] [ari_sim_test_runner]: Test #128: expected ['askUserIntent'], executed ['askUserIntent', 'askUserIntent'] (check: True), time: -904 ms
+[INFO] [1760651984.348876008] [ari_sim_test_runner]: Test #129: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 107 ms
+[INFO] [1760651984.349414758] [ari_sim_test_runner]: Test #130: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.349989264] [ari_sim_test_runner]: Test #131: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -881 ms
+[INFO] [1760651984.350508552] [ari_sim_test_runner]: Test #132: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'] (check: True), time: 99 ms
+[INFO] [1760651984.350979200] [ari_sim_test_runner]: Test #133: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 99 ms
+[INFO] [1760651984.351457236] [ari_sim_test_runner]: Test #134: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 126 ms
+[INFO] [1760651984.352079910] [ari_sim_test_runner]: Test #135: expected ['informNurse'], executed ['informNurse'] (check: True), time: 83 ms
+[INFO] [1760651984.352851989] [ari_sim_test_runner]: Test #136: expected ['remindUserMealTime', 'explainNoFood'], executed ['remindUserMealTime', 'explainNoFood'] (check: True), time: 115 ms
+[INFO] [1760651984.353416588] [ari_sim_test_runner]: Test #137: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 109 ms
+[INFO] [1760651984.354051675] [ari_sim_test_runner]: Test #138: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 109 ms
+[INFO] [1760651984.354643594] [ari_sim_test_runner]: Test #139: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.355220858] [ari_sim_test_runner]: Test #140: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 102 ms
+[INFO] [1760651984.355553543] [ari_sim_test_runner]: Test #141: expected ['wakeUpUser'], executed ['wakeUpUser'] (check: True), time: 104 ms
+[INFO] [1760651984.356160801] [ari_sim_test_runner]: Test #142: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 109 ms
+[INFO] [1760651984.356508827] [ari_sim_test_runner]: Test #143: expected ['askUserIntent'], executed ['askUserIntent', 'askUserIntent'] (check: True), time: -895 ms
+[INFO] [1760651984.357120310] [ari_sim_test_runner]: Test #144: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 118 ms
+[INFO] [1760651984.357551856] [ari_sim_test_runner]: Test #145: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 111 ms
+[INFO] [1760651984.357957869] [ari_sim_test_runner]: Test #146: expected ['informNurse'], executed ['informNurse'] (check: True), time: 105 ms
+[INFO] [1760651984.358308698] [ari_sim_test_runner]: Test #147: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession', 'closeDoor'] (check: True), time: 130 ms
+[INFO] [1760651984.358741364] [ari_sim_test_runner]: Test #148: expected ['remindUserMealTime'], executed ['remindUserMealTime'] (check: True), time: 97 ms
+[INFO] [1760651984.359263055] [ari_sim_test_runner]: Test #149: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 110 ms
+[INFO] [1760651984.359737333] [ari_sim_test_runner]: Test #150: expected ['informNurse'], executed ['informNurse'] (check: True), time: 107 ms
+[INFO] [1760651984.360080353] [ari_sim_test_runner]: Test #151: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.360503161] [ari_sim_test_runner]: Test #152: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 103 ms
+[INFO] [1760651984.361127512] [ari_sim_test_runner]: Test #153: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 113 ms
+[INFO] [1760651984.361521871] [ari_sim_test_runner]: Test #154: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.362017362] [ari_sim_test_runner]: Test #155: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.362380708] [ari_sim_test_runner]: Test #156: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 127 ms
+[INFO] [1760651984.362968293] [ari_sim_test_runner]: Test #157: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 116 ms
+[INFO] [1760651984.363301010] [ari_sim_test_runner]: Test #158: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.363869392] [ari_sim_test_runner]: Test #159: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 141 ms
+[INFO] [1760651984.364504403] [ari_sim_test_runner]: Test #160: expected ['explainDietAdherenceReason', 'deliverMeal'], executed ['explainDietAdherenceReason', 'deliverMeal'] (check: True), time: 125 ms
+[INFO] [1760651984.365025256] [ari_sim_test_runner]: Test #161: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'] (check: True), time: 196 ms
+[INFO] [1760651984.365420137] [ari_sim_test_runner]: Test #162: expected ['askUserIntent'], executed ['askUserIntent'] (check: True), time: 112 ms
+[INFO] [1760651984.366037050] [ari_sim_test_runner]: Test #163: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 125 ms
+[INFO] [1760651984.366457179] [ari_sim_test_runner]: Test #164: expected ['shareData'], executed ['shareData'] (check: True), time: 116 ms
+[INFO] [1760651984.367055730] [ari_sim_test_runner]: Test #165: expected ['remindUserMealTime', 'explainNoFood'], executed ['remindUserMealTime', 'explainNoFood'] (check: True), time: 165 ms
+[INFO] [1760651984.367506609] [ari_sim_test_runner]: Test #166: expected ['explainDietAdherenceReason', 'deliverMeal'], executed ['explainDietAdherenceReason', 'deliverMeal'] (check: True), time: 117 ms
+[INFO] [1760651984.367972644] [ari_sim_test_runner]: Test #167: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.368491021] [ari_sim_test_runner]: Test #168: expected ['notifySessionEnd', 'alertNurse'], executed ['alertNurse', 'notifySessionEnd'] (check: True), time: 91 ms
+[INFO] [1760651984.368985913] [ari_sim_test_runner]: Test #169: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 113 ms
+[INFO] [1760651984.369447171] [ari_sim_test_runner]: Test #170: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'greetInUserLanguage', 'startTrainingSession'] (check: True), time: 117 ms
+[INFO] [1760651984.370002855] [ari_sim_test_runner]: Test #171: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 145 ms
+[INFO] [1760651984.370382807] [ari_sim_test_runner]: Test #172: expected ['remindUserMealTime', 'explainNoFood'], executed ['remindUserMealTime', 'explainNoFood'] (check: True), time: 111 ms
+[INFO] [1760651984.370995319] [ari_sim_test_runner]: Test #173: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 123 ms
+[INFO] [1760651984.371474404] [ari_sim_test_runner]: Test #174: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 118 ms
+[INFO] [1760651984.372104520] [ari_sim_test_runner]: Test #175: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 115 ms
+[INFO] [1760651984.372535794] [ari_sim_test_runner]: Test #176: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 104 ms
+[INFO] [1760651984.373078906] [ari_sim_test_runner]: Test #177: expected ['encourage'], executed ['encourage'] (check: True), time: 97 ms
+[INFO] [1760651984.373545000] [ari_sim_test_runner]: Test #178: expected ['encourage'], executed ['encourage'] (check: True), time: 103 ms
+[INFO] [1760651984.374182188] [ari_sim_test_runner]: Test #179: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 99 ms
+[INFO] [1760651984.374836653] [ari_sim_test_runner]: Test #180: expected ['remindUserMealTime'], executed ['remindUserMealTime'] (check: True), time: 94 ms
+[INFO] [1760651984.375271745] [ari_sim_test_runner]: Test #181: expected ['wakeUpUser'], executed ['wakeUpUser'] (check: True), time: 99 ms
+[INFO] [1760651984.375805177] [ari_sim_test_runner]: Test #182: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['startTrainingSession', 'closeDoor', 'greetInUserLanguage'] (check: True), time: 117 ms
+[INFO] [1760651984.376281382] [ari_sim_test_runner]: Test #183: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 105 ms
+[INFO] [1760651984.376877354] [ari_sim_test_runner]: Test #184: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 102 ms
+[INFO] [1760651984.377285564] [ari_sim_test_runner]: Test #185: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'] (check: True), time: 116 ms
+[INFO] [1760651984.377979800] [ari_sim_test_runner]: Test #186: expected ['alertNurse'], executed ['alertNurse'] (check: True), time: 97 ms
+[INFO] [1760651984.378477513] [ari_sim_test_runner]: Test #187: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -900 ms
+[INFO] [1760651984.379053936] [ari_sim_test_runner]: Test #188: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.379615559] [ari_sim_test_runner]: Test #189: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.380155743] [ari_sim_test_runner]: Test #190: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 102 ms
+[INFO] [1760651984.380930820] [ari_sim_test_runner]: Test #191: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.381620580] [ari_sim_test_runner]: Test #192: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 101 ms
+[INFO] [1760651984.382579786] [ari_sim_test_runner]: Test #193: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 106 ms
+[INFO] [1760651984.383124004] [ari_sim_test_runner]: Test #194: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 105 ms
+[INFO] [1760651984.383503801] [ari_sim_test_runner]: Test #195: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'greetInUserLanguage', 'startTrainingSession'] (check: True), time: 129 ms
+[INFO] [1760651984.384115917] [ari_sim_test_runner]: Test #196: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 98 ms
+[INFO] [1760651984.384555146] [ari_sim_test_runner]: Test #197: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 103 ms
+[INFO] [1760651984.385152012] [ari_sim_test_runner]: Test #198: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -875 ms
+[INFO] [1760651984.385603229] [ari_sim_test_runner]: Test #199: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 101 ms
+[INFO] [1760651984.386185575] [ari_sim_test_runner]: Test #200: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 142 ms
+[INFO] [1760651984.386629526] [ari_sim_test_runner]:[INFO] [1760651984.386629526] [ari_sim_test_runner]: Test #201: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.387137881] [ari_sim_test_runner]: Test #202: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -898 ms
+[INFO] [1760651984.387525704] [ari_sim_test_runner]: Test #203: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.388163068] [ari_sim_test_runner]: Test #204: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 120 ms
+[INFO] [1760651984.388598947] [ari_sim_test_runner]: Test #205: expected ['remindUserMealTime', 'explainNoFood'], executed ['remindUserMealTime', 'explainNoFood'] (check: True), time: 96 ms
+[INFO] [1760651984.389098001] [ari_sim_test_runner]: Test #206: expected ['shareData'], executed ['shareData'] (check: True), time: 94 ms
+[INFO] [1760651984.389534880] [ari_sim_test_runner]: Test #207: expected ['encourage'], executed ['encourage'] (check: True), time: 101 ms
+[INFO] [1760651984.390136804] [ari_sim_test_runner]: Test #208: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 108 ms
+[INFO] [1760651984.390493938] [ari_sim_test_runner]: Test #209: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 102 ms
+[INFO] [1760651984.391046201] [ari_sim_test_runner]: Test #210: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 107 ms
+[INFO] [1760651984.391513354] [ari_sim_test_runner]: Test #211: expected ['remindUserMealTime'], executed ['remindUserMealTime'] (check: True), time: 103 ms
+[INFO] [1760651984.392240698] [ari_sim_test_runner]: Test #212: expected ['remindUserMealTime', 'explainNoFood'], executed ['remindUserMealTime', 'explainNoFood'] (check: True), time: 127 ms
+[INFO] [1760651984.392926751] [ari_sim_test_runner]: Test #213: expected ['wakeUpUser'], executed ['wakeUpUser'] (check: True), time: 105 ms
+[INFO] [1760651984.393523529] [ari_sim_test_runner]: Test #214: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 98 ms
+[INFO] [1760651984.394561826] [ari_sim_test_runner]: Test #215: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.395384838] [ari_sim_test_runner]: Test #216: expected ['shareData'], executed ['shareData'] (check: True), time: 103 ms
+[INFO] [1760651984.395963849] [ari_sim_test_runner]: Test #217: expected ['encourage'], executed ['encourage'] (check: True), time: 98 ms
+[INFO] [1760651984.396481840] [ari_sim_test_runner]: Test #218: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 113 ms
+[INFO] [1760651984.392926751] [ari_sim_test_runner]: Test #213: expected ['wakeUpUser'], executed ['wakeUpUser'] (check: True), time: 105 ms
+[INFO] [1760651984.393523529] [ari_sim_test_runner]: Test #214: expected ['deliverMeal'], executed ['deliverMeal'] (check: True), time: 98 ms
+[INFO] [1760651984.394561826] [ari_sim_test_runner]: Test #215: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.395384838] [ari_sim_test_runner]: Test #216: expected ['shareData'], executed ['shareData'] (check: True), time: 103 ms
+[INFO] [1760651984.395963849] [ari_sim_test_runner]: Test #217: expected ['encourage'], executed ['encourage'] (check: True), time: 98 ms
+[INFO] [1760651984.396481840] [ari_sim_test_runner]: Test #218: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 113 ms
+[INFO] [1760651984.396964432] [ari_sim_test_runner]: Test #219: expected ['shareData'], executed ['shareData'] (check: True), time: 102 ms
+[INFO] [1760651984.397465882] [ari_sim_test_runner]: Test #220: expected ['encourage'], executed ['encourage'] (check: True), time: 97 ms
+[INFO] [1760651984.398230763] [ari_sim_test_runner]: Test #221: expected ['explainDietAdherenceReason', 'deliverMeal'], executed ['explainDietAdherenceReason', 'deliverMeal'] (check: True), time: 111 ms
+[INFO] [1760651984.398648306] [ari_sim_test_runner]: Test #222: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 99 ms
+[INFO] [1760651984.399146422] [ari_sim_test_runner]: Test #223: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 100 ms
+[INFO] [1760651984.399758587] [ari_sim_test_runner]: Test #224: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 93 ms
+[INFO] [1760651984.400216526] [ari_sim_test_runner]: Test #225: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.400847810] [ari_sim_test_runner]: Test #226: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 87 ms
+[INFO] [1760651984.401250605] [ari_sim_test_runner]: Test #227: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession', 'closeDoor'] (check: True), time: 110 ms
+[INFO] [1760651984.401771197] [ari_sim_test_runner]: Test #228: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.402188333] [ari_sim_test_runner]: Test #229: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.402731248] [ari_sim_test_runner]: Test #230: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.403240377] [ari_sim_test_runner]: Test #231: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 106 ms
+[INFO] [1760651984.403819493] [ari_sim_test_runner]: Test #232: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 101 ms
+[INFO] [1760651984.404451409] [ari_sim_test_runner]: Test #233: expected ['showNextExercise'], executed ['showNextExercise'] (check: True), time: 109 ms
+[INFO] [1760651984.405092560] [ari_sim_test_runner]: Test #234: expected ['greetInUserLanguage', 'closeDoor', 'startTrainingSession'], executed ['closeDoor', 'startTrainingSession', 'greetInUserLanguage'] (check: True), time: 110 ms
+[INFO] [1760651984.405577639] [ari_sim_test_runner]: Test #235: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 105 ms
+[INFO] [1760651984.406145661] [ari_sim_test_runner]: Test #236: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 99 ms
+[INFO] [1760651984.406595388] [ari_sim_test_runner]: Test #237: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['startTrainingSession', 'greetInUserLanguage'] (check: True), time: 113 ms
+[INFO] [1760651984.407153597] [ari_sim_test_runner]: Test #238: expected ['showNextExercise'], executed ['showNextExercise', 'showNextExercise'] (check: True), time: -903 ms
+[INFO] [1760651984.407749065] [ari_sim_test_runner]: Test #239: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.408155202] [ari_sim_test_runner]: Test #240: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 110 ms
+[INFO] [1760651984.408567952] [ari_sim_test_runner]: Test #241: expected ['greetInUserLanguage', 'startTrainingSession'], executed ['greetInUserLanguage', 'startTrainingSession'] (check: True), time: 115 ms
+[INFO] [1760651984.409093959] [ari_sim_test_runner]: Test #242: expected ['encourage'], executed ['encourage', 'encourage'] (check: True), time: -907 ms
+[INFO] [1760651984.409406490] [ari_sim_test_runner]: Test #243: expected ['remindUserMealTime', 'explainNoFood'], executed ['remindUserMealTime', 'explainNoFood'] (check: True), time: 112 ms
+[INFO] [1760651984.409707147] [ari_sim_test_runner]: Test #244: expected [], executed [] (check: True), time: N/A ms
+[INFO] [1760651984.410183787] [ari_sim_test_runner]: Test #245: expected ['shareData'], executed ['shareData'] (check: True), time: 108 ms
+[INFO] [1760651984.410650100] [ari_sim_test_runner]: Test #246: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 113 ms
+[INFO] [1760651984.411133617] [ari_sim_test_runner]: Test #247: expected ['remindUserMealTime', 'explainNoFood'], executed ['explainNoFood', 'remindUserMealTime'] (check: True), time: 104 ms
+[INFO] [1760651984.411539743] [ari_sim_test_runner]: Test #248: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 102 ms
+[INFO] [1760651984.412104371] [ari_sim_test_runner]: Test #249: expected ['giveDietarySnack', 'informNurse'], executed ['giveDietarySnack', 'informNurse'] (check: True), time: 109 ms
+[INFO] [1760651984.412474043] [ari_sim_test_runner]: Test #250: expected ['denyDataSharingWithExplanation'], executed ['denyDataSharingWithExplanation'] (check: True), time: 108 ms
