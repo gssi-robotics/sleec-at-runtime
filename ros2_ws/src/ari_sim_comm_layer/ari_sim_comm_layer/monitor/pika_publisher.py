@@ -3,11 +3,13 @@ from threading import Thread
 import aio_pika
 
 class PikaPublisher:
-    def __init__(self, host, port, queue):
+    def __init__(self, host, port, user, password, queue):
         self.queue = queue
         self.host = host
         self.port = port
-        self.url = f"amqp://guest:guest@{host}:{port}/"
+        self.user = user
+        self.password = password
+        self.url = f"amqp://{user}:{password}@{host}:{port}/"
         self.loop = asyncio.new_event_loop()
         self._ready = asyncio.Event()
 
