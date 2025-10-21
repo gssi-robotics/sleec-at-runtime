@@ -4,7 +4,7 @@
   <name>ari_web</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="gssi-lab@todo.todo">gssi-lab</maintainer>
+  <maintainer email="organization-lab@todo.todo">organization-lab</maintainer>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>

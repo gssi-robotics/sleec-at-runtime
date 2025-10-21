@@ -4,7 +4,7 @@
   <name>ari_sim_comm_layer</name>
   <version>0.0.0</version>
   <description>Abstract communication layer for simulated Ari's SLEEC rules enforcer</description>
-  <maintainer email="name.surname@gssi.it">name surname</maintainer>
+  <maintainer email="name.surname@organization.it">name surname</maintainer>
   <license>Apache-2.0</license>
 
   <exec_depend>rclpy</exec_depend>

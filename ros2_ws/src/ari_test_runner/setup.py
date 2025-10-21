@@ -17,7 +17,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='name surname',
-    maintainer_email='name.surname@gssi.it',
+    maintainer_email='name.surname@organization.it',
     description='Firefighter simulated robot package',
     license='Apache-2.0',
     tests_require=['pytest'],
