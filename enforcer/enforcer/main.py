@@ -99,14 +99,14 @@ async def main():
     execute_enforcer = enforcer != None
 
     # Connecting to RabbitMQ
-    rabbit_mq_param.host, rabbit_mq_param.port, rabbit_mq_param.conditions_queue_name, rabbit_mq_param.obligations_queue_name = config_manager.get_rabbitmq_params()
+    rabbit_mq_param.host, rabbit_mq_param.port, rabbit_mq_param.user, rabbit_mq_param.password, rabbit_mq_param.conditions_queue_name, rabbit_mq_param.obligations_queue_name = config_manager.get_rabbitmq_params()
     try:
         # Try multiple times for robustness
         retries = 10
         delay = 3
         for attempt in range(retries):
             try:
-                connection = await aio_pika.connect_robust(host=rabbit_mq_param.host, port=rabbit_mq_param.port)
+                connection = await aio_pika.connect_robust(host=rabbit_mq_param.host, port=rabbit_mq_param.port, login=rabbit_mq_param.user, password=rabbit_mq_param.password)
                 logger.info("Connected to RabbitMQ")
             except Exception as e:
                 logger.info(f"Attempt {attempt+1}/{retries}: RabbitMQ not ready, retrying in {delay}s...")

@@ -26,7 +26,7 @@ definitions:
 
 	rule r_alertAndCloseDoor = par r_setObligation[alertNurse] r_setObligation[closeDoor] endpar
 
-	rule r_showNextExercise = r_setObligation[showNextExercise,AFTER,1,MIN,doNothing]
+	rule r_showNextExercise = r_setObligation[showNextExercise]
 	
 	rule r_encourage = r_setObligation[encourage]
 			
@@ -40,7 +40,7 @@ definitions:
     
     rule r_remindUserMealTime = r_setObligation[remindUserMealTime] 
 
-    rule r_wakeUpUserOrAlert = r_setObligation[wakeUpUser,WITHIN,5,MIN,alertNurse]
+    rule r_wakeUpUserOrAlert = r_setObligation[wakeUpUser]
 
 	rule r_informNurse = r_setObligation[informNurse]
 

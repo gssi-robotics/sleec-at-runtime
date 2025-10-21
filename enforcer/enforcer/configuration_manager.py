@@ -20,7 +20,7 @@ class ConfigurationManager:
 
     def get_rabbitmq_params(self):
         rabbitmq_param = self.json_data["rabbitmq"]
-        return rabbitmq_param["host"], rabbitmq_param["port"], rabbitmq_param["conditions_queue_name"], rabbitmq_param["obligations_queue_name"]
+        return rabbitmq_param["host"], rabbitmq_param["port"], rabbitmq_param["user"], rabbitmq_param["pass"], rabbitmq_param["conditions_queue_name"], rabbitmq_param["obligations_queue_name"]
 
     def get_logging_params(self):
         log_param = self.json_data["logging"]

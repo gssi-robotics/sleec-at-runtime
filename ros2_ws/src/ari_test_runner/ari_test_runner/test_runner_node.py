@@ -221,7 +221,7 @@ class TestRunnerNode(Node):
 
         self.get_logger().info("************************ Summary ************************")
         total_test_cases = len(self.test_data["test_cases"])
-        collected = len(test_results)
+        collected = len(self.test_results)
         self.get_logger().info(f"Test cases run: {total_test_cases}")
         self.get_logger().info(f"Collected results for: {collected}")
         self.get_logger().info(f"Successes: {successes} ({(successes/total_test_cases)*100.0:.3f}%)")

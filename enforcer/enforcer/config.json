@@ -9,6 +9,8 @@
   "rabbitmq": {
     "host": "localhost",
     "port": 5672,
+    "user": "guest",
+    "pass": "guest",
     "conditions_queue_name": "conditions",
     "obligations_queue_name": "obligations"
   },

@@ -24,6 +24,8 @@ class RabbitMQParam():
     def __init__(self):
         self.host = None
         self.port = None
+        self.user = None
+        self.password = None
         self.conditions_queue_name = None
         self.obligations_queue_name = None
         self.conditions_queue = None
@@ -31,7 +33,7 @@ class RabbitMQParam():
         self.exchange = None    
 
     def __str__(self):
-        return f"RabbitMQParam(host={self.host}, port={self.port}, conditions_queue_name={self.conditions_queue_name}, obligations_queue_name={self.obligations_queue_name})"
+        return f"RabbitMQParam(host={self.host}, port={self.port}, user={self.user}, password={self.password}, conditions_queue_name={self.conditions_queue_name}, obligations_queue_name={self.obligations_queue_name})"
 
 # Create a shared rabbit instance 
 rabbit_mq_param = RabbitMQParam()

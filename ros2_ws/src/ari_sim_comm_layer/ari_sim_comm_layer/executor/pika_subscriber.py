@@ -10,6 +10,8 @@ class PikaSubscriber:
         self,
         host: str,
         port: int,
+        user: str,
+        password: str,
         queue: str,
         on_message: Callable[[bytes], Union[None, Awaitable[None]]],
         *,
@@ -19,13 +21,15 @@ class PikaSubscriber:
     ):
         self.host = host
         self.port = port
+        self.user = user
+        self.password = password
         self.queue_name = queue
         self.on_message = on_message
         self.prefetch = prefetch
         self.auto_ack = auto_ack
         self.requeue_on_error = requeue_on_error
 
-        self.url = f"amqp://guest:guest@{host}:{port}/"
+        self.url = f"amqp://{user}:{password}@{host}:{port}/"
         self.loop = asyncio.new_event_loop()
         self._ready = asyncio.Event()
         self._stopping = asyncio.Event()
