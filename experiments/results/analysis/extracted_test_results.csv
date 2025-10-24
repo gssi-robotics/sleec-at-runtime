@@ -1,0 +1,751 @@
+experiment_id,test_case_number,expected_obligation,executed_obligation,check,total_enforcement_time
+seams250,1,,,True,
+seams250,2,encourage,encourage,True,100.0
+seams250,3,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,97.0
+seams250,4,wakeUpUser,wakeUpUser,True,90.0
+seams250,5,encourage,encourage,True,75.0
+seams250,6,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams250,7,,,True,
+seams250,8,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,87.0
+seams250,9,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams250,10,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,82.0
+seams250,11,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,82.0
+seams250,12,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,82.0
+seams250,13,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,80.0
+seams250,14,,,True,
+seams250,15,showNextExercise,showNextExercise,True,76.0
+seams250,16,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,79.0
+seams250,17,shareData,shareData,True,75.0
+seams250,18,,,True,
+seams250,19,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,78.0
+seams250,20,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams250,21,shareData,shareData,True,83.0
+seams250,22,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,82.0
+seams250,23,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,78.0
+seams250,24,encourage,encourage,True,-928.0
+seams250,25,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,91.0
+seams250,26,showNextExercise,showNextExercise,True,-928.0
+seams250,27,alertNurse AND closeDoor,alertNurse AND closeDoor,True,69.0
+seams250,28,informNurse,informNurse,True,78.0
+seams250,29,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,77.0
+seams250,30,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,82.0
+seams250,31,deliverMeal,deliverMeal,True,74.0
+seams250,32,,,True,
+seams250,33,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams250,34,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,70.0
+seams250,35,shareData,shareData,True,69.0
+seams250,36,showNextExercise,showNextExercise,True,-931.0
+seams250,37,informNurse,informNurse,True,69.0
+seams250,38,remindUserMealTime,remindUserMealTime,True,78.0
+seams250,39,wakeUpUser,wakeUpUser,True,69.0
+seams250,40,,,True,
+seams250,41,,,True,
+seams250,42,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,81.0
+seams250,43,,,True,
+seams250,44,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams250,45,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams250,46,showNextExercise,showNextExercise,True,-924.0
+seams250,47,showNextExercise,showNextExercise,True,-926.0
+seams250,48,,,True,
+seams250,49,showNextExercise,showNextExercise,True,78.0
+seams250,50,showNextExercise,showNextExercise,True,-929.0
+seams250,51,deliverMeal,deliverMeal,True,72.0
+seams250,52,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,82.0
+seams250,53,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams250,54,alertNurse AND closeDoor,alertNurse AND closeDoor,True,83.0
+seams250,55,,,True,
+seams250,56,askPermissionForOpenDoor,askPermissionForOpenDoor,True,77.0
+seams250,57,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,78.0
+seams250,58,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,74.0
+seams250,59,shareData,shareData,True,74.0
+seams250,60,encourage,encourage,True,-931.0
+seams250,61,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,73.0
+seams250,62,wakeUpUser,wakeUpUser,True,70.0
+seams250,63,,,True,
+seams250,64,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,75.0
+seams250,65,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,77.0
+seams250,66,informNurse,informNurse,True,80.0
+seams250,67,askUserIntent,askUserIntent,True,-931.0
+seams250,68,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams250,69,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams250,70,deliverMeal,deliverMeal,True,77.0
+seams250,71,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,85.0
+seams250,72,showNextExercise,showNextExercise,True,79.0
+seams250,73,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,77.0
+seams250,74,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,78.0
+seams250,75,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,78.0
+seams250,76,,,True,
+seams250,77,,,True,
+seams250,78,encourage,encourage,True,74.0
+seams250,79,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,77.0
+seams250,80,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams250,81,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,77.0
+seams250,82,showNextExercise,showNextExercise,True,75.0
+seams250,83,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams250,84,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,79.0
+seams250,85,showNextExercise,showNextExercise,True,-926.0
+seams250,86,deliverMeal,deliverMeal,True,72.0
+seams250,87,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,79.0
+seams250,88,wakeUpUser,wakeUpUser,True,79.0
+seams250,89,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,94.0
+seams250,90,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,78.0
+seams250,91,encourage,encourage,True,75.0
+seams250,92,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,77.0
+seams250,93,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,76.0
+seams250,94,informNurse,informNurse,True,75.0
+seams250,95,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,73.0
+seams250,96,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams250,97,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,84.0
+seams250,98,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,82.0
+seams250,99,encourage,encourage,True,-931.0
+seams250,100,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,90.0
+seams250,101,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams250,102,askPermissionForOpenDoor,askPermissionForOpenDoor,True,70.0
+seams250,103,encourage,encourage,True,71.0
+seams250,104,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams250,105,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,80.0
+seams250,106,encourage,encourage,True,73.0
+seams250,107,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,81.0
+seams250,108,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,63.0
+seams250,109,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,75.0
+seams250,110,askPermissionForOpenDoor,askPermissionForOpenDoor,True,80.0
+seams250,111,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,71.0
+seams250,112,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,83.0
+seams250,113,,,True,
+seams250,114,shareData,shareData,True,69.0
+seams250,115,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,85.0
+seams250,116,,,True,
+seams250,117,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,80.0
+seams250,118,askPermissionForOpenDoor,askPermissionForOpenDoor,True,69.0
+seams250,119,encourage,encourage,True,78.0
+seams250,120,askUserIntent,askUserIntent,True,74.0
+seams250,121,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,77.0
+seams250,122,deliverMeal,deliverMeal,True,82.0
+seams250,123,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams250,124,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,77.0
+seams250,125,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams250,126,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,70.0
+seams250,127,showNextExercise,showNextExercise,True,71.0
+seams250,128,askUserIntent,askUserIntent,True,-933.0
+seams250,129,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams250,130,,,True,
+seams250,131,showNextExercise,showNextExercise,True,-935.0
+seams250,132,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,85.0
+seams250,133,deliverMeal,deliverMeal,True,70.0
+seams250,134,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams250,135,informNurse,informNurse,True,73.0
+seams250,136,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,80.0
+seams250,137,showNextExercise,showNextExercise,True,71.0
+seams250,138,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams250,139,,,True,
+seams250,140,deliverMeal,deliverMeal,True,72.0
+seams250,141,wakeUpUser,wakeUpUser,True,69.0
+seams250,142,showNextExercise,showNextExercise,True,67.0
+seams250,143,askUserIntent,askUserIntent,True,-927.0
+seams250,144,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,82.0
+seams250,145,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,79.0
+seams250,146,informNurse,informNurse,True,74.0
+seams250,147,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,77.0
+seams250,148,remindUserMealTime,remindUserMealTime,True,77.0
+seams250,149,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,68.0
+seams250,150,informNurse,informNurse,True,73.0
+seams250,151,,,True,
+seams250,152,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,75.0
+seams250,153,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,82.0
+seams250,154,,,True,
+seams250,155,,,True,
+seams250,156,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,87.0
+seams250,157,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams250,158,,,True,
+seams250,159,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,82.0
+seams250,160,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,80.0
+seams250,161,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,82.0
+seams250,162,askUserIntent,askUserIntent,True,71.0
+seams250,163,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,85.0
+seams250,164,shareData,shareData,True,69.0
+seams250,165,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,77.0
+seams250,166,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,85.0
+seams250,167,,,True,
+seams250,168,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,87.0
+seams250,169,showNextExercise,showNextExercise,True,76.0
+seams250,170,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,84.0
+seams250,171,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,83.0
+seams250,172,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,75.0
+seams250,173,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,79.0
+seams250,174,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,70.0
+seams250,175,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams250,176,deliverMeal,deliverMeal,True,76.0
+seams250,177,encourage,encourage,True,75.0
+seams250,178,encourage,encourage,True,79.0
+seams250,179,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,78.0
+seams250,180,remindUserMealTime,remindUserMealTime,True,72.0
+seams250,181,wakeUpUser,wakeUpUser,True,69.0
+seams250,182,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,82.0
+seams250,183,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,78.0
+seams250,184,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,68.0
+seams250,185,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,84.0
+seams250,186,alertNurse,alertNurse,True,73.0
+seams250,187,showNextExercise,showNextExercise,True,-923.0
+seams250,188,,,True,
+seams250,189,,,True,
+seams250,190,deliverMeal,deliverMeal,True,72.0
+seams250,191,,,True,
+seams250,192,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,74.0
+seams250,193,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,75.0
+seams250,194,deliverMeal,deliverMeal,True,71.0
+seams250,195,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,84.0
+seams250,196,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams250,197,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams250,198,showNextExercise,showNextExercise,True,-924.0
+seams250,199,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,77.0
+seams250,200,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams250,201,,,True,
+seams250,202,showNextExercise,showNextExercise,True,-931.0
+seams250,203,,,True,
+seams250,204,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,80.0
+seams250,205,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,75.0
+seams250,206,shareData,shareData,True,71.0
+seams250,207,encourage,encourage,True,73.0
+seams250,208,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,69.0
+seams250,209,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,86.0
+seams250,210,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,71.0
+seams250,211,remindUserMealTime,remindUserMealTime,True,74.0
+seams250,212,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,72.0
+seams250,213,wakeUpUser,wakeUpUser,True,77.0
+seams250,214,deliverMeal,deliverMeal,True,69.0
+seams250,215,,,True,
+seams250,216,shareData,shareData,True,68.0
+seams250,217,encourage,encourage,True,77.0
+seams250,218,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,75.0
+seams250,219,shareData,shareData,True,74.0
+seams250,220,encourage,encourage,True,67.0
+seams250,221,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,77.0
+seams250,222,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,69.0
+seams250,223,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams250,224,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,79.0
+seams250,225,,,True,
+seams250,226,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,66.0
+seams250,227,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,92.0
+seams250,228,,,True,
+seams250,229,,,True,
+seams250,230,,,True,
+seams250,231,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,78.0
+seams250,232,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,82.0
+seams250,233,showNextExercise,showNextExercise,True,72.0
+seams250,234,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,85.0
+seams250,235,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,70.0
+seams250,236,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,75.0
+seams250,237,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams250,238,showNextExercise,showNextExercise,True,-927.0
+seams250,239,,,True,
+seams250,240,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,78.0
+seams250,241,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,78.0
+seams250,242,encourage,encourage,True,-929.0
+seams250,243,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,75.0
+seams250,244,,,True,
+seams250,245,shareData,shareData,True,75.0
+seams250,246,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,81.0
+seams250,247,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,78.0
+seams250,248,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,76.0
+seams250,249,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,78.0
+seams250,250,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,78.0
+seams500,1,deliverDietaryAlternative,deliverDietaryAlternative,True,91.0
+seams500,2,informNurse,informNurse,True,82.0
+seams500,3,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,90.0
+seams500,4,deliverDietaryAlternative,deliverDietaryAlternative,True,86.0
+seams500,5,showNextExercise,showNextExercise,True,-911.0
+seams500,6,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,94.0
+seams500,7,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,80.0
+seams500,8,deliverMeal,deliverMeal,True,74.0
+seams500,9,encourage,encourage,True,84.0
+seams500,10,informNurse,informNurse,True,78.0
+seams500,11,wakeUpUser,wakeUpUser,True,82.0
+seams500,12,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,86.0
+seams500,13,,,True,
+seams500,14,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,86.0
+seams500,15,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,78.0
+seams500,16,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,86.0
+seams500,17,,,True,
+seams500,18,wakeUpUser,wakeUpUser,True,68.0
+seams500,19,alertNurse,alertNurse,True,75.0
+seams500,20,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,71.0
+seams500,21,,,True,
+seams500,22,,,True,
+seams500,23,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,83.0
+seams500,24,encourage,encourage,True,78.0
+seams500,25,informNurse,informNurse,True,69.0
+seams500,26,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,85.0
+seams500,27,remindUserMealTime,remindUserMealTime,True,79.0
+seams500,28,deliverDietaryAlternative,deliverDietaryAlternative,True,74.0
+seams500,29,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,78.0
+seams500,30,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,73.0
+seams500,31,shareData,shareData,True,78.0
+seams500,32,showNextExercise,showNextExercise,True,-927.0
+seams500,33,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams500,34,remindUserMealTime,remindUserMealTime,True,72.0
+seams500,35,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams500,36,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,71.0
+seams500,37,showNextExercise,showNextExercise,True,-915.0
+seams500,38,,,True,
+seams500,39,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,40,,,True,
+seams500,41,deliverMeal,deliverMeal,True,73.0
+seams500,42,deliverMeal,deliverMeal,True,75.0
+seams500,43,deliverMeal,deliverMeal,True,76.0
+seams500,44,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,91.0
+seams500,45,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,70.0
+seams500,46,encourage,encourage,True,67.0
+seams500,47,showNextExercise,showNextExercise,True,77.0
+seams500,48,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,81.0
+seams500,49,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,85.0
+seams500,50,,,True,
+seams500,51,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,81.0
+seams500,52,,,True,
+seams500,53,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,76.0
+seams500,54,,,True,
+seams500,55,remindUserMealTime,remindUserMealTime,True,68.0
+seams500,56,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams500,57,wakeUpUser,wakeUpUser,True,74.0
+seams500,58,askUserIntent,askUserIntent,True,70.0
+seams500,59,wakeUpUser,wakeUpUser,True,71.0
+seams500,60,remindUserMealTime,remindUserMealTime,True,75.0
+seams500,61,alertNurse AND closeDoor,alertNurse AND closeDoor,True,85.0
+seams500,62,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,86.0
+seams500,63,,,True,
+seams500,64,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,70.0
+seams500,65,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,77.0
+seams500,66,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,-928.0
+seams500,67,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,70.0
+seams500,68,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,80.0
+seams500,69,alertNurse AND closeDoor,alertNurse AND closeDoor,True,82.0
+seams500,70,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams500,71,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,78.0
+seams500,72,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,78.0
+seams500,73,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,77.0
+seams500,74,shareData,shareData,True,71.0
+seams500,75,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams500,76,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,71.0
+seams500,77,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,91.0
+seams500,78,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,69.0
+seams500,79,deliverMeal,deliverMeal,True,71.0
+seams500,80,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,78.0
+seams500,81,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,82.0
+seams500,82,wakeUpUser,wakeUpUser,True,79.0
+seams500,83,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,69.0
+seams500,84,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,76.0
+seams500,85,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,83.0
+seams500,86,,,True,
+seams500,87,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams500,88,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,71.0
+seams500,89,,,True,
+seams500,90,showNextExercise,showNextExercise,True,69.0
+seams500,91,shareData,shareData,True,73.0
+seams500,92,shareData,shareData,True,72.0
+seams500,93,,,True,
+seams500,94,,,True,
+seams500,95,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,82.0
+seams500,96,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,85.0
+seams500,97,deliverMeal,deliverMeal,True,71.0
+seams500,98,,,True,
+seams500,99,encourage,encourage,True,80.0
+seams500,100,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams500,101,showNextExercise,showNextExercise,True,71.0
+seams500,102,,,True,
+seams500,103,deliverDietaryAlternative,deliverDietaryAlternative,True,71.0
+seams500,104,showNextExercise,showNextExercise,True,-932.0
+seams500,105,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams500,106,encourage,encourage,True,75.0
+seams500,107,wakeUpUser,wakeUpUser,True,68.0
+seams500,108,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,85.0
+seams500,109,remindUserMealTime,remindUserMealTime,True,75.0
+seams500,110,shareData,shareData,True,78.0
+seams500,111,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,71.0
+seams500,112,,,True,
+seams500,113,askPermissionForOpenDoor,askPermissionForOpenDoor,True,78.0
+seams500,114,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,115,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,79.0
+seams500,116,,,True,
+seams500,117,informNurse,informNurse,True,75.0
+seams500,118,alertNurse AND closeDoor,alertNurse AND closeDoor,True,82.0
+seams500,119,shareData,shareData,True,68.0
+seams500,120,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,82.0
+seams500,121,showNextExercise,showNextExercise,True,-925.0
+seams500,122,shareData,shareData,True,76.0
+seams500,123,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,82.0
+seams500,124,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams500,125,deliverMeal,deliverMeal,True,85.0
+seams500,126,wakeUpUser,wakeUpUser,True,72.0
+seams500,127,encourage,encourage,True,82.0
+seams500,128,showNextExercise,showNextExercise,True,-928.0
+seams500,129,alertNurse AND closeDoor,alertNurse AND closeDoor,True,81.0
+seams500,130,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,71.0
+seams500,131,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,66.0
+seams500,132,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,81.0
+seams500,133,remindUserMealTime,remindUserMealTime,True,68.0
+seams500,134,deliverMeal,deliverMeal,True,69.0
+seams500,135,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,76.0
+seams500,136,,,True,
+seams500,137,,,True,
+seams500,138,informNurse,informNurse,True,78.0
+seams500,139,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,81.0
+seams500,140,showNextExercise,showNextExercise,True,69.0
+seams500,141,encourage,encourage,True,70.0
+seams500,142,shareData,shareData,True,77.0
+seams500,143,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,80.0
+seams500,144,,,True,
+seams500,145,encourage,encourage,True,70.0
+seams500,146,,,True,
+seams500,147,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,76.0
+seams500,148,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,70.0
+seams500,149,wakeUpUser,wakeUpUser,True,76.0
+seams500,150,shareData,shareData,True,74.0
+seams500,151,remindUserMealTime,remindUserMealTime,True,71.0
+seams500,152,,,True,
+seams500,153,alertNurse AND closeDoor,alertNurse AND closeDoor,True,86.0
+seams500,154,,,True,
+seams500,155,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,71.0
+seams500,156,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,74.0
+seams500,157,showNextExercise,showNextExercise,True,83.0
+seams500,158,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,69.0
+seams500,159,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,78.0
+seams500,160,deliverDietaryAlternative,deliverDietaryAlternative,True,75.0
+seams500,161,wakeUpUser,wakeUpUser,True,78.0
+seams500,162,,,True,
+seams500,163,,,True,
+seams500,164,,,True,
+seams500,165,deliverMeal,deliverMeal,True,72.0
+seams500,166,remindUserMealTime,remindUserMealTime,True,73.0
+seams500,167,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,77.0
+seams500,168,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams500,169,wakeUpUser,wakeUpUser,True,69.0
+seams500,170,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,83.0
+seams500,171,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,85.0
+seams500,172,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,75.0
+seams500,173,,,True,
+seams500,174,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,77.0
+seams500,175,,,True,
+seams500,176,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,86.0
+seams500,177,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,77.0
+seams500,178,,,True,
+seams500,179,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,77.0
+seams500,180,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,77.0
+seams500,181,askPermissionForOpenDoor,askPermissionForOpenDoor,True,75.0
+seams500,182,showNextExercise,showNextExercise,True,69.0
+seams500,183,showNextExercise,showNextExercise,True,71.0
+seams500,184,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,70.0
+seams500,185,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,72.0
+seams500,186,alertNurse AND closeDoor,alertNurse AND closeDoor,True,100.0
+seams500,187,showNextExercise,showNextExercise,True,74.0
+seams500,188,alertNurse,alertNurse,True,74.0
+seams500,189,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,80.0
+seams500,190,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,75.0
+seams500,191,,,True,
+seams500,192,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,75.0
+seams500,193,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams500,194,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams500,195,shareData,shareData,True,73.0
+seams500,196,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,79.0
+seams500,197,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,80.0
+seams500,198,,,True,
+seams500,199,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,79.0
+seams500,200,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,79.0
+seams500,201,,,True,
+seams500,202,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,75.0
+seams500,203,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,74.0
+seams500,204,showNextExercise,showNextExercise,True,69.0
+seams500,205,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,80.0
+seams500,206,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,74.0
+seams500,207,,,True,
+seams500,208,deliverMeal,deliverMeal,True,75.0
+seams500,209,askPermissionForOpenDoor,askPermissionForOpenDoor,True,68.0
+seams500,210,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,69.0
+seams500,211,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams500,212,,,True,
+seams500,213,shareData,shareData,True,69.0
+seams500,214,encourage,encourage,True,-936.0
+seams500,215,,,True,
+seams500,216,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,93.0
+seams500,217,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,74.0
+seams500,218,encourage,encourage,True,72.0
+seams500,219,,,True,
+seams500,220,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,78.0
+seams500,221,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,82.0
+seams500,222,encourage,encourage,True,73.0
+seams500,223,informNurse,informNurse,True,70.0
+seams500,224,encourage,encourage,True,-934.0
+seams500,225,shareData,shareData,True,71.0
+seams500,226,,,True,
+seams500,227,,,True,
+seams500,228,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams500,229,deliverDietaryAlternative,deliverDietaryAlternative,True,74.0
+seams500,230,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,74.0
+seams500,231,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,86.0
+seams500,232,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,79.0
+seams500,233,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,72.0
+seams500,234,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,78.0
+seams500,235,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,76.0
+seams500,236,shareData,shareData,True,71.0
+seams500,237,,,True,
+seams500,238,,,True,
+seams500,239,deliverMeal,deliverMeal,True,73.0
+seams500,240,encourage,encourage,True,70.0
+seams500,241,encourage,encourage,True,72.0
+seams500,242,alertNurse AND closeDoor,alertNurse AND closeDoor,True,76.0
+seams500,243,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,244,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,86.0
+seams500,245,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,76.0
+seams500,246,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,81.0
+seams500,247,,,True,
+seams500,248,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,79.0
+seams500,249,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,75.0
+seams500,250,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,71.0
+seams500,251,askPermissionForOpenDoor,askPermissionForOpenDoor,True,72.0
+seams500,252,remindUserMealTime,remindUserMealTime,True,77.0
+seams500,253,wakeUpUser,wakeUpUser,True,73.0
+seams500,254,encourage,encourage,True,74.0
+seams500,255,deliverMeal,deliverMeal,True,72.0
+seams500,256,,,True,
+seams500,257,deliverDietaryAlternative,deliverDietaryAlternative,True,73.0
+seams500,258,remindUserMealTime,remindUserMealTime,True,73.0
+seams500,259,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,86.0
+seams500,260,,,True,
+seams500,261,deliverMeal,deliverMeal,True,77.0
+seams500,262,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,70.0
+seams500,263,remindUserMealTime,remindUserMealTime,True,76.0
+seams500,264,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,89.0
+seams500,265,,,True,
+seams500,266,,,True,
+seams500,267,deliverMeal,deliverMeal,True,79.0
+seams500,268,shareData,shareData,True,70.0
+seams500,269,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams500,270,,,True,
+seams500,271,informNurse,informNurse,True,75.0
+seams500,272,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,80.0
+seams500,273,informNurse,informNurse,True,77.0
+seams500,274,,,True,
+seams500,275,,,True,
+seams500,276,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,84.0
+seams500,277,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,79.0
+seams500,278,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,79.0
+seams500,279,encourage,encourage,True,70.0
+seams500,280,remindUserMealTime,remindUserMealTime,True,77.0
+seams500,281,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,75.0
+seams500,282,deliverDietaryAlternative,deliverDietaryAlternative,True,74.0
+seams500,283,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,82.0
+seams500,284,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,74.0
+seams500,285,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,77.0
+seams500,286,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,73.0
+seams500,287,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,74.0
+seams500,288,askUserIntent,askUserIntent,True,78.0
+seams500,289,deliverMeal,deliverMeal,True,78.0
+seams500,290,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,291,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,66.0
+seams500,292,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,79.0
+seams500,293,encourage,encourage,True,74.0
+seams500,294,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,74.0
+seams500,295,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,85.0
+seams500,296,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,77.0
+seams500,297,deliverMeal,deliverMeal,True,72.0
+seams500,298,showNextExercise,showNextExercise,True,71.0
+seams500,299,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,86.0
+seams500,300,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,68.0
+seams500,301,showNextExercise,showNextExercise,True,-924.0
+seams500,302,encourage,encourage,True,73.0
+seams500,303,remindUserMealTime,remindUserMealTime,True,71.0
+seams500,304,deliverDietaryAlternative,deliverDietaryAlternative,True,72.0
+seams500,305,remindUserMealTime,remindUserMealTime,True,81.0
+seams500,306,informNurse,informNurse,True,79.0
+seams500,307,,,True,
+seams500,308,remindUserMealTime,remindUserMealTime,True,67.0
+seams500,309,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,86.0
+seams500,310,askPermissionForOpenDoor,askPermissionForOpenDoor,True,70.0
+seams500,311,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,74.0
+seams500,312,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,75.0
+seams500,313,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,74.0
+seams500,314,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,81.0
+seams500,315,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,76.0
+seams500,316,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,77.0
+seams500,317,showNextExercise,showNextExercise,True,75.0
+seams500,318,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,85.0
+seams500,319,encourage,encourage,True,70.0
+seams500,320,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,76.0
+seams500,321,deliverMeal,deliverMeal,True,80.0
+seams500,322,wakeUpUser,wakeUpUser,True,74.0
+seams500,323,encourage,encourage,True,73.0
+seams500,324,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,75.0
+seams500,325,,,True,
+seams500,326,askPermissionForOpenDoor,askPermissionForOpenDoor,True,71.0
+seams500,327,,,True,
+seams500,328,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams500,329,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams500,330,,,True,
+seams500,331,deliverDietaryAlternative,deliverDietaryAlternative,True,69.0
+seams500,332,wakeUpUser,wakeUpUser,True,79.0
+seams500,333,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,334,informNurse,informNurse,True,70.0
+seams500,335,,,True,
+seams500,336,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,91.0
+seams500,337,,,True,
+seams500,338,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,85.0
+seams500,339,shareData,shareData,True,82.0
+seams500,340,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,341,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,74.0
+seams500,342,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,79.0
+seams500,343,encourage,encourage,True,72.0
+seams500,344,,,True,
+seams500,345,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams500,346,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,67.0
+seams500,347,informNurse,informNurse,True,72.0
+seams500,348,wakeUpUser,wakeUpUser,True,73.0
+seams500,349,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,71.0
+seams500,350,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,74.0
+seams500,351,,,True,
+seams500,352,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams500,353,shareData,shareData,True,71.0
+seams500,354,,,True,
+seams500,355,encourage,encourage,True,-934.0
+seams500,356,remindUserMealTime,remindUserMealTime,True,74.0
+seams500,357,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams500,358,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,359,,,True,
+seams500,360,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams500,361,deliverDietaryAlternative,deliverDietaryAlternative,True,104.0
+seams500,362,informNurse,informNurse,True,72.0
+seams500,363,showNextExercise,showNextExercise,True,74.0
+seams500,364,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,75.0
+seams500,365,shareData,shareData,True,72.0
+seams500,366,deliverMeal,deliverMeal,True,72.0
+seams500,367,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,79.0
+seams500,368,deliverDietaryAlternative,deliverDietaryAlternative,True,74.0
+seams500,369,informNurse,informNurse,True,69.0
+seams500,370,showNextExercise,showNextExercise,True,82.0
+seams500,371,showNextExercise,showNextExercise,True,-928.0
+seams500,372,askUserIntent,askUserIntent,True,-918.0
+seams500,373,,,True,
+seams500,374,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,85.0
+seams500,375,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,71.0
+seams500,376,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,75.0
+seams500,377,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams500,378,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,69.0
+seams500,379,askPermissionForOpenDoor,askPermissionForOpenDoor,True,82.0
+seams500,380,deliverMeal,deliverMeal,True,74.0
+seams500,381,remindUserMealTime,remindUserMealTime,True,75.0
+seams500,382,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,383,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,67.0
+seams500,384,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,81.0
+seams500,385,wakeUpUser,wakeUpUser,True,70.0
+seams500,386,,,True,
+seams500,387,,,True,
+seams500,388,deliverMeal,deliverMeal,True,76.0
+seams500,389,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,73.0
+seams500,390,,,True,
+seams500,391,deliverMeal,deliverMeal,True,74.0
+seams500,392,,,True,
+seams500,393,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,78.0
+seams500,394,,,True,
+seams500,395,,,True,
+seams500,396,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams500,397,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,-927.0
+seams500,398,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,71.0
+seams500,399,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,75.0
+seams500,400,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,72.0
+seams500,401,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,80.0
+seams500,402,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,74.0
+seams500,403,remindUserMealTime,remindUserMealTime,True,75.0
+seams500,404,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,78.0
+seams500,405,,,True,
+seams500,406,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,82.0
+seams500,407,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,74.0
+seams500,408,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,77.0
+seams500,409,wakeUpUser,wakeUpUser,True,70.0
+seams500,410,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,79.0
+seams500,411,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,92.0
+seams500,412,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,85.0
+seams500,413,,,True,
+seams500,414,deliverMeal,deliverMeal,True,78.0
+seams500,415,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,81.0
+seams500,416,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,81.0
+seams500,417,showNextExercise,showNextExercise,True,73.0
+seams500,418,askUserIntent,askUserIntent,True,69.0
+seams500,419,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,76.0
+seams500,420,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,77.0
+seams500,421,,,True,
+seams500,422,deliverMeal,deliverMeal,True,78.0
+seams500,423,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,80.0
+seams500,424,shareData,shareData,True,79.0
+seams500,425,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,67.0
+seams500,426,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,70.0
+seams500,427,showNextExercise,showNextExercise,True,74.0
+seams500,428,showNextExercise,showNextExercise,True,-922.0
+seams500,429,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,78.0
+seams500,430,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,82.0
+seams500,431,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,75.0
+seams500,432,,,True,
+seams500,433,showNextExercise,showNextExercise,True,66.0
+seams500,434,notifySessionEnd AND alertNurse,notifySessionEnd AND alertNurse,True,73.0
+seams500,435,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,67.0
+seams500,436,alertNurse,alertNurse,True,71.0
+seams500,437,,,True,
+seams500,438,alertNurse AND closeDoor,alertNurse AND closeDoor,True,79.0
+seams500,439,shareData,shareData,True,66.0
+seams500,440,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams500,441,deliverDietaryAlternative,deliverDietaryAlternative,True,72.0
+seams500,442,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,79.0
+seams500,443,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,78.0
+seams500,444,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams500,445,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,71.0
+seams500,446,askUserIntent,askUserIntent,True,69.0
+seams500,447,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,83.0
+seams500,448,,,True,
+seams500,449,shareData,shareData,True,71.0
+seams500,450,showNextExercise,showNextExercise,True,70.0
+seams500,451,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams500,452,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,75.0
+seams500,453,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,83.0
+seams500,454,,,True,
+seams500,455,deliverMeal,deliverMeal,True,75.0
+seams500,456,,,True,
+seams500,457,wakeUpUser,wakeUpUser,True,70.0
+seams500,458,encourage,encourage,True,-929.0
+seams500,459,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,86.0
+seams500,460,showNextExercise,showNextExercise,True,-937.0
+seams500,461,,,True,
+seams500,462,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,74.0
+seams500,463,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,82.0
+seams500,464,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,77.0
+seams500,465,,,True,
+seams500,466,,,True,
+seams500,467,shareData,shareData,True,72.0
+seams500,468,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams500,469,,,True,
+seams500,470,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,77.0
+seams500,471,,,True,
+seams500,472,encourage,encourage,True,69.0
+seams500,473,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,72.0
+seams500,474,encourage,encourage,True,67.0
+seams500,475,remindUserMealTime,remindUserMealTime,True,72.0
+seams500,476,,,True,
+seams500,477,wakeUpUser,wakeUpUser,True,68.0
+seams500,478,informNurse,informNurse,True,68.0
+seams500,479,explainDietAdherenceReason AND deliverMeal,explainDietAdherenceReason AND deliverMeal,True,78.0
+seams500,480,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,80.0
+seams500,481,greetInUserLanguage AND closeDoor AND startTrainingSession,greetInUserLanguage AND closeDoor AND startTrainingSession,True,82.0
+seams500,482,giveDietarySnack AND informNurse,giveDietarySnack AND informNurse,True,74.0
+seams500,483,encourage,encourage,True,-930.0
+seams500,484,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,69.0
+seams500,485,,,True,
+seams500,486,deliverMeal,deliverMeal,True,69.0
+seams500,487,,,True,
+seams500,488,,,True,
+seams500,489,,,True,
+seams500,490,remindUserMealTime AND explainNoFood,remindUserMealTime AND explainNoFood,True,73.0
+seams500,491,,,True,
+seams500,492,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
+seams500,493,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,67.0
+seams500,494,alertNurse AND closeDoor,alertNurse AND closeDoor,True,88.0
+seams500,495,deliverMeal,deliverMeal,True,65.0
+seams500,496,showNextExercise,showNextExercise,True,-932.0
+seams500,497,deliverDietaryAlternative,deliverDietaryAlternative,True,69.0
+seams500,498,greetInUserLanguage AND startTrainingSession,greetInUserLanguage AND startTrainingSession,True,76.0
+seams500,499,deliverMeal,deliverMeal,True,69.0
+seams500,500,denyDataSharingWithExplanation,denyDataSharingWithExplanation,True,73.0
