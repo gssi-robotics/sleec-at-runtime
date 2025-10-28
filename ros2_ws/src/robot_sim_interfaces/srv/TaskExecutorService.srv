@@ -1,6 +1,0 @@
-# Request
-string task
-string[] parameters
----
-# Response
-string result
