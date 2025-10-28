@@ -5,8 +5,7 @@ FROM ros:humble-ros-base
 WORKDIR /ros2_ws
 
 # Copy your source code
-COPY ../enforcement_subsystem/ros2_ws/src/ari_test_runner ./src/ari_test_runner
-COPY ./experiments .
+COPY ./src /ros2_ws/src
 
 # Install dependencies and build
 RUN apt update && apt install -y \
@@ -17,10 +16,10 @@ RUN apt update && apt install -y \
 
 RUN apt-get update && rosdep install --from-paths src -y --ignore-src
 
+RUN pip install aio-pika
+
 # Build the workspace
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
-
-RUN chmod +x ./run_tests.sh
 
 # Source the workspace when starting the container
 ENTRYPOINT ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && bash"]
