@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
     <script defer src="../static/js/fontawesome.all.min.js"></script>
 
-    
+
 </head>
 
 <body>
@@ -42,26 +42,25 @@
             <div class="container is-max-desktop has-text-centered">
                 <h1 class="title is-2">Firefighter Scenario</h1>
                 <p class="subtitle is-5">
-                    A case study showcasing SLEEC@run.time in an emergency-response setting 
+                    A case study showcasing SLEEC@run.time in an emergency-response setting
                 </p>
                 <span class="link-block">
                     <a href="https://www.sciencedirect.com/science/article/pii/S0164121224002735" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file"></i>
-                      </span>
-                      <span>Case Study Ref.</span>
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <i class="fas fa-file"></i>
+                        </span>
+                        <span>Case Study Ref.</span>
                     </a>
-                  </span>
+                </span>
                 <span class="link-block">
-                    <a href="/" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fab fa-github"></i>
-                      </span>
-                      <span>Code</span>
+                    <a href="/" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <i class="fab fa-github"></i>
+                        </span>
+                        <span>Code</span>
                     </a>
-                  </span>
+                </span>
             </div>
         </div>
     </section>
@@ -74,7 +73,27 @@
                     <h2 class="title is-4">Scenario Overview</h2>
                     <div class="content">
                         <p>
-                            ...
+                            The firefighter scenario consists of an uncrewed aerial vehicle (UAV) designed to support
+                            wildfire and
+                            urban fire response operations. The UAV collaborates with human firefighters, bystanders,
+                            and remote
+                            teleoperators to improve situational awareness and early intervention. Its primary tasks
+                            include
+                            detecting potential fires—such as warehouse fires—using a thermal camera, localizing the
+                            fire with a
+                            depth camera, and reporting the situation by transmitting video footage of the surveyed
+                            building to
+                            teleoperators. When appropriate, the UAV can also deploy onboard water spraying to help
+                            contain the fire
+                            until human firefighters arrive on site.
+                            <br>
+                            In addition to these functional capabilities, the firefighter UAV must address SLEEC
+                            considerations that
+                            arise from interacting with people. For example,
+                            activating an onboard loudspeaker alarm near bystanders may cause social disturbances, while
+                            transmitting video footage can raise legal or ethical privacy concerns when individuals are
+                            present in
+                            the monitored area.
                         </p>
                     </div>
                 </div>
@@ -87,7 +106,54 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered">
                 <div class="column is-four-fifths">
-                    <h2 class="title is-4">SLEEC Rules</h2>
+                    <h2 class="title is-4">Elicited SLEEC Rules</h2>
+
+                    <div class="content">
+                        <div class="box">
+                            <ol>
+                                <li>
+                                    <strong>Rule 1</strong><br>
+                                    <span class="has-text-grey">WHEN</span> CameraStart
+                                    <span class="has-text-grey">AND</span> personNearby<br>
+                                    <span class="has-text-grey">THEN</span> SoundAlarm
+                                </li>
+
+                                <li>
+                                    <strong>Rule 2</strong><br>
+                                    <span class="has-text-grey">WHEN</span> CameraStart
+                                    <span class="has-text-grey">AND</span> personNearby<br>
+                                    <span class="has-text-grey">THEN</span> SoundAlarm <em>WITHIN 2 seconds</em>
+                                </li>
+
+                                <li>
+                                    <strong>Rule 3</strong><br>
+                                    <span class="has-text-grey">WHEN</span> SoundAlarm<br>
+                                    <span class="has-text-grey">THEN</span> not GoHome <em>WITHIN 5 minutes</em>
+                                </li>
+
+                                <li>
+                                    <strong>Rule 4</strong><br>
+                                    <span class="has-text-grey">WHEN</span> CameraStart<br>
+                                    <span class="has-text-grey">THEN</span> SoundAlarm<br>
+                                    <span class="has-text-grey">UNLESS</span> personNearby
+                                    <span class="has-text-grey">THEN</span> GoHome<br>
+                                    <span class="has-text-grey">UNLESS</span> temperature &gt; 35
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section is-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-4">Rule Formal Specification and Analysis</h2>
                     <div class="content">
                         ...
                     </div>
@@ -96,14 +162,184 @@
         </div>
     </section>
 
-    <!-- Runtime Adaptation -->
     <section class="section is-light">
         <div class="container is-max-desktop">
             <div class="columns is-centered">
                 <div class="column is-four-fifths">
-                    <h2 class="title is-4">Runtime Adaptation</h2>
+                    <h2 class="title is-4">Rule Formal Specification and Analysis</h2>
+                    <p>Below is the formal specification of the firefighter scenario in ASMETA language.</p>
+                    <div class="box">
+                        <p>firefighterHeader.asm</p>
+                        <pre><code class="language-text">
+module firefighterHeader //domain-specific signature
+
+import ../libraries/StandardLibrary
+import ../libraries/SLEECLibrary
+export *
+
+signature:	
+/* DOMAIN-SPECIFIC SIGNATURE */
+
+//domains
+domain Temperature subsetof Real
+enum domain WindScale = {LIGHT | MODERATE | STRONG}
+enum domain CapabilityID = {DONOTHING | SOUNDALARM | GOHOME}
+
+//Events and sensed variables
+monitored batteryCritical: Boolean
+monitored cameraStart: Boolean
+monitored alarmRinging: Boolean //To not confuse with the obligation soundAlarm
+monitored personNearby: Boolean
+monitored temperature: Temperature 
+monitored windSpeed: WindScale
+static alarmdeadline: Integer //constant
+
+//Capabilities
+static goHome: Capability
+static soundAlarm: Capability
+static id: Capability -> CapabilityID //not in lib, since it depends on CapabilityID that is model-specific
+
+/* CONSTANT (DOMAIN-GENERAL) SIGNATURE */	
+//NEW (compact, aggregated output)
+controlled info: Capability -> Prod(CapabilityID,TCType,Integer,TimerUnit,CapabilityID) //examples: (GOHOME,AFTER,5,MIN,undef), (GOHOME,WITHIN,8,MIN,SOUNDALARM)
+out outObligation: CapabilityID 
+out outConstraint: CapabilityID -> Prod(TCType,Integer,TimerUnit,CapabilityID)
+
+
+definitions:
+    
+/* DOMAIN-SPECIFIC DEFINITIONS*/
+
+domain Temperature = {-5.0:50.0}
+
+function alarmdeadline = 30
+
+function id($c in Capability) = 
+    switch $c
+        case doNothing : DONOTHING
+        case goHome : GOHOME
+        case soundAlarm : SOUNDALARM
+    endswitch	
+
+
+/* CONSTANT (DOMAIN-GENERAL) DEFINITIONS */	
+//with no time constraint
+rule r_setObligation($c in Capability) = 
+par 
+    doObligation := $c
+    constraint($c) := none
+    info($c) := (id($c),undef,undef,undef,undef)
+    //prepare out locations
+    outObligation := id($c) 
+    outConstraint(id($c)) := undef //(undef,undef,undef,undef) 
+endpar
+
+//complete overloading
+rule r_setObligation($c in Capability, $type in TCType, $t in Integer, $u in TimerUnit, $alt in Capability) = 
+par 
+    doObligation := $c
+    r_setTimeConstraint[$c,$type,$t,$u]
+    if isDef($alt) then otherwiseC($c) := $alt endif
+    info($c) := (id($c),$type,$t,$u,id($alt))
+    //prepare out locations
+    outObligation := id($c)
+    outConstraint(id($c)) := ($type,$t,$u,id($alt))
+endpar		             
+                </code></pre>
+                    </div>
+                    <div class="box">
+                        <p>firefighter.asm</p>
+                        <pre><code class="language-text">
+asm firefighter
+
+import ../libraries/StandardLibrary
+import ../libraries/SLEECLibrary
+import firefighterHeader
+
+signature: 
+    
+definitions:
+    
+
+    /* DOMAIN-SPECIFIC CONTROL RULES*/
+
+    //default: no obligation to do
+    rule r_doNothing = r_setObligation[doNothing]
+    
+    rule r_soundAlarm = r_setObligation[soundAlarm]
+            
+    rule r_soundAlarmWithinTwoSeconds = r_setObligation[soundAlarm,WITHIN,2,SEC,doNothing]
+    
+    rule r_goHome = r_setObligation[goHome]
+        
+    rule r_goHomeAfterFiveMinutes = r_setObligation[goHome,AFTER,5,MIN,doNothing]
+
+    rule r_goHomeWithinOneMinute = r_setObligation[goHome,WITHIN,1,MIN,doNothing]
+    
+    
+    //legal, social
+    rule r_Rule1 =
+        if cameraStart and personNearby then r_soundAlarm[] endif         
+    
+    //legal, ethical	
+    rule r_Rule2 =
+        if cameraStart and personNearby then r_soundAlarmWithinTwoSeconds[] endif        
+            
+    //legal		
+    rule r_Rule3 =
+        if alarmRinging then r_goHomeAfterFiveMinutes[] endif 
+        
+    rule r_RuleA =
+        if batteryCritical and temperature < 25.0 then r_goHomeWithinOneMinute[] endif 
+        	
+    //emphatatic	
+    rule r_Rule4 =
+        r_SLEEC[cameraStart, <<r_soundAlarm>>, personNearby, <<r_goHome>>, temperature > 35.0, <<r_doNothing>>]
+    
+        
+    /* CONSTANT (DOMAIN-GENERAL) RULES*/
+    
+    //NEW
+    //reset of all locations that contribute to the out location output
+    rule r_Reset =
+            forall $c in Capability do 
+                par
+                info($c) := (undef,undef,undef,undef,undef)
+                outConstraint(id($c)) := undef //(undef,undef,undef,undef)
+                doObligation := undef
+                outObligation := undef
+                constraint($c) := undef
+                otherwiseC($c) := undef
+            endpar
+    
+    //invariant inv_I0 over  doObligation, outObligation: (doObligation = outObligation)
+    
+    /* DOMAIN-SPECIFIC RULES*/
+        
+    main rule r_Main =  
+        seq	
+            r_Reset[] //reset of out locations in sequential order, otherwise the function resetting updates will not be visible to the other rules in one machine step
+            //par 
+            //example of SLEEC rule covering all modeling constructs
+            r_SLEEC[cameraStart, <<r_soundAlarm>>, personNearby, <<r_goHomeWithinOneMinute>>, temperature > 35.0, <<r_goHomeAfterFiveMinutes>>]
+            //endpar
+        endseq
+                                        </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section is-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-4">Enforcement Subsystem Development and Running</h2>
                     <div class="content">
-...
+                        ...
                     </div>
                 </div>
             </div>
