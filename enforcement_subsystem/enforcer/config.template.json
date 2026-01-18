@@ -1,0 +1,21 @@
+{
+  "asmeta_server":{
+    "ip": "${SERVER_IP}",
+    "base_port": 8080,
+    "spec_path": "../resources/models",
+    "runtime_model": "${MODEL}", 
+    "other_models" : ["${MODEL_HEADER}"]
+  },
+  "rabbitmq": {
+    "host": "${RABBITMQ_HOST}",
+    "port": 5672,
+    "user": "${RABBITMQ_DEFAULT_USER}",
+    "pass": "${RABBITMQ_DEFAULT_PASS}",
+    "conditions_queue_name": "conditions",
+    "obligations_queue_name": "obligations"
+  },
+  "logging":{
+    "level": "INFO",
+    "target_folder": "log"
+  }
+}
