@@ -1,4 +1,4 @@
-# Enforcing Ethics at Runtime in Autonomous Systems
+# A Process to Enforce Ethical Requirements of Autonomous Systems at Runtime
 
 This is the replication package for the paper _A Process to Enforce Ethical Requirements of Autonomous Systems at Runtime_ accepted at SEAMS2026.
 
@@ -82,28 +82,28 @@ Docker Compose is the recommended way for running the whole system.
 
 ```
 cd enforcement_subsystem
-docker compose --profile ari-sim --env-file .env.ari-sim up --build
+docker compose --profile firefighter-sim --env-file .env.firefighter-sim up --build
 ```
 
 #### Interact with the system
 On a new terminal:
 ```
-docker exec -it sleec-runtime-enforcer-ari-sim-1 bash
+docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
 . install/setup.bash
-ros2 run ari_sim ari_sim_user_interface
+ros2 run firefighter_sim firefighter_sim_user_interface
 ```
 ...and follow the prompted instructions
 
 ### Run in local testing configuration
 ```
 cd enforcement_subsystem
-docker compose --profile ari-sim-test --env-file .env.ari-sim up --build
+docker compose --profile firefighter-sim-test --env-file .env.firefighter-sim up --build
 ```
 
 #### Run tests
 On a new terminal:
 ```
-docker exec -it sleec-runtime-enforcer-ari-sim-test-runner-1 bash
+docker exec -it sleec-runtime-enforcer-firefighter-sim-test-runner-1 bash
 ```
 
 Generate a new test case if needed (optional):

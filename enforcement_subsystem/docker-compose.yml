@@ -43,7 +43,7 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-guest}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-guest}
-    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py rabbitmq_user:=${RABBITMQ_DEFAULT_USER:-guest} rabbitmq_pass:=${RABBITMQ_DEFAULT_USER:-guest}'"
+    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch firefighter_comm_layer firefighter_comm_layer_launch.py rabbitmq_user:=${RABBITMQ_DEFAULT_USER:-guest} rabbitmq_pass:=${RABBITMQ_DEFAULT_USER:-guest}'"
     networks:
       - enforcer-network
 
@@ -51,7 +51,7 @@ services:
     profiles: ["firefighter-sim"]
     build:
       context: ./ros2_ws    
-    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch ari_sim ari_sim_launch.py'"
+    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch firefighter_sim firefighter_sim_launch.py'"
     networks:
       - enforcer-network
 
