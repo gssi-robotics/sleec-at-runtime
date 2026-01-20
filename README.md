@@ -23,14 +23,14 @@ sleec-at-runtime
 |   |       |       SLEECLibrary.asm            # ASM library file containing the SLEEC constructor
 |   |       |       StandardLibrary.asm         # ASM library file for ASMETA
 |   |       └---models
-|   |               firefighter.asm                   # ASM SLEEC model for the running scenario
-|   |               firefighterHeaders.asm            # ASM model containing signatures and definitions for the running scenario
+|   |               firefighter.asm             # ASM SLEEC model for the running scenario
+|   |               firefighterHeaders.asm      # ASM model containing signatures and definitions for the running scenario
 |   |
 |   ├---ros2_ws                                 # ROS 2 workspace containing the ROS packages for the Monitor and Executor compents, plus testing/simulation facilities
 |   |   |   Dockerfile                          # Dockerfile for running in a containerized environment
 |   |   └---src
-|   |       ├---firefighter_sim                         # ROS 2 package containing a headless simulation of firefighter and a command line user interface
-|   |       └---firefighter_comm_layer              # ROS 2 package containing the implementation of Monitor and Executor components
+|   |       ├---firefighter_sim                 # ROS 2 package containing a headless simulation of firefighter and a command line user interface
+|   |       └---firefighter_comm_layer          # ROS 2 package containing the implementation of Monitor and Executor components
 |   |
 |   └---utils                                   # Utilities for converting ASM in Python data structures
 ```
