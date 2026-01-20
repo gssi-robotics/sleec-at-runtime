@@ -46,8 +46,10 @@
                     <br>
                 </p>
                 <p class="is-size-7">
-                    Yaman, Sinem Getir, et al. <emp>"Specification, validation and verification of social, legal, ethical, empathetic and cultural requirements for autonomous agents."</emp> <br>Journal of Systems and Software 220 (2025): 112229.
-                  </p>
+                    Yaman, Sinem Getir, et al. <emp>"Specification, validation and verification of social, legal,
+                        ethical, empathetic and cultural requirements for autonomous agents."</emp> <br>Journal of
+                    Systems and Software 220 (2025): 112229.
+                </p>
                 <span class="link-block">
                     <a href="https://www.sciencedirect.com/science/article/pii/S0164121224002735" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
@@ -58,7 +60,7 @@
                     </a>
                 </span>
                 <span class="link-block">
-                    <a href="/" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <a href="https://github.com/gssi-robotics/sleec-at-runtime/tree/master" target="_blank" class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                             <i class="fab fa-github"></i>
                         </span>
@@ -320,21 +322,77 @@ definitions:
             </div>
         </div>
     </section>
-
-
-
+    
     <section class="section is-light">
         <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-4">Enforcement Subsystem Development and Running</h2>
-                    <div class="content">
-                        ...
-                    </div>
+          <div class="columns is-centered">
+            <div class="column is-four-fifths">
+      
+              <h2 class="title is-4">
+                Enforcement Subsystem Development and Running
+              </h2>
+      
+              <div class="content">
+      
+                <p>
+                  Below we report a runtime execution trace produced by the enforcement
+                  subsystem, showing input conditions, rule evaluation, and applied actions.
+                </p>
+      
+                <!-- Terminal-style output -->
+                <div class="box" style="background:#0d1117; color:#c9d1d9;">
+                    <p>Enforcement output</p>
+                  <pre style="margin:0; white-space:pre-wrap;">
+[INFO] Executing new step.
+[INFO] Received input conditions: 
+    ('batteryCritical': False, 
+    'cameraStart': True,
+    'alarmRinging': False, 
+    'personNearby': True,
+    "temperature': 10.0,
+    'windSpeed': 'STRONG', 
+    'alarmdeadline': 30} 
+
+[INFO] ASM step performed for ID 1 with delay 40.33 ms
+
+[INFO] ASM output: 
+    ['outObligation(GOHOME)': 'true',
+    'outConstraint(SOUNDALARM)': 'undef',
+    'outobligation(DONOTHING)': 'false',
+    'outobligation(SOUNDALARM)': 'false',
+    'outConstraint(GOHOME)': 'undef',
+    'outConstraint(DONOTHING)': 'undef"}
+
+[INFO] Enforcement applied.
+                  </pre>
                 </div>
+      
+                <div class="box" style="background:#0d1117; color:#c9d1d9;">
+                    <p>Enforcement output (from the terminal)</p>
+                <figure class="mt-4">
+                    <a href="#enforcement-lightbox">
+                      <img src="../static/images/firefighter-enf.png"
+                           alt="Enforcement Subsystem Architecture"
+                           style="max-width:100%; border-radius:6px; cursor:zoom-in;">
+                    </a>
+                    <figcaption class="has-text-white is-size-6 mt-2">
+                      Click to enlarge the enforcement subsystem output.
+                    </figcaption>
+                  </figure>
+                </div>
+                  <div id="enforcement-lightbox" class="lightbox">
+                    <a href="#" class="lightbox-close"></a>
+                    <img src="../static/images/firefighter-enf.png"
+                         alt="Enforcement Subsystem Architecture (enlarged)">
+                  </div>
+                                    
+      
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
+      
 
 
     <!-- Footer -->

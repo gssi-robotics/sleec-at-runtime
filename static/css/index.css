@@ -751,3 +751,31 @@ a:focus {
 
 
 
+
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: 6px;
+}
+
+.lightbox:target {
+  display: flex;
+}
+
+.lightbox-close {
+  position: absolute;
+  inset: 0;
+  cursor: zoom-out;
+}
