@@ -1,6 +1,6 @@
 # A Process to Enforce Ethical Requirements of Autonomous Systems at Runtime
 
-This is the replication package for the paper _A Process to Enforce Ethical Requirements of Autonomous Systems at Runtime_ accepted at SEAMS2026.
+This is the replication package for the paper _A Process to Enforce Ethical Requirements of Autonomous Systems at Runtime_ accepted at the _21st International Conference on Software Engineering for Adaptive and Self-Managing Systems_ ([SEAMS2026](https://conf.researchr.org/home/seams-2026)).
 
 ## Repository structure
 ```
@@ -60,3 +60,6 @@ docker exec -it sleec-runtime-enforcer-firefighter-sim-1 bash
 cd src/firefighter_sim/run
 source prompt_data.sh
 ```
+
+### Output Example
+![Output Example](static/imgs/enforcement-cmd.png)
