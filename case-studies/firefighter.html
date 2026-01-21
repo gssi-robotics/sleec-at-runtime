@@ -163,80 +163,81 @@
                     <div class="box">
                         <p>firefighterHeader.asm</p>
                         <pre><code class="language-text">
-module firefighterHeader //domain-specific signature
+module firefighterHeader 
 
 import ../libraries/StandardLibrary
 import ../libraries/SLEECLibrary
 export *
 
 signature:	
-/* DOMAIN-SPECIFIC SIGNATURE */
-
-//domains
-domain Temperature subsetof Real
-enum domain WindScale = {LIGHT | MODERATE | STRONG}
-enum domain CapabilityID = {DONOTHING | SOUNDALARM | GOHOME}
-
-//Events and sensed variables
-monitored batteryCritical: Boolean
-monitored cameraStart: Boolean
-monitored alarmRinging: Boolean //To not confuse with the obligation soundAlarm
-monitored personNearby: Boolean
-monitored temperature: Temperature 
-monitored windSpeed: WindScale
-static alarmdeadline: Integer //constant
-
-//Capabilities
-static goHome: Capability
-static soundAlarm: Capability
-static id: Capability -> CapabilityID //not in lib, since it depends on CapabilityID that is model-specific
-
-/* CONSTANT (DOMAIN-GENERAL) SIGNATURE */	
-//NEW (compact, aggregated output)
-controlled info: Capability -> Prod(CapabilityID,TCType,Integer,TimerUnit,CapabilityID) //examples: (GOHOME,AFTER,5,MIN,undef), (GOHOME,WITHIN,8,MIN,SOUNDALARM)
-out outObligation: CapabilityID 
-out outConstraint: CapabilityID -> Prod(TCType,Integer,TimerUnit,CapabilityID)
-
-
-definitions:
+    /* DOMAIN-SPECIFIC SIGNATURE */
     
+    //domains
+    domain Temperature subsetof Real
+    enum domain WindScale = {LIGHT,MODERATE,STRONG}
+    enum domain CapabilityID = {DONOTHING,SOUNDALARM,GOHOME}
+    
+    //Events and sensed variables
+    monitored batteryCritical: Boolean
+    monitored cameraStart: Boolean
+    monitored alarmRinging: Boolean //To not confuse with the obligation soundAlarm
+    monitored personNearby: Boolean
+    monitored temperature: Temperature 
+    monitored windSpeed: WindScale
+    static alarmdeadline: Integer //constant
+    
+    //Capabilities
+    static goHome: Capability
+    static soundAlarm: Capability
+    static id: Capability -> CapabilityID //not in lib, since it depends on CapabilityID that is model-specific
+    
+/* CONSTANT (DOMAIN-GENERAL) SIGNATURE */	
+    //NEW (compact, aggregated output)
+    controlled info: Capability -> Prod(CapabilityID,TCType,Integer,TimerUnit,CapabilityID) //examples: (GOHOME,AFTER,5,MIN,undef), (GOHOME,WITHIN,8,MIN,SOUNDALARM)
+    //out outObligation: CapabilityID //OLD
+    out outObligation: CapabilityID -> Boolean //NEW: any due obligation (there could be more than one) is activated through a flag
+    out outConstraint: CapabilityID -> Prod(TCType,Integer,TimerUnit,CapabilityID)
+
+    
+definitions:
+        
 /* DOMAIN-SPECIFIC DEFINITIONS*/
-
-domain Temperature = {-5.0:50.0}
-
-function alarmdeadline = 30
-
-function id($c in Capability) = 
-    switch $c
-        case doNothing : DONOTHING
-        case goHome : GOHOME
-        case soundAlarm : SOUNDALARM
-    endswitch	
-
-
+    
+    domain Temperature = {-5.0:50.0}
+    
+    function alarmdeadline = 30
+    
+    function id($c in Capability) = 
+        switch $c
+            case doNothing : DONOTHING
+            case goHome : GOHOME
+            case soundAlarm : SOUNDALARM
+        endswitch	
+    
+    
 /* CONSTANT (DOMAIN-GENERAL) DEFINITIONS */	
-//with no time constraint
-rule r_setObligation($c in Capability) = 
-par 
-    doObligation := $c
-    constraint($c) := none
-    info($c) := (id($c),undef,undef,undef,undef)
-    //prepare out locations
-    outObligation := id($c) 
-    outConstraint(id($c)) := undef //(undef,undef,undef,undef) 
-endpar
-
-//complete overloading
-rule r_setObligation($c in Capability, $type in TCType, $t in Integer, $u in TimerUnit, $alt in Capability) = 
-par 
-    doObligation := $c
-    r_setTimeConstraint[$c,$type,$t,$u]
-    if isDef($alt) then otherwiseC($c) := $alt endif
-    info($c) := (id($c),$type,$t,$u,id($alt))
-    //prepare out locations
-    outObligation := id($c)
-    outConstraint(id($c)) := ($type,$t,$u,id($alt))
-endpar		             
+    //with no time constraint
+    rule r_setObligation($c in Capability) = 
+    par 
+        doObligation($c) := true //NEW
+        constraint($c) := none
+        info($c) := (id($c),undef,undef,undef,undef)
+        //prepare out locations
+        outObligation(id($c)) := true //true if doObligation is true 
+        outConstraint(id($c)) := undef //(undef,undef,undef,undef) 
+    endpar
+    
+    //complete overloading
+    rule r_setObligation($c in Capability, $type in TCType, $t in Integer, $u in TimerUnit, $alt in Capability) = 
+    par 
+        doObligation($c) := true //NEW
+        r_setTimeConstraint[$c,$type,$t,$u]
+        if isDef($alt) then otherwiseC($c) := $alt endif
+        info($c) := (id($c),$type,$t,$u,id($alt))
+        //prepare out locations
+        outObligation(id($c)) := true  //NEW
+        outConstraint(id($c)) := ($type,$t,$u,id($alt))
+    endpar		
                 </code></pre>
                     </div>
                     <div class="box">
@@ -254,7 +255,8 @@ definitions:
     
 
     /* DOMAIN-SPECIFIC CONTROL RULES*/
-
+    
+        
     //default: no obligation to do
     rule r_doNothing = r_setObligation[doNothing]
     
@@ -271,40 +273,45 @@ definitions:
     
     //legal, social
     rule r_Rule1 =
-        if cameraStart and personNearby then r_soundAlarm[] endif         
+        if cameraStart and personNearby then r_soundAlarm[] endif 	
     
     //legal, ethical	
     rule r_Rule2 =
-        if cameraStart and personNearby then r_soundAlarmWithinTwoSeconds[] endif        
+        if cameraStart and personNearby then r_soundAlarmWithinTwoSeconds[] endif
             
     //legal		
     rule r_Rule3 =
-        if alarmRinging then r_goHomeAfterFiveMinutes[] endif 
+        //if alarmRinging then r_goHomeAfterFiveMinutes[] endif 
+        r_SLEEC[alarmRinging,<<r_goHomeAfterFiveMinutes>>]
         
     rule r_RuleA =
-        if batteryCritical and temperature < 25.0 then r_goHomeWithinOneMinute[] endif 
-        	
+        //if batteryCritical and temperature < 25.0 then r_goHomeWithinOneMinute[] endif 
+        r_SLEEC[batteryCritical and temperature < 25.0,<<r_goHomeWithinOneMinute>>]
+        
     //emphatatic	
     rule r_Rule4 =
         r_SLEEC[cameraStart, <<r_soundAlarm>>, personNearby, <<r_goHome>>, temperature > 35.0, <<r_doNothing>>]
-    
+        
         
     /* CONSTANT (DOMAIN-GENERAL) RULES*/
     
-    //NEW
+
     //reset of all locations that contribute to the out location output
     rule r_Reset =
             forall $c in Capability do 
                 par
                 info($c) := (undef,undef,undef,undef,undef)
                 outConstraint(id($c)) := undef //(undef,undef,undef,undef)
-                doObligation := undef
-                outObligation := undef
+                doObligation($c) := false //NEW
+                outObligation(id($c)) := false //NEW
                 constraint($c) := undef
                 otherwiseC($c) := undef
             endpar
     
-    //invariant inv_I0 over  doObligation, outObligation: (doObligation = outObligation)
+    
+    invariant inv_I0 over  doObligation, outObligation: (forall $c in Capability with (doObligation($c) = outObligation(id($c)) ))
+    
+    
     
     /* DOMAIN-SPECIFIC RULES*/
         
@@ -312,10 +319,19 @@ definitions:
         seq	
             r_Reset[] //reset of out locations in sequential order, otherwise the function resetting updates will not be visible to the other rules in one machine step
             //par 
+            //Rule1 and Rule2 are redundant (inconsistent update on secondary attributes of the doOblication) 
+            //r_Rule1[]
+            //r_Rule2[]
+            //r_Rule3[] //Rule1 and RuleA are in conflict (inconsistent update on doOblication: e.g. doObligation updated to soundAlarm and goHome) [From the source spec: they are conflicting rules: RuleA requires GoHome to take place, but Rule3 forbids it.
+            r_Rule4[] 
+            r_RuleA[]
             //example of SLEEC rule covering all modeling constructs
-            r_SLEEC[cameraStart, <<r_soundAlarm>>, personNearby, <<r_goHomeWithinOneMinute>>, temperature > 35.0, <<r_goHomeAfterFiveMinutes>>]
+            //r_SLEEC[cameraStart, <<r_soundAlarm>>, personNearby, <<r_goHomeWithinOneMinute>>, temperature > 35.0, <<r_goHomeAfterFiveMinutes>>]
             //endpar
         endseq
+
+default init s0:
+                                                
                                         </code></pre>
                     </div>
                 </div>
