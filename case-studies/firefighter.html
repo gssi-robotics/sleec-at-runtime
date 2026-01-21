@@ -163,7 +163,6 @@
                     <div class="box">
                         <p>firefighterHeader.asm</p>
                         <pre><code class="language-text">
-<![CDATA[
 module firefighterHeader 
 
 import ../libraries/StandardLibrary
@@ -239,13 +238,11 @@ definitions:
         outObligation(id($c)) := true  //NEW
         outConstraint(id($c)) := ($type,$t,$u,id($alt))
     endpar		
-]]>
                 </code></pre>
                     </div>
                     <div class="box">
                         <p>firefighter.asm</p>
                         <pre><code class="language-text">
-<![CDATA[
 asm firefighter
 
 import ../libraries/StandardLibrary
@@ -285,15 +282,15 @@ definitions:
     //legal		
     rule r_Rule3 =
         //if alarmRinging then r_goHomeAfterFiveMinutes[] endif 
-        r_SLEEC[alarmRinging,<<r_goHomeAfterFiveMinutes>>]
+        r_SLEEC[alarmRinging,&lt;&lt;r_goHomeAfterFiveMinutes&gt;&gt;]
         
     rule r_RuleA =
         //if batteryCritical and temperature < 25.0 then r_goHomeWithinOneMinute[] endif 
-        r_SLEEC[batteryCritical and temperature < 25.0,<<r_goHomeWithinOneMinute>>]
+        r_SLEEC[batteryCritical and temperature < 25.0,&lt;&lt;r_goHomeWithinOneMinute&gt;&gt;]
         
     //emphatatic	
     rule r_Rule4 =
-        r_SLEEC[cameraStart, <<r_soundAlarm>>, personNearby, <<r_goHome>>, temperature > 35.0, <<r_doNothing>>]
+        r_SLEEC[cameraStart, &lt;&lt;r_soundAlarm&gt;&gt;, personNearby, &lt;&lt;r_goHome&gt;&gt;, temperature > 35.0, &lt;&lt;r_doNothing&gt;&gt;]
         
         
     /* CONSTANT (DOMAIN-GENERAL) RULES*/
@@ -329,12 +326,12 @@ definitions:
             r_Rule4[] 
             r_RuleA[]
             //example of SLEEC rule covering all modeling constructs
-            //r_SLEEC[cameraStart, <<r_soundAlarm>>, personNearby, <<r_goHomeWithinOneMinute>>, temperature > 35.0, <<r_goHomeAfterFiveMinutes>>]
+            //r_SLEEC[cameraStart, &lt;&lt;r_soundAlarm&gt;&gt;, personNearby, &lt;&lt;r_goHomeWithinOneMinute&gt;&gt;, temperature > 35.0, &lt;&lt;r_goHomeAfterFiveMinutes&gt;&gt;]
             //endpar
         endseq
 
 default init s0:
- ]]>                                               
+                                                
                                         </code></pre>
                     </div>
                 </div>
