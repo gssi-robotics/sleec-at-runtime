@@ -152,11 +152,19 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam
-                tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue,
-                a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac
-                gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed
-                vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+                This work addresses the challenge of enforcing ethical behaviors
+                at runtime in autonomous systems through a structured ethics
+                assurance process. At the core of this process is a subsystem that
+                rigorously operationalizes ethical rules, specifically social, legal,
+                ethical, empathetic, and cultural (SLEEC) requirements. This subsystem enables the dynamic evaluation,
+                adaptation, and enforcement
+                of ethically compliant behavior within a formally defined runtime
+                model. The proposed approach, named SLEEC@run.time, is demonstrated through a running example involving
+                firefighter-uncrewed
+                aerial vehicles. In addition, by leveraging its flexible runtime model,
+                SLEEC@run.time accommodates changes such as the addition or
+                removal of SLEEC rules, ensuring a robust and evolvable approach
+                to ethical assurance in autonomous systems.
               </p>
             </div>
           </div>
@@ -174,8 +182,27 @@
             <div class="content has-text-justified">
               <img src="static/images/process.png" alt="Ethics assurance process" />
               <p>
-                ...
+                The workflow is organized into four main phases.
+                The first three phases: <strong>(1) rule elicitation</strong>,
+                <strong>(2) formal rule specification and analysis</strong>, and
+                <strong>(3) enforcement subsystem development</strong> take place at
+                <strong>design time</strong>. The fourth phase: <strong>(4) enforcement subsystem
+                operation</strong> runs at <strong>runtime</strong>.
               </p>
+              
+              <p>
+                These phases are executed sequentially; however, the SLEEC ruleset can be
+                revisited and evolved at any point in the process. Such evolution may be
+                triggered by signals or observations arising during any phase, prompting a
+                reassessment of the normative framework.
+              </p>
+              
+              <p>
+                When rules are reassessed, a refinement workflow propagates updates to both the
+                design-time and runtime stages, ensuring the system remains aligned with
+                evolving normative expectations.
+              </p>
+              
             </div>
           </div>
         </div>
@@ -208,7 +235,9 @@
                 <br>
               </p>
               <p class="is-size-7">
-                Yaman, Sinem Getir, et al. <emp>"Specification, validation and verification of social, legal, ethical, empathetic and cultural requirements for autonomous agents."</emp>Journal of Systems and Software 220 (2025): 112229.
+                Yaman, Sinem Getir, et al. <emp>"Specification, validation and verification of social, legal, ethical,
+                  empathetic and cultural requirements for autonomous agents."</emp>Journal of Systems and Software 220
+                (2025): 112229.
               </p>
               <br>
 
