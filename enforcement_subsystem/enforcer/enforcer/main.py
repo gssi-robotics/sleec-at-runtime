@@ -158,7 +158,7 @@ async def main():
         try:
             await rabbit_mq_param.conditions_queue.consume(handle_condition_change)
 
-            logger.info("Awaiting messages (CTRL‑C to stop)...")
+            logger.info("Awaiting messages (CTRL-C to stop)...")
             await asyncio.get_running_loop().create_future()
 
         except asyncio.CancelledError:

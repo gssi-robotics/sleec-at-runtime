@@ -27,4 +27,4 @@ fi
 
 echo "Running with test file: $TEST_FILE_ABS"
 
-ros2 run ari_test_runner test_runner --ros-args -p testcase_file:="$TEST_FILE_ABS"
+ros2 run ari_test_runner testcase_runner --ros-args -p testcase_file:="$TEST_FILE_ABS"

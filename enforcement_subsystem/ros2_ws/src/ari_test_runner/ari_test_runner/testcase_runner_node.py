@@ -11,9 +11,9 @@ from rclpy.executors import MultiThreadedExecutor
 from rclpy.callback_groups import ReentrantCallbackGroup
 
 
-class TestRunnerNode(Node):
+class TestcaseRunnerNode(Node):
     def __init__(self):
-        super().__init__('ari_sim_test_runner')
+        super().__init__('ari_sim_testcase_runner')
 
         self.callback_group = ReentrantCallbackGroup()
 
@@ -230,7 +230,7 @@ class TestRunnerNode(Node):
 
 def main():
     rclpy.init()
-    node = TestRunnerNode()
+    node = TestcaseRunnerNode()
     executor = MultiThreadedExecutor()
     executor.add_node(node)
     executor.spin()
