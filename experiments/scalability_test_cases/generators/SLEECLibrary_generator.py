@@ -25,12 +25,12 @@ def gen_constructor(k: int) -> str:
             action = "$o0"
             lines.append(f"\t if {cond} then {action}\n")
         elif j < k - 1:
-            cond = " and ".join(f"${{c{i}}}" for i in range(j + 1))
+            cond = " and ".join(f"$c{i}" for i in range(j + 1))
             cond = cond + f" and not $c{j+1}"
             action = f"$o{j}"
             lines.append(f"\t else if {cond} then {action}\n")
         else:
-            cond = " and ".join(f"${{c{i}}}" for i in range(k))
+            cond = " and ".join(f"$c{i}" for i in range(k))
             action = f"$o{j}"
             endif_suffix = " endif" * k
             lines.append(f"\t else if {cond} then {action}{endif_suffix}\n\n")
@@ -49,11 +49,14 @@ BASE_HEADER = '''
 // definition of SLEEC rule 
 //version: Multi obligation
 // THIS IS AUTOMATICALLY GENERATED
-module SLEECLibrary
+module SLEECLibrary_{N}
 
 import StandardLibrary
 export *
 
+'''
+
+SIGNATURES = '''
 signature:
 	enum domain TimerUnit={NANOSEC, MILLISEC, SEC, MIN, HOUR}//lib
 	enum domain TCType = {AFTER, WITHIN} //lib
@@ -86,64 +89,42 @@ definitions:
 			constraint($c) := $tc
 		endpar
 
-	//SLEEC constructor for 1 condition
-	rule r_SLEEC($c0 in Boolean, $o0 in Rule) =
-	 if $c0 then $o0 endif
-	 
-	//SLEEC constructor for 2 conditions
-	rule r_SLEEC($c0 in Boolean, $o0 in Rule, $c1 in Boolean, $o1 in Rule) =
-	 if $c0 and not $c1 then $o0 
-	 else if $c0 and $c1 then $o1 endif endif
-	
-	//SLEEC constructor for 3 conditions
-	rule r_SLEEC($c0 in Boolean, $o0 in Rule, $c1 in Boolean, $o1 in Rule, $c2 in Boolean, $o2 in Rule) =
-	 if $c0 and not $c1 then $o0 
-	 else if $c0 and $c1 and not $c2 then $o1 
-	 else if $c0 and $c1 and $c2 then $o2 endif endif endif
-	
-	 //SLEEC constructor for 4 conditions
-	 rule r_SLEEC($c0 in Boolean, $o0 in Rule, $c1 in Boolean, $o1 in Rule, $c2 in Boolean, $o2 in Rule, $c3 in Boolean, $o3 in Rule) =
-	 if ($c0 and not $c1) then $o0 
-	 else if ($c0 and $c1 and not $c2) then $o1 
-     else if ($c0 and $c1 and $c2 and not $c3) then $o2
-     else if ($c0 and $c1 and $c2 and $c3) then $o3 endif endif endif endif
-
-	 //SLEEC constructor for 5 conditions
-	 rule r_SLEEC($c0 in Boolean, $o0 in Rule, $c1 in Boolean, $o1 in Rule, $c2 in Boolean, $o2 in Rule, $c3 in Boolean, $o3 in Rule, $c4 in Boolean, $o4 in Rule) =
-	 	if $c0 and not $c1 then $o0 
-		else if $c0 and $c1 and not $c2 then $o1 
-		else if $c0 and $c1 and $c2 and not $c3 then $o2
-		else if $c0 and $c1 and $c2 and $c3 and not $c4 then $o3
-		else if $c0 and $c1 and $c2 and $c3 and $c4 then $o4
-	    endif endif endif endif endif
-
 '''
 
 FOOTER = """\n\t// End of generated constructors\n"""
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Generate a SLEECLibrary.asm containing constructors 1..N.")
-    parser.add_argument("-n", "--num", type=int, required=True, help="Generate constructors 1..N")
-    parser.add_argument("--outdir", type=Path, default=os.path.join(Path(__file__).parent,"libraries"), help="Output directory (defaults to script dir)")
-    args = parser.parse_args(argv)
+	parser = argparse.ArgumentParser(description="Generate a SLEECLibrary.asm containing constructors 1..N.")
+	parser.add_argument("-n", "--num", type=int, required=True, help="Generate constructors 1..N")
+	parser.add_argument("--outdir", type=Path, default=os.path.join(Path(__file__).parent.parent, "libraries"), help="Output directory (defaults to script dir)")
+	args = parser.parse_args(argv)
 
-    n = args.num
-    if n < 1:
-        print("n must be >= 1", file=sys.stderr)
-        return 2
+	n = args.num
+	outdir = args.outdir
+	generate_sleeclibrary(n, outdir)
+	return 0
 
-    outdir = args.outdir
-    outdir.mkdir(parents=True, exist_ok=True)
-    outfile = outdir / f"SLEECLibrary_{n}.asm"
 
-    generated = generate_block(n)
+def generate_sleeclibrary(n: int, outdir: Path | str) -> Path:
+	"""Generate a SLEECLibrary file with constructors 1..n into `outdir` and return the Path."""
+	if n < 1:
+		raise ValueError("n must be >= 1")
 
-    final_text = BASE_HEADER + generated + FOOTER
+	outdir = Path(outdir)
+	outdir.mkdir(parents=True, exist_ok=True)
+	outfile = outdir / f"SLEECLibrary_{n}.asm"
 
-    outfile.write_text(final_text, encoding="utf-8")
-    print(f"Wrote {outfile} (constructors 1..{n})")
-    return 0
+	generated = generate_block(n)
+	final_text = BASE_HEADER.format(N=n) + SIGNATURES + generated + FOOTER
+
+	outfile.write_text(final_text, encoding="utf-8")
+	print(f"Wrote {outfile} (constructors 1..{n})")
+	return outfile
+
+
+if __name__ == "__main__":
+	raise SystemExit(main())
 
 
 if __name__ == "__main__":

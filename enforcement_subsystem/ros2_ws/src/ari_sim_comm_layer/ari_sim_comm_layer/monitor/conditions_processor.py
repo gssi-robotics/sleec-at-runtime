@@ -186,3 +186,11 @@ class ConditionsProcessor():
             self.conditions.differentFoodAllowed = True
         else:
             self.conditions.differentFoodAllowed = False
+
+    def raw_condition_update_callback(self, msg: String):
+        self.get_logger().info(f"Received raw condition update: {msg.data}")
+        try:
+            self.publisher.publish(msg.data)
+            self.get_logger().info(f"[RabbitMQ] Published: {msg.data}")
+        except Exception as e:
+            self.get_logger().error(f"[RabbitMQ] publish failed: {e}")

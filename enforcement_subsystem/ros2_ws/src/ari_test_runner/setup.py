@@ -24,6 +24,7 @@ setup(
     entry_points={
         'console_scripts': [
             'testcase_runner = ari_test_runner.testcase_runner_node:main',
+            'scalability_test_runner = ari_test_runner.scalability_tests_runner_node:main'
         ],
     },
 )

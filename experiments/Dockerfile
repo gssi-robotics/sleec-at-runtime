@@ -16,11 +16,14 @@ RUN apt update && apt install -y \
     && rosdep update
 
 RUN apt-get update && rosdep install --from-paths src -y --ignore-src
+    
+RUN pip install requests
 
 # Build the workspace
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
 
-RUN chmod +x ./run_tests.sh
+RUN chmod +x ./run_testcases.sh
+RUN chmod +x ./run_scalability_tests.sh
 
 # Source the workspace when starting the container
 ENTRYPOINT ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && bash"]

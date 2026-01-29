@@ -16,7 +16,7 @@ TEMPLATE_PREFIX = """
 asm {name}_{R}_{C}
 
 import ../libraries/StandardLibrary
-import ../libraries/SLEECLibrary
+import ../libraries/SLEECLibrary_{C}
 
 signature:
 	/* DOMAIN-SPECIFIC SIGNATURE */
@@ -183,13 +183,22 @@ def write_out(content: str, name:str, out_dir: str, R: int, C: int) -> str:
     return path
 
 
+def generate_and_write(name: str, rules: int, clauses: int, out_dir: str = None) -> str:
+    """Generate ASM content and write to `out_dir` (defaults to script relative `models`). Returns path."""
+    if out_dir is None:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        out_dir = os.path.join(script_dir, "models")
+    content = generate(name, rules, clauses)
+    return write_out(content, name, out_dir, rules, clauses)
+
+
 def main(argv=None):
-    p = argparse.ArgumentParser(description="Generate ASM file")
-    p.add_argument("-n", "--name", type=str, required=True, help="Name of test model")
-    p.add_argument("-r", "--rules", type=int, required=True, help="Number of rules")
-    p.add_argument("-c", "--clauses", type=int, required=True, help="Clauses per rule (base rule + hedge clauses)")
-    p.add_argument("-o", "--out", default="models", help="Output directory relative to script (default: models)")
-    args = p.parse_args(argv)
+    parser = argparse.ArgumentParser(description="Generate ASM file")
+    parser.add_argument("-n", "--name", type=str, required=True, help="Name of test model")
+    parser.add_argument("-r", "--rules", type=int, required=True, help="Number of rules")
+    parser.add_argument("-c", "--clauses", type=int, required=True, help="Clauses per rule (base rule + hedge clauses)")
+    parser.add_argument("-o", "--out", default="models", help="Output directory relative to script (default: models)")
+    args = parser.parse_args(argv)
 
     name = args.name
 
@@ -197,8 +206,7 @@ def main(argv=None):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     out_dir = os.path.join(script_dir, args.out)
 
-    content = generate(args.name, args.rules, args.clauses)
-    out_path = write_out(content, name, out_dir, args.rules, args.clauses)
+    out_path = generate_and_write(name, args.rules, args.clauses, out_dir)
     print(f"Wrote {out_path}")
 
 

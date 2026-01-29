@@ -48,6 +48,8 @@ class MonitorNode(Node):
         self.create_subscription(Empty, 'user_refuse_diet', self.conditions_processor.user_refuse_diet_callback, 10)
         self.create_subscription(String, 'exercise_result', self.conditions_processor.last_exercise_result_callback, 10)
 
+        self.create_subscription(String, 'raw_condition_update', self.conditions_processor.raw_condition_update_callback, 10)
+
         self.create_subscription(Empty, 'condition_reset', self.conditions_processor.reset_callback, 10)
 
         self.get_logger().info("Probe started")

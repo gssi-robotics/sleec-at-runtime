@@ -4,8 +4,7 @@ import time
 import rclpy
 from rclpy.node import Node
 from threading import Thread, Event
-from std_msgs.msg import String, Float32, Int32, Bool, Empty
-from sensor_msgs.msg import Temperature
+from std_msgs.msg import String, Empty
 
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.callback_groups import ReentrantCallbackGroup
@@ -29,10 +28,7 @@ class TestcaseRunnerNode(Node):
         self.get_logger().info(f"Json data loaded from {test_file}")
 
         # Publishers for test data
-        self.topic_publishers = {
-            'raw_condition_update': self.create_publisher(String, 'raw_condition_update', 10),
-            'condition_reset': self.create_publisher(Empty, 'condition_reset', 10),
-        }
+        self.raw_condition_update_publisher = self.create_publisher(String, 'raw_condition_update', 10),
 
         # Subscribers for results
         self.create_subscription(String, 'raw_obligation_enforcement', self.result_callback, 10, callback_group=self.callback_group)
@@ -54,106 +50,32 @@ class TestcaseRunnerNode(Node):
         wait_event.clear()
         self.print_results()
 
-    def publish_conditions(self, test_case_conditions):
-        for name, value in test_case_conditions.items():
-            pub = self.topic_publishers[name]
-            msg_type = type(pub.msg_type())
-
-            self.get_logger().info(f"Publishing condition {name}: {value}")
-
-            try:
-                if msg_type is String:
-                    msg = String(data=value)
-                elif msg_type is Bool:
-                    msg = Bool(data=value)
-                elif msg_type is Int32:
-                    msg = Int32(data=value)
-                elif msg_type is Float32:
-                    msg = Float32(data=float(value))
-                elif msg_type is Temperature:
-                    msg = Temperature(temperature=float(value))
-                elif msg_type is Empty:
-                    if value:
-                        msg = Empty()
-                    else:
-                        continue
-                else:
-                    self.get_logger().info("Unsupported message type.")
-                    continue
-
-                pub.publish(msg)
-
-                pub_event = Event()
-                pub_event.wait(0.5)
-                pub_event.clear()
-
-            except Exception as e:
-                self.get_logger().info(f"Error while sending message: {e}")
-
     def run_tests(self):
         self.test_start_time = time.perf_counter()
         for test_case in self.test_data["test_cases"]:
             test_id = test_case["id"]
-            expected_obligations = test_case["expected_obligation"]
-            if len(expected_obligations) > 0:
-                expected_obligations_list = [s.strip() for s in expected_obligations[0].split("AND")]
-            else:
-                expected_obligations_list = expected_obligations
-
-            day_time = test_case["time"]
             conditions = test_case["conditions"]
-            interactions = test_case["interactions"]
 
-            self.get_logger().info(f'---- Running test case #{test_id} (expecting {expected_obligations}) ----')
+            self.get_logger().info(f'---- Running test case #{test_id} ----')
 
-            # Setting up expected results for this test case
             self.running_test_id = test_id
-            self.test_results[test_id] = {"id": test_id, "start": 0, "expected_obligations": expected_obligations_list, "end": 0, "executed_obligations": []}
+            self.test_results[test_id] = {"id": test_id, "start": 0, "end": 0}
 
-            self.publish_conditions(conditions)
+            # Update this: set all the conditions once
+            self.get_logger().info(f"Publishing conditions")
 
-            # Publish time
-            time_publisher = self.topic_publishers["time"]
-            time_msg = String(data=day_time)
+            # Build the message
+            msg = String()
+            msg.data = json.dumps(conditions)
 
-            # If no interactions are set, time will fire the next obligation: save the time before publishing
-            self.get_logger().info(f"Publishing time: {day_time}...")
-            if not (interactions["data_request"] or interactions["user_request_food"] or interactions["user_complains"]):
-                self.test_results[test_id]["start"] = time.perf_counter()
-            time_publisher.publish(time_msg)
+            # Storing start time
+            self.test_results[test_id]["start"] = time.perf_counter()
+
+            self.raw_condition_update_publisher.publish(msg)
 
             pub_event = Event()
             pub_event.wait(1)
             pub_event.clear()
-
-            # Publish interactions
-            msg = Empty()
-            if interactions["data_request"]:
-                self.get_logger().info(f"Publishing data_request...")
-                pub = self.topic_publishers["data_request"]
-                self.test_results[test_id]["start"] = time.perf_counter()
-                pub.publish(msg)
-                pub_event = Event()
-                pub_event.wait(1)
-                pub_event.clear()
-
-            if interactions["user_request_food"]:
-                self.get_logger().info(f"Publishing user_request_food...")
-                pub = self.topic_publishers["user_request_food"]
-                self.test_results[test_id]["start"] = time.perf_counter()
-                pub.publish(msg)
-                pub_event = Event()
-                pub_event.wait(1)
-                pub_event.clear()
-
-            if interactions["user_complains"]:
-                self.get_logger().info(f"Publishing user_complains...")
-                pub = self.topic_publishers["user_complains"]
-                self.test_results[test_id]["start"] = time.perf_counter()
-                pub.publish(msg)
-                pub_event = Event()
-                pub_event.wait(1)
-                pub_event.clear()
 
             # Reset conditions
             condition_reset_publisher = self.topic_publishers["condition_reset"]
@@ -173,33 +95,20 @@ class TestcaseRunnerNode(Node):
         if self.test_results[self.running_test_id]["end"] == 0:
             self.test_results[self.running_test_id]["end"] = result_time
 
-        self.test_results[self.running_test_id]["executed_obligations"].append(action)
-
     def print_results(self):
         self.get_logger().info("************************ Test results ************************")
-        successes = 0
-        failures = 0
         for test_results in self.test_results.values():
             test_id = test_results["id"]
             start = test_results.get("start", 0)
             end = test_results.get("end", 0)
-            expected_obligations = test_results["expected_obligations"]
-            executed_obligations = test_results["executed_obligations"]
-            check = set(expected_obligations) == set(executed_obligations)
-            if check:
-                successes+=1
-            else:
-                failures+=1
             time = int((end-start) * 1000.0) if end != 0 and start != 0 else "N/A"
-            self.get_logger().info(f"Test #{test_id}: expected {expected_obligations}, executed {executed_obligations} (check: {check}), time: {time} ms")
+            self.get_logger().info(f"Test #{test_id}: time: {time} ms")
 
         self.get_logger().info("************************ Summary ************************")
         total_test_cases = len(self.test_data["test_cases"])
         collected = len(self.test_results)
         self.get_logger().info(f"Test cases run: {total_test_cases}")
         self.get_logger().info(f"Collected results for: {collected}")
-        self.get_logger().info(f"Successes: {successes} ({(successes/total_test_cases)*100.0:.3f}%)")
-        self.get_logger().info(f"Failures: {failures} ({(failures/total_test_cases)*100.0:.3f}%)")
         self.get_logger().info(f"Total time: {int(self.test_end_time-self.test_start_time)} seconds")
 
 def main():
