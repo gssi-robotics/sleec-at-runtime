@@ -3,16 +3,22 @@
 set -e
 . ./install/setup.bash
 
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <test_name>"
+if [ $# -ne 4 ]; then
+    echo "Usage: $0 <test_name> <rules> <conditions> <deployment>"
     exit 1
 fi
 
-TEST_NAME="$1"
-TEST_DIR="./scalabilitt_tests"
+RULES="$2"
+CONDITIONS="$3"
+DEPLOYMENT="$4"
+
+TEST_NAME="$1_$2_$3"
+TEST_DIR="./scalability_test_cases"
 LIBRARIES_DIR="$TEST_DIR/libraries"
 MODELS_DIR="$TEST_DIR/models"
-TEST_FILE="$TEST_DIR/$TEST_NAME.json"
+TEST_CASES_DIR="$TEST_DIR/test_cases"
+
+TEST_FILE="$TEST_CASES_DIR/$TEST_NAME.json"
 
 
 if [ ! -f "$TEST_FILE" ]; then
@@ -29,4 +35,29 @@ fi
 
 echo "Running with test file: $TEST_FILE_ABS"
 
-ros2 run ari_test_runner testcase_runner --ros-args -p testcase_file:="$TEST_FILE_ABS"
+CONFIGURATORS_DIR="./scalability_test_cases/configurators"
+if [ ! -d "$CONFIGURATORS_DIR" ]; then
+    echo "No such directory: $CONFIGURATORS_DIR"
+    exit 1
+fi
+
+LIB_FILE="$LIBRARIES_DIR/SLEECLibrary_${CONDITIONS}.asm"
+MODEL_FILE="$MODELS_DIR/${TEST_NAME}.asm"
+
+if [ ! -f "$LIB_FILE" ]; then
+    echo "Library file for test missing: $LIB_FILE. Generate it using the generator."
+    exit 1
+fi
+
+if [ ! -f "$MODEL_FILE" ]; then
+    echo "ASM model for testing missing: $MODEL_FILE. Generate it using the generator."
+    exit 1
+fi
+
+pushd "$CONFIGURATORS_DIR" >/dev/null
+python3 asmeta_configurator.py -n "$TEST_NAME" -c "$CONDITIONS" -d "$DEPLOYMENT"
+popd >/dev/null
+
+sleep 1
+
+ros2 run ari_test_runner scalability_test_runner --ros-args -p testcase_file:="$TEST_FILE_ABS"

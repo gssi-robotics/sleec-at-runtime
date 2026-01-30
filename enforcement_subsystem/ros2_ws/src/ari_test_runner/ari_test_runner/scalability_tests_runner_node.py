@@ -10,7 +10,7 @@ from rclpy.executors import MultiThreadedExecutor
 from rclpy.callback_groups import ReentrantCallbackGroup
 
 
-class TestcaseRunnerNode(Node):
+class ScalabilityTestRunnerNode(Node):
     def __init__(self):
         super().__init__('ari_sim_scalability_tests_runner')
 
@@ -28,7 +28,7 @@ class TestcaseRunnerNode(Node):
         self.get_logger().info(f"Json data loaded from {test_file}")
 
         # Publishers for test data
-        self.raw_condition_update_publisher = self.create_publisher(String, 'raw_condition_update', 10),
+        self.raw_condition_update_publisher = self.create_publisher(String, 'raw_condition_update', 10)
 
         # Subscribers for results
         self.create_subscription(String, 'raw_obligation_enforcement', self.result_callback, 10, callback_group=self.callback_group)
@@ -77,18 +77,10 @@ class TestcaseRunnerNode(Node):
             pub_event.wait(1)
             pub_event.clear()
 
-            # Reset conditions
-            condition_reset_publisher = self.topic_publishers["condition_reset"]
-            condition_reset_publisher.publish(Empty())
-            pub_event = Event()
-            pub_event.wait(1)
-            pub_event.clear()
-
         self.test_end_time = time.perf_counter()
 
     def result_callback(self, msg):
-        command = json.loads(msg.data)
-        action = command.get("action", None)
+        action = msg.data
         self.get_logger().info(f"Received result: {action}")
         result_time = time.perf_counter()
 
@@ -113,7 +105,7 @@ class TestcaseRunnerNode(Node):
 
 def main():
     rclpy.init()
-    node = TestcaseRunnerNode()
+    node = ScalabilityTestRunnerNode()
     executor = MultiThreadedExecutor()
     executor.add_node(node)
     executor.spin()
