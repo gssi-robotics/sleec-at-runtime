@@ -33,6 +33,8 @@ class ScalabilityTestRunnerNode(Node):
         # Subscribers for results
         self.create_subscription(String, 'raw_obligation_enforcement', self.result_callback, 10, callback_group=self.callback_group)
 
+        self.wait_event = Event()
+
         self.test_results = {}
         self.running_test_id = 0
 
@@ -41,6 +43,7 @@ class ScalabilityTestRunnerNode(Node):
 
         self.test_thread = Thread(target=self.test_loop, daemon=True)
         self.test_thread.start()
+
 
     def test_loop(self):
         self.get_logger().info("Starting test loop...")
@@ -73,9 +76,8 @@ class ScalabilityTestRunnerNode(Node):
 
             self.raw_condition_update_publisher.publish(msg)
 
-            pub_event = Event()
-            pub_event.wait(1)
-            pub_event.clear()
+            self.wait_event.wait()
+            self.wait_event.clear()
 
         self.test_end_time = time.perf_counter()
 
@@ -86,6 +88,8 @@ class ScalabilityTestRunnerNode(Node):
 
         if self.test_results[self.running_test_id]["end"] == 0:
             self.test_results[self.running_test_id]["end"] = result_time
+
+        self.wait_event.set()
 
     def print_results(self):
         self.get_logger().info("************************ Test results ************************")

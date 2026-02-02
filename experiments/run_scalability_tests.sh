@@ -3,16 +3,16 @@
 set -e
 . ./install/setup.bash
 
-if [ $# -ne 4 ]; then
-    echo "Usage: $0 <test_name> <rules> <conditions> <deployment>"
+if [ $# -ne 3 ]; then
+    echo "Usage: $0 <rules> <conditions> <deployment>"
     exit 1
 fi
 
-RULES="$2"
-CONDITIONS="$3"
-DEPLOYMENT="$4"
+RULES="$1"
+CONDITIONS="$2"
+DEPLOYMENT="$3"
 
-TEST_NAME="$1_$2_$3"
+TEST_NAME="test_${RULES}_$CONDITIONS"
 TEST_DIR="./scalability_test_cases"
 LIBRARIES_DIR="$TEST_DIR/libraries"
 MODELS_DIR="$TEST_DIR/models"

@@ -1,1 +1,0 @@
-ASM models are named according to the following strategy: NAME_<number-of-rules>_<number-of-clauses-per-rule>.asm
