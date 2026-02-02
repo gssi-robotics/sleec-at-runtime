@@ -1,0 +1,64 @@
+rule_start
+	R1 when RobotMoving then AvoidBumping
+	   unless {humanInRoute} then AdjustRoute
+	   unless {humanTooClose} then AdjustRoute
+	   unless {bumpHuman} then InquireSafety
+	   
+    R1b when RobotMoving and ({humanInRange} or ({humanTooClose} or (not {routeAvailable}))) then AvoidBumping
+
+
+    R2 when RobotMoving then AccountHumanRandomness
+
+    R3 when RobotMoving then TrackHumanLocation
+
+    R4 when RobotWorking then InformHuman 
+    
+    R5 when HumanSaysStop then RobotStopAction
+    
+    R6 when InformHuman then RobotMoving 
+        unless {humanInRoute} then AdjustRoute
+ 	   unless (not {routeAvailable}) then AskPermission
+
+    R7 when RobotMoving and {humanInRange} then RobotStopAction
+   	   unless {humanReEnables} then RobotContinueTask
+
+    R8 when RobotMoving then MoveAtSafeSpeed
+   	   unless (({efficiency} = elow) and ({risk} = low)) then IncreaseSpeed
+
+    R9 when PreparingRobot and {isHumanTask} then not AssignToRobot
+   	   unless {humanConsents}
+
+    R10 when PreparingRobot then AssignLiability
+    
+    R10_1 when PreparingRobot then InformHuman
+
+    R11 when PreparingRobot then ConsiderAppearance
+
+    R12 when PreparingRobot then MinimizeCobotCollaboration
+
+	R12_1 when PreparingRobot then PrioritizeHumans
+
+    R13 when RobotWorking and {accident} then RobotStopAction
+
+    R13_1 when RobotWorking and {accident} then ReportIncident
+
+    R14v when PreparingRobot and {humansPresent} then Communicate
+
+
+    R15 when RobotWorking and {obstaclePresent} then ReportIncident
+    
+    R15_1 when RobotWorking and {obstaclePresent} then RobotStopAction
+    
+    R16 when RobotWorking and ({humanInRange} or ({bumpHuman} or ({humanTooClose} or (not {routeAvailable})))) then not  RobotContinueTask
+    
+    R17 when ActionHumanRandom then RobotStopAction
+
+	R18 when ActionHumanRandom then AskPermission
+	R19 when AskPermission then not RobotMoving
+
+	R20 when ActionHumanRandom and {routeAvailable} then MoveAwayFromHuman 
+
+	R21 when TrackHumanLocation and {humanTooClose} then InformHuman
+
+
+rule_end

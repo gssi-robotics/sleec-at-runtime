@@ -1,0 +1,47 @@
+rule_start
+	R1 when MonitorMealTime then InformUser within 10 minutes
+		unless {userOccupied} then RemindLater
+	R2 when AgentDeployed then TrackTime
+	R2_1 when TrackTime and ({timeBetweenMeals} > maxTimeBetweenMeals) then InformCaregiver
+	R2_2 when TrackTime and ({timeBetweenMeals} > maxTimeBetweenMeals) then GiveSuggestion
+   R3b when HumanOnFloor then AskCallHelp 
+   R3bb when AskCallHelp and (not {humanAssents}) then CallEmergencyServices
+   R3bbb when AskCallHelp and (not {humanAssents}) then InformCaregiver 
+	R4 when InterfereSafely and (not {safePathFound}) then InformUser
+	   unless {userOccupied}
+	R5 when UserWantsToCook then AllowUserToCook
+	R5_1 when AllowUserToCook and ({hazardDetected} or ({riskLevel} = high))
+	then InterfereSafely
+	R6 when UserHasLimitation then InformUser
+	R7 when UserWantsToCook then CheckTemperature
+	R7_1 when CheckTemperature and {hazardDetected} then InformUser
+	R8 when FoodPreparation then TrackTime
+	R8_1 when TrackTime then InformUser
+	R9 when MeetingUser then CollectandRecordInformation
+	R9_1 when AgentDeployed then UpdateInformation
+	R10 when GiveSuggestion then ConsiderUserPractices
+	R11 when MeetingUser then AskForEmergencyContact
+	R11_1 when AskForEmergencyContact then InformUser
+	R12 when AgentDeployed and (not {personAuthorized}) then not ShowDataHistory
+	R12_1 when ShowDataHistory and {dataNeedsChecking} then ProvideDataSummaries
+	R13 when UserUnpredictable then not GiveUserDangerousObjects
+	R14 when AgentDeployed and (not {userAsksForAppropriateTasks}) then RemindUserOfLimitations
+		unless ({needLevel} > nmedium)
+	R15 when PreparingDeployment then AgentHasAppropriateAppearance
+		unless {userNeedsSpecialAccomodations}
+	R16 when PreparingDeployment then CalibrateSpeech
+	R17 when GivingCookingInstructions then UseFirstPersonPluralLanguage
+	R17_1 when GivingCookingInstructions then InformUser 
+	R18 when BeforeCookingBegins then AskForDetailLevelOfInstructions
+	R19 when UserChangeMind then RecalculateApproach
+	    unless ({riskLevel} = high)
+	R20 when UserChangeItemLocation then UpdateMap
+	    unless ({riskLevel} = high) then InterfereSafely
+	R21 when SmokeDetectorAlarm then CallEmergencyServices within 5 minutes
+	    unless ({userDisablesAlarm} and (not {alarmRestarts})) then FireSafetyMeasures 
+	R21b when SmokeDetectorAlarm then CallEmergencyServices within 2 minutes
+	     unless ({userDisablesAlarm} and (not {alarmRestarts})) then FireSafetyMeasures
+	R21_1 when FireSafetyMeasures then OpenWindows
+	R21_2 when FireSafetyMeasures then AskUserIfOK
+	R21_3 when FireSafetyMeasures then InformCaregiver
+rule_end

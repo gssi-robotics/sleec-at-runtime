@@ -1,0 +1,87 @@
+rule_start
+	R1 when UserTurnOnSystem then TurnOnSensors
+
+	R1bb when UserTurnOffSystem then TurnOffSensors eventually
+
+	R1b when UserTurnOnSystem and (not {userTurnedOffSystem}) then not  TurnOffSensors
+
+	R1_cont when TurnOnSensors then CheckSystemComponents
+	R2 when SystemReady then TakeUserInput
+	R3 when TakeUserInput then CalculateShortestPath
+		unless ((not {destinationExists}) or (not {pathExists})) then DisplayError
+	R3_cont when CalculateShortestPath then DisplayRoute
+	R4 when UserRequestSpeedChange and {environmentClear} then ChangeSpeed
+        unless ({riskLevel} > low)
+        unless (not {actionIsLegal})
+
+	R5 when UserChangeRoute then CalculateShortestPath
+		unless (not {commandClear}) then AskForClarification
+		otherwise not ChangeCurrentDriving
+
+	R6 when UserCancelPath then ParkVehicle
+		unless ({riskLevel} > low) then WaitUntilChanges
+	R7 when CarDriving and ({carsInFront} and {carsBehind}) then MaintainEqualDistance
+	R8 when CarDriving and {objectInPath} then TemporarilyStopCar
+	unless ({riskLevel} > low) then ChangeLanes
+	unless (not {multipleLanes}) then TurnOnHazardsAndTemporarilyStop
+    unless (not {objectInPath}) then CarDriving
+
+	R9 when CarDriving and {withinLane} then StayCenteredinLane
+    unless ({userRequestedLaneChange} and ({environmentClear} and ({riskLevel} = low)))
+    then ChangeLanes
+    unless ((not {withinLane}) or (not {laneExists})) then DisplayAlert
+	R10 when UserTurnOffSystem then ParkVehicle
+	R10_1 when ParkVehicle and {userTurnedOffSystem} then TurnOffSensors
+	R11 when PriorityVehicleNearby then DisplayAlert
+	R12 when PriorityVehicleNearby and ({ambulanceBehindCar} and (not {ambulanceOnOppositeSide}))
+		then ChangeLanes
+		unless ({ambulanceNextToCar} or (not {multipleLanes})) then MakeSpace
+		unless ({riskLevel} > low)
+	R13 when SeeTrafficLight and ({redLight} and {recognizeInput}) then TemporarilyStopCar
+		unless (not {redLight}) then TakeNewInput 
+	R14 when SeeTrafficLight and ({yellowLight} and {recognizeInput}) then SlowDown
+		unless (not {yellowLight}) then TakeNewInput
+		unless ({previousLight} = red) then GetReadyToDrive
+	R15 when SeeTrafficLight and ({greenLight} and {recognizeInput}) then CarDriving
+		unless {objectInPath} then WaitUntilChanges
+	R16 when SeeTrafficLight and (not {recognizeInput}) then SlowDown
+	R16_cont when SlowDown and {environmentClear} then CarDriving
+
+	R17 when SystemReady and (not (({doorClosed} or {seatBeltOn}) or {destinationExists}))
+	then DisplayAlert otherwise AskIfUserReadyToDrive
+	R17b when SystemReady and ({doorClosed} and (({seatBeltOn} and  {destinationExists}) and (not {userSaysYes}))) then AskIfUserReadyToDrive 
+	
+	R17bbb when SystemReady and ((not {userSaysYes}) and (((not {doorClosed}) or (not{seatBeltOn})) or (not {destinationExists})))  then DisplayError
+	
+	R19 when AskIfUserReadyToDrive and (not {userSaysYes}) then StopAutonomousAssistance
+	
+	R17bbbb when DisplayError then StopAutonomousAssistance
+	
+	R17bb when SystemReady and ({doorClosed} and (({seatBeltOn} and  {destinationExists}) and (not {userSaysYes}))) then StopAutonomousAssistance 
+	
+	R20 when SystemReady then DisplayCarInformation
+	R26 when UserTurnOffSystem then TurnOffSensors eventually 
+	R21 when CalculateShortestPath then TakeShortestPath
+	    unless ({riskLevel} > low)
+	    unless (not {actionIsLegal})
+	R22 when SystemReady then not RecordPeople
+	    unless {peopleConsentObtained}
+	
+	R24 when SystemReady and (not {actionIsLegal}) then ChangeCurrentDriving
+
+	R25 when CarDriving and (not {peopleConsentObtained}) then not  RecordPeople
+	
+	R27I when UserTurnOnSystem and (not {peopleConsentObtained}) then not RecordPeople
+	R27II when TurnOnSensors and (not {peopleConsentObtained}) then not RecordPeople
+	R27III when SystemReady and (not {peopleConsentObtained}) then not RecordPeople
+	R27IV when ReadyToDrive and (not {peopleConsentObtained}) then not RecordPeople
+	R27V when AskIfUserReadyToDrive and (not {peopleConsentObtained}) then not RecordPeople
+	R27VI when CarDriving and (not {peopleConsentObtained}) then not RecordPeople
+	R27VII when SlowDown and (not {peopleConsentObtained}) then not RecordPeople
+	R27VIII when ChangeSpeed and (not {peopleConsentObtained}) then not RecordPeople
+	R27IX when ChangeLanes and (not {peopleConsentObtained}) then not RecordPeople
+	R27X when ChangeCurrentDriving and (not {peopleConsentObtained}) then not RecordPeople
+	R27XI when MaintainEqualDistance and (not {peopleConsentObtained}) then not RecordPeople
+	R27XII when StayCenteredinLane and (not {peopleConsentObtained}) then not RecordPeople
+
+rule_end

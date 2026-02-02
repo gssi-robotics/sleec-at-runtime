@@ -1,0 +1,66 @@
+rule_start
+	R1 when AddressUserName then UsePreferredName
+		 unless {userNameUnknown} then AddressSirOrMadam
+		 unless {userDirectsOtherwise}
+	R2 when ProvideInfo then NotDisclosePersonalInformation
+		 unless {directlyToUser}
+		 unless {userConsentAvalaible}
+		 unless {medicalEmergency}
+	R3 when EventX and ({culturalIndicatorA} and {genderTypeB}) then RequestHumanAgent
+		 unless {userDirectsOtherwise} 
+		 unless {medicalEmergency}
+	R4 when Speaking then UseChoicenLanguage
+		 unless (not {languagePreferenceAvailable}) then UseDefaultasEnglish
+		 unless {userDirectsOtherwise}
+	R5 when UserRequestInfo then ProvideInfo
+			  unless ((not {informationAvailable}) or {informationDisclosureNotPermitted}) 
+						  then InformUserandandReferToHumanCarer
+						  
+	R5_1 when UserRequestInfo then ProvideInfo
+            unless ((not {informationAvailable}) or {informationDisclosureNotPermitted})  then not ProvideInfo
+
+
+	R6 when InstructionFail then RepeatInstruction
+			  unless (({instructionRepeat} >= 3) or ({timeElapsed} > 20)) then CallSupport
+	R7 when PreparingExamination then ObtainConsent
+			  unless ((not {UserUnableToConsent}) or ({UserAge} < legalAge)) then AskRepresentativeForConsent
+	R8 when PreparingTasks then ConfirmConsent
+	R9 when CheckUnderstanding and (({userPayingAttention} and {userDataInformed}) 
+			  and {userSensoryNeedsMet}) then UserUnderstands
+	R10 when MeetingUser then ExamineState
+	R10_1 when ExamineState and ({severityOfState} > StateThreshold) then not ApproachPatient
+		  unless {urgentNeed}
+	R10_2 when ExamineState and ({stablePsychologicalState} and {stablePhysicalState}) 
+					 then ExaminationContinuable
+	R11 when PreparingExamination then EnsurePrivateSpace
+				unless ({UserAge} < legalAge) then EnsureLegalPresence
+	R12 when ExaminingPatient then NotTouchUnnecessarily
+				unless {bodyPartInvolvedInExam}
+	R13 when MeetingUser then IdentifyDAISYTrust
+	R13_1 when IdentifyDAISYTrust then determineThreshold
+	R13_2 when determineThreshold then selectDAISYProtocol
+	R14 when ExaminingPatient and {behaviorAggressive} then ReferToHumanExaminer
+	R14_1 when ExaminingPatient and {behaviorAggressive} then RobotStopSession 
+	R14_2 when ExaminingPatient and {behaviorAggressive} then CallSupport
+
+
+	R15 when PresentingReport and {dataNoiseConsidered}  then ProvideConfidenceLevel
+	R16b when ExaminingPatient and ((not {dataRelevantToContext}) or {dataUnnecessary})
+then not CollectPatientData
+
+
+	R17 when CollectingTrainingData and {trainingDataRepresentative} then TrainDaisy
+	R18b when MeetingUser and ({patientComfortable} and ({patientAgeConsidered} and (not {patientXReligion})))
+           then ExaminingPatient
+           unless {userDirectsOtherwise}
+           unless {medicalEmergency}
+
+	R20 when MeetingUser then informDaisyAbilities
+	R21 when ExaminingPatient then CanEndSession
+	R21_1 when ExaminingPatient then CanCallHuman
+	R22 when UserEndSession then RobotStopSession 
+	R23 when MeetingPatient and (not {patientComfortable})  then not ExaminingPatient 
+	R24 when MeetingPatient and ((not {patientAgeConsidered}) and (not {guardianConsentAvalaible})) then not ExaminingPatient 
+	R25 when MeetingUser and (not {trainingDataRepresentative})  then CallSupport 
+
+rule_end

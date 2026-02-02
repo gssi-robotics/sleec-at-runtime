@@ -1,0 +1,45 @@
+rule_start
+		R1 when DPAMade then DPAComplete 
+	       unless (((((((not {controllerID}) or (not {controllerInfo})) or (not {processorInfo})) or (not {processorID})) or (not {dpaPurpose})) or (not {dpaNature})) or (not {dpaCategories})) then not DPAIncomplete
+	
+		R2 when DPAMade and (({dpaLength} > 0) or {dpaActive}) then DPAComplete
+			otherwise DPATerminate
+	
+		R3_0 when DPAUpdate and ((not {specificControllerAuth}) or (not {genControllerAuth})) then not EngageSubProcessor
+		R3_1 when DPAUpdate and ((not {specificControllerAuth}) or (not {genControllerAuth})) then ObtainControllerConsent
+
+		
+		R4 when ChangeSubProcessor and {genControllerAuth} then InformController
+		R5 when StartDPAProcess and ((({controllerInstructions} and {personalData}) and 
+		   {confidentialityEnsured}) and {securityEnsured}) then ProcessPersonalData
+	       unless ({lawRequires} and {informingAllowed}) then InformController
+		R6 when InformController and (({personalData} and {confidentialityEnsured}) and 
+		   {securityEnsured}) then ProcessPersonalData
+
+		R7 when RightsRequested then AssistController
+		R8 when RightsRequested then RespondToRequest
+		R8_0 when RespondToRequest then InformSubject
+		R9 when StartDPAProcess and ((not {securityEnsured}) or (not {dataCompliance}))
+	then AssistController
+		R10 when DataBreach then InformSupervisor
+		R11 when DataBreach then InformSubject
+		R12 when EvaluateDPAProcess and ((not {measureTaken}) and ({riskLevel} = high))
+		then not StartDPAProcess
+		R13 when EvaluateDPAProcess and ((not {measureTaken}) and ({riskLevel} = high))
+		then InformSupervisor
+		R14 when StartDPAProcess and (({dpaLength} <= 0) or (not {dpaActive}))
+		then RemovePersonalData
+		R15 when StartDPAProcess and ({controllerInstructions} and (not {rulesConform}))
+	then InformController
+		R16 when StartDPAProcess and (not {art28Compliance}) then ProvideControllerInformation
+		R17 when AuditsOccur and (((({auditType} = audit) or ({auditType} = inspection)) or ({auditorType} = controller)) or ({auditorType} = mandatedAuditor)) then AllowAudits
+		R18 when AuditsOccur and (((({auditType} = audit) or ({auditType} = inspection)) or ({auditorType} = controller)) or ({auditorType} = mandatedAuditor)) then HelpAuditors
+		R19 when EngageSubProcessor then ImposeObligationsOnSubProcessor
+		R20 when EngageSubProcessor then TakeLiabilityForSubProcessor
+	
+	R21_0 when EvaluateSecurity and ({personalData} and ((((({typesOfRisk} = dataDestruction) or ({typesOfRisk} =  dataLoss)) or ({typesOfRisk} = dataAlter)) or ({typesOfRisk} = unauthDataAccess) ) and ({riskLevel} > low))) then not PassSecurity
+
+	R21_1 when EvaluateSecurity and ({personalData} and ((((({typesOfRisk} = dataDestruction) or ({typesOfRisk} =  dataLoss)) or ({typesOfRisk} = dataAlter)) or ({typesOfRisk} = unauthDataAccess) ) and ({riskLevel} > low))) then InformController
+
+	R22 when InformController and {genControllerAuth} then CanObjectToChange
+rule_end

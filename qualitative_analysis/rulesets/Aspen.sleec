@@ -1,0 +1,59 @@
+rule_start
+	R1 when EncounterHuman and ({sameLanguage} and {humanUnderstands})
+    then InformHuman
+
+    R2 when EncounterHuman then IdentifyActivity
+
+    R2_1 when IdentifyActivity and {unrelatedActivity} then not StoreData
+
+    R3 when HumanNearby and {environmentDangerous} then InformHuman
+
+      R4bb when PreparingDrone and (({onIndigenousLand} and (not {landTreatyInPlace})) or 
+      (({battery} = low) or ((({store} = low) or {damages}) or ({flightCondition} = dangerous)
+      )))  then not DeployDrone
+
+    R5 when DeployDrone and {relevantLand} then MonitorLand
+
+    R6 when CollectSample then AvoidInterference
+
+    R6_1 when DeployDrone then AvoidInterference
+
+    R7 when PreparingDrone then UpdateTerritories
+
+    R7_1 when PreparingDrone and {privateTerritory} then not DeployDrone
+
+    R7_2 when DeployDrone and {privateTerritory} then ExitArea
+
+    R8 when DeployDrone then MonitorCarbon
+
+    R8_1 when DeployDrone and (({carbonFootprint} > low) and  ({benefits} < medium))
+    then InformKeeper
+
+    R9 when TakePictures and {humanIdentified} then AnonymizeHuman
+    unless {unrelatedActivity} then DeletePictures
+    
+    R9b1 when DeletePictures then  InformKeeper
+    R9b2 when DeletePictures then  LogDroneAction
+
+
+    R10 when ImplementASPEN then EnsureCompliance
+    R10b when EnsureCompliance then InformKeeper
+
+    R11 when DeployDrone and ({flightCondition} < safe) then ReturnHome
+    unless ({flightCondition} = dangerous) then GroundDrone
+
+    R11_cont when ReturnHome then InformKeeper
+
+    R11_cont_1 when GroundDrone then InformKeeper
+
+    R12 when EncounterWildlife then AvoidInterference
+    unless {wildlifeDisturbed} then BackUp
+    unless {wildlifeInteractswithDrone} then ExitArea within 1 minutes
+
+    R12_1 when EncounterWildlife and {wildlifeInteractswithDrone} then InformKeeper
+
+    R14_1 when DeployDrone and ({damages} or  ({battery} = low)) then GroundDrone within 5 minutes
+    
+    R15 when DeployDrone and {unKnownObject} then TakePictures
+    
+rule_end
