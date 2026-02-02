@@ -86,7 +86,8 @@ class ObligationsProcessor():
             elif capability in self.capabilities_func_dict:
                 self.capabilities_func_dict[capability]()
             else:
-                self.get_logger().warn(f"Unknown capability: {capability}")
+                self.get_logger().warn(f"Unknown capability: {capability}... publishing as a raw obligation.")
+                self.executor.raw_obligation_enforcement(capability)
         except Exception as e:
             self.get_logger().error(f"[Obligation Processor] Error executing capability {capability}: {e}")
 

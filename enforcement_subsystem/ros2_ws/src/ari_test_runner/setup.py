@@ -16,14 +16,15 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='name surname',
-    maintainer_email='name.surname@email.com',
-    description='Firefighter simulated robot package',
+    maintainer='Gianluca Filippone',
+    maintainer_email='gianluca.filippone@gssi.it',
+    description='Ari test runner package',
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'test_runner = ari_test_runner.test_runner_node:main',
+            'testcase_runner = ari_test_runner.testcase_runner_node:main',
+            'scalability_test_runner = ari_test_runner.scalability_tests_runner_node:main'
         ],
     },
 )

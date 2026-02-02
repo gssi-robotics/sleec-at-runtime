@@ -1,0 +1,234 @@
+
+// Sample SLEEC rules 
+asm test_5_5
+
+import ../libraries/StandardLibrary
+import ../libraries/SLEECLibrary_5
+
+signature:
+	/* DOMAIN-SPECIFIC SIGNATURE */
+
+	//domains
+	enum domain CapabilityID = {CAPABILITY1, CAPABILITY2, CAPABILITY3, CAPABILITY4, CAPABILITY5, CAPABILITY6, CAPABILITY7, CAPABILITY8, CAPABILITY9, CAPABILITY10, CAPABILITY11, CAPABILITY12, CAPABILITY13, CAPABILITY14, CAPABILITY15, CAPABILITY16, CAPABILITY17, CAPABILITY18, CAPABILITY19, CAPABILITY20, CAPABILITY21, CAPABILITY22, CAPABILITY23, CAPABILITY24, CAPABILITY25}
+
+	//functions
+	//Events and sensed variables
+	monitored condition1: Boolean
+	monitored condition2: Boolean
+	monitored condition3: Boolean
+	monitored condition4: Boolean
+	monitored condition5: Boolean
+	monitored condition6: Boolean
+	monitored condition7: Boolean
+	monitored condition8: Boolean
+	monitored condition9: Boolean
+	monitored condition10: Boolean
+	monitored condition11: Boolean
+	monitored condition12: Boolean
+	monitored condition13: Boolean
+	monitored condition14: Boolean
+	monitored condition15: Boolean
+	monitored condition16: Boolean
+	monitored condition17: Boolean
+	monitored condition18: Boolean
+	monitored condition19: Boolean
+	monitored condition20: Boolean
+	monitored condition21: Boolean
+	monitored condition22: Boolean
+	monitored condition23: Boolean
+	monitored condition24: Boolean
+	monitored condition25: Boolean
+
+	//Capabilities
+	static capability1: Capability
+	static capability2: Capability
+	static capability3: Capability
+	static capability4: Capability
+	static capability5: Capability
+	static capability6: Capability
+	static capability7: Capability
+	static capability8: Capability
+	static capability9: Capability
+	static capability10: Capability
+	static capability11: Capability
+	static capability12: Capability
+	static capability13: Capability
+	static capability14: Capability
+	static capability15: Capability
+	static capability16: Capability
+	static capability17: Capability
+	static capability18: Capability
+	static capability19: Capability
+	static capability20: Capability
+	static capability21: Capability
+	static capability22: Capability
+	static capability23: Capability
+	static capability24: Capability
+	static capability25: Capability
+
+	static id: Capability -> CapabilityID
+
+	/* DOMAIN-GENERAL SIGNATURE */	
+	out outObligation: CapabilityID -> Boolean //any due obligation (there could be more than one) is activated through a flag
+	out outConstraint: CapabilityID -> Prod(TCType,Integer,TimerUnit,CapabilityID)
+
+definitions:
+/* DOMAIN-SPECIFIC DEFINITIONS*/
+
+	function id($c in Capability) = 
+		switch $c
+		
+		case capability1: CAPABILITY1
+		case capability2: CAPABILITY2
+		case capability3: CAPABILITY3
+		case capability4: CAPABILITY4
+		case capability5: CAPABILITY5
+		case capability6: CAPABILITY6
+		case capability7: CAPABILITY7
+		case capability8: CAPABILITY8
+		case capability9: CAPABILITY9
+		case capability10: CAPABILITY10
+		case capability11: CAPABILITY11
+		case capability12: CAPABILITY12
+		case capability13: CAPABILITY13
+		case capability14: CAPABILITY14
+		case capability15: CAPABILITY15
+		case capability16: CAPABILITY16
+		case capability17: CAPABILITY17
+		case capability18: CAPABILITY18
+		case capability19: CAPABILITY19
+		case capability20: CAPABILITY20
+		case capability21: CAPABILITY21
+		case capability22: CAPABILITY22
+		case capability23: CAPABILITY23
+		case capability24: CAPABILITY24
+		case capability25: CAPABILITY25
+		endswitch	
+ 
+/* DOMAIN-GENERAL DEFINITIONS */	
+ 
+    //with no time constraint
+	rule r_setObligation($c in Capability) = 
+	par  
+		constraint($c) := none
+		//prepare out locations
+		outObligation(id($c)) := true //true if doObligation is true 
+		outConstraint(id($c)) := undef 
+	endpar
+
+
+	
+	//overloading with an alternative obligation in case of constraint unsatisfied
+	rule r_setObligation($c in Capability, $type in TCType, $t in Integer, $u in TimerUnit, $alt in Capability) = 
+	par 
+		r_setTimeConstraint[$c,$type,$t,$u]
+		if isDef($alt) then otherwiseC($c) := $alt endif
+		//prepare out locations
+		outObligation(id($c)) := true 
+		outConstraint(id($c)) := ($type,$t,$u,id($alt))
+	endpar	
+
+	//default: no obligation to do
+	rule r_doNothing = r_setObligation[doNothing]
+
+
+	/* DOMAIN-SPECIFIC CONTROL RULES*/ 
+
+	rule r_obligation1 = r_setObligation[capability1]
+	rule r_obligation2 = r_setObligation[capability2]
+	rule r_obligation3 = r_setObligation[capability3]
+	rule r_obligation4 = r_setObligation[capability4]
+	rule r_obligation5 = r_setObligation[capability5]
+	rule r_obligation6 = r_setObligation[capability6]
+	rule r_obligation7 = r_setObligation[capability7]
+	rule r_obligation8 = r_setObligation[capability8]
+	rule r_obligation9 = r_setObligation[capability9]
+	rule r_obligation10 = r_setObligation[capability10]
+	rule r_obligation11 = r_setObligation[capability11]
+	rule r_obligation12 = r_setObligation[capability12]
+	rule r_obligation13 = r_setObligation[capability13]
+	rule r_obligation14 = r_setObligation[capability14]
+	rule r_obligation15 = r_setObligation[capability15]
+	rule r_obligation16 = r_setObligation[capability16]
+	rule r_obligation17 = r_setObligation[capability17]
+	rule r_obligation18 = r_setObligation[capability18]
+	rule r_obligation19 = r_setObligation[capability19]
+	rule r_obligation20 = r_setObligation[capability20]
+	rule r_obligation21 = r_setObligation[capability21]
+	rule r_obligation22 = r_setObligation[capability22]
+	rule r_obligation23 = r_setObligation[capability23]
+	rule r_obligation24 = r_setObligation[capability24]
+	rule r_obligation25 = r_setObligation[capability25]
+	
+	/*
+	 * IF condition THEN obligation
+	 * UNLESS condition IN WHICH CASE obligation
+	 */
+		rule r_Rule1 = 
+		r_SLEEC[condition1, <<r_obligation1>>,
+			condition2, <<r_obligation2>>,
+			condition3, <<r_obligation3>>,
+			condition4, <<r_obligation4>>,
+			condition5, <<r_obligation5>>
+		]
+
+	rule r_Rule2 = 
+		r_SLEEC[condition6, <<r_obligation6>>,
+			condition7, <<r_obligation7>>,
+			condition8, <<r_obligation8>>,
+			condition9, <<r_obligation9>>,
+			condition10, <<r_obligation10>>
+		]
+
+	rule r_Rule3 = 
+		r_SLEEC[condition11, <<r_obligation11>>,
+			condition12, <<r_obligation12>>,
+			condition13, <<r_obligation13>>,
+			condition14, <<r_obligation14>>,
+			condition15, <<r_obligation15>>
+		]
+
+	rule r_Rule4 = 
+		r_SLEEC[condition16, <<r_obligation16>>,
+			condition17, <<r_obligation17>>,
+			condition18, <<r_obligation18>>,
+			condition19, <<r_obligation19>>,
+			condition20, <<r_obligation20>>
+		]
+
+	rule r_Rule5 = 
+		r_SLEEC[condition21, <<r_obligation21>>,
+			condition22, <<r_obligation22>>,
+			condition23, <<r_obligation23>>,
+			condition24, <<r_obligation24>>,
+			condition25, <<r_obligation25>>
+		]
+
+	
+/* DOMAIN-GENERAL RULES*/
+	
+	//reset of all locations that contribute to the out location output
+	rule r_Reset =
+	 	forall $c in Capability do 
+	 		par
+				//info($c) := (undef,undef,undef,undef,undef)
+				outConstraint(id($c)) := undef //(undef,undef,undef,undef)
+				//doObligation($c) := false //NEW
+			    outObligation(id($c)) := false //NEW
+				constraint($c) := undef
+				otherwiseC($c) := undef
+			endpar
+			
+	main rule r_Main =  
+		seq	
+			r_Reset[] //reset of out locations in sequential order, otherwise the function resetting updates will not be visible to the other rules in one machine step
+			par
+				r_Rule1[]
+			r_Rule2[]
+			r_Rule3[]
+			r_Rule4[]
+			r_Rule5[]
+			endpar
+		endseq
+
+default init s0:

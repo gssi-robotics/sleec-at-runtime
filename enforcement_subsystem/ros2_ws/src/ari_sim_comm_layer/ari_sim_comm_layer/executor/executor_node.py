@@ -36,6 +36,8 @@ class ExecutorNode(Node):
         self.data_share_pub = self.create_publisher(String, 'data_share', 10)
         self.meal_cmd_pub = self.create_publisher(String, 'meal_cmd', 10)
 
+        self.raw_obligation_pub = self.create_publisher(String, 'raw_obligation_enforcement', 10)
+
         self.get_logger().info("Effector ready...")
 
     def greet_user(self):
@@ -153,7 +155,13 @@ class ExecutorNode(Node):
         msg = String()
         msg.data = json.dumps({"action": "deliverDietaryAlternative", "body": "deliver_alt_meal"})
         self.meal_cmd_pub.publish(msg)
-    
+
+    def raw_obligation_enforcement(self, obligation: str):
+        self.get_logger().info(f"Publishing raw obligation: {obligation}")
+        msg = String()
+        msg.data = obligation
+        self.raw_obligation_pub.publish(msg)
+
 def main(args=None):
     rclpy.init(args=args)
     node = ExecutorNode()

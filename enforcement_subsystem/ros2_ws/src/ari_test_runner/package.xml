@@ -4,7 +4,7 @@
   <name>ari_test_runner</name>
   <version>0.0.0</version>
   <description>Ari test runner package</description>
-  <maintainer email="name.surname@email.com">name surname</maintainer>
+  <maintainer email="gianluca.filippone@gssi.it">Gianluca Filippone</maintainer>
   <license>Apache-2.0</license>
 
   <exec_depend>rclpy</exec_depend>
