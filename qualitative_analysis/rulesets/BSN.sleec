@@ -1,0 +1,84 @@
+rule_start
+    R1 when PatientAsleep and ((({patientDiscomfort} = low) or ({patientDiscomfort} = moderate))
+	    or ({patientDiscomfort} = high)) then TrackVitals
+		unless ({canPatientDeactivate} and ({patientDiscomfort} > low)) then CaregiverCanDeactivate
+
+	R2 when PatientDoingChores and {patientIsHome} then TrackVitals
+		unless (({signsImpaired} or {signsDetached}) and {alternateSensorsDeployed})
+
+	R3 when PatientBathing then TrackVitals
+		unless (((not {isWaterproof}) and {hasFallAlertPendant}) or (not {allowsBathroomTracking}))
+
+	R4 when PatientOutdoors and (not {patientIsHome}) then HideGeographicLocation
+		unless {canCommunicateRegularly}
+    unless {authorizedParties}
+    unless {emergencyDetected}
+
+    R5 when TrackVitals and ((not {messageOnTime}) and (not {numUsersKnown}))
+    then AdjustServiceTimerate
+
+    R5_1 when TrackVitals and ((not {messageOnTime}) and (not {numUsersKnown}))
+    then not SystemShutDown
+
+    R6 when TrackVitals and (((not {timeToFailureKnown}) and (not {numSampleKnown}))
+    or ({batteryConsumption} = high)) then AdjustSamplingRate
+
+    R6_1 when TrackVitals and (((not {timeToFailureKnown}) and (not {numSampleKnown}))
+    or ({batteryConsumption} = high)) then not SystemShutDown
+
+    R7 when EmergencyConfirmed then CallCaregiver
+
+    R7_1 when EmergencyConfirmed and ({riskLevel} >= moderate) then CallAmbulance
+
+    R8 when TrackVitals and {anomalyDetected} then ConfirmSensorPlacement
+
+    R8_1 when TrackVitals and {anomalyDetected} then ConfirmUsersActivities
+
+    R9 when TrackVitals and ((({anomalyDetected} and (not {unusualActivity})) and
+        (not {sensorMalfunction})) and (not {sensorMisplacement})) then InformUser
+
+    R9_1 when InformUser and (not {userResponds}) then CallCaregiver
+
+	R9_2 when CallCaregiver and (not {caregiverResponds}) then CallAmbulance
+
+	R10 when MeetingUser then ObtainUserConsentForData
+
+	R11 when MeetingUser then InformBSNPurposeAndResponseProtocol
+
+    R11_1 when MeetingUser then ObtainEmergencyContact
+
+    R12 when DataCollected and (not {dataNeededForTraining}) then DeleteData
+    unless {dataNeededForTraining} then AnonymizeData
+
+	R13 when TrackVitals and {userWantsToStop} then EnsureEasyStopping
+	    otherwise CallCaregiver
+		unless ({riskLevel} > autonomyConcern)
+
+
+    R13_1 when UserWantsToRemoveSensors and (not {caregiverConsent})
+    then not RemoveSensors
+
+    R13_2 when UserWantsToRemoveSensors then InformUser
+
+    R13_3 when UserWantsTimeout then InformUser
+
+    R14 when CalibrateBSN and ((({seeHealthHistory} and {seeDemographics}) and {seeLocation})
+                                    and {accurateHealthComparison}) then TrackVitals
+
+    R15 when DataCollected then DeleteData within bufferPeriod seconds
+    
+    R15bis when DataCollected then AnonymizeData 
+
+    R16 when MeetingUser then EnsureHardwareCompliance
+
+    R16_1 when MeetingUser then ObtainUserConsentForSensors
+
+    R17 when TrackVitals then UserCanCallEmergency
+
+    R18 when CalibrateBSN then ObtainRiskLevel
+
+    R19 when UserRequestRemoveSensor and {canCaregiverDeactivate}  then CaregiverCanDeactivate 
+
+    R19b when UserWantsToRemoveSensors  and {canPatientDeactivate}  then CaregiverCanDeactivate
+    
+rule_end

@@ -1,0 +1,61 @@
+rule_start
+    R2 when UserDriving and {fullAttentionNeeded} then EnsureAlertness
+
+    R2_1 when EnsureAlertness then TrackMetrics
+    
+    R2_2 when TrackMetrics and (({hearRateVariability} = low) and ({eyeMovements} = low)) then Alert
+ 
+    R3 when SensorsConnect and (not {properlyPlaced}) then InformUser
+
+	R4 when UserDriving then not InformUser
+		unless ({informationImportant} or ((not {properlyPlaced}) or ({userImpaired} or ({relevantObjectNearby} or ({blindSpot} and {objectNearby})))))
+	R5 when FindInformation then DetermineImportance
+
+    R6 when BaselineDiffers then ConfirmWithUser
+
+    R7 when UserWantsControl and (({health} and {hasLicense}) and (not {substanceUse})) then UserDriving
+    
+     R7_1 when UserWantsControl and ((((not {health}) or (not {hasLicense})) or {substanceUse}) and {obtainConsent}) then not UserDriving
+     R7_1 when UserWantsControl and ((((not {health}) or (not {hasLicense})) or {substanceUse}) and {obtainConsent}) then SytemTakesOver
+
+    R8 when UserEnters and ({commonLanguage} and {userUnderstands})
+    then ObtainConsentForUserDrive
+
+        
+    R9_2 when InformUser and (not {rulesFollowed}) then RemindUser
+    
+    R10 when UserDriving and ({relevantObjectNearby} and (not {userNotice})) then InformUser
+
+    R11 when UserDriving then TrackVisionField
+
+    R11_1 when TrackVisionField and ({blindSpot} and {objectNearby}) then InformUser 
+
+    R12_1 when ShowConsentForm and (not {obtainConsent}) then StopAutonomousComponent
+   
+
+	R13 when PreparingSystem then CreateConsentForm
+	
+	R13b when FirstInteractionUser then ShowConsentForm
+
+
+	R14 when UserEnters and {needsAccomodation} then EnsureAccessibility
+
+	R15 when PreparingSystem then EnsureAlertIndependence
+
+	R16 when UserDriving and {userImpaired} then InformUser
+
+	R16_1 when UserDriving and {userImpaired} then TakeControlForSafety
+		unless {warningSignalOff}
+
+	R17 when SystemDriving and {decisionPoint} then UserDriving
+		unless {userGivesControl}
+
+	R18 when SystemOn then UserCanTurnOffSystem
+
+	R18_1 when SystemOn then UserCanTurnOffMonitoring
+	
+	R19 when SystemDriving and  (not {properlyPlaced}) then  StopUnfunctioningSensorAssistance
+	
+	R20  when SystemDriving and {removeFeatureConsent} then  StopUnfunctioningSensorAssistance 
+
+rule_end
