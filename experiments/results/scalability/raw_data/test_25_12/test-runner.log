@@ -1,0 +1,206 @@
+[INFO] [1770224898.863037007] [ari_sim_scalability_tests_runner]: Starting test loop...
+[INFO] [1770224898.865835377] [ari_sim_scalability_tests_runner]: ---- Running test case #1 ----
+[INFO] [1770224898.868088288] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224899.562797237] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY169
+[INFO] [1770224899.567915295] [ari_sim_scalability_tests_runner]: ---- Running test case #2 ----
+[INFO] [1770224899.571410642] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224899.925499507] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY289
+[INFO] [1770224899.929729163] [ari_sim_scalability_tests_runner]: ---- Running test case #3 ----
+[INFO] [1770224899.935460477] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224900.245687895] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY37
+[INFO] [1770224900.250263753] [ari_sim_scalability_tests_runner]: ---- Running test case #4 ----
+[INFO] [1770224900.253829692] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224900.569729535] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY121
+[INFO] [1770224900.574294375] [ari_sim_scalability_tests_runner]: ---- Running test case #5 ----
+[INFO] [1770224900.577380039] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224900.845328519] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY25
+[INFO] [1770224900.849456584] [ari_sim_scalability_tests_runner]: ---- Running test case #6 ----
+[INFO] [1770224900.853045949] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224901.120710541] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY208
+[INFO] [1770224901.124107741] [ari_sim_scalability_tests_runner]: ---- Running test case #7 ----
+[INFO] [1770224901.126483243] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224901.398438566] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY194
+[INFO] [1770224901.402533224] [ari_sim_scalability_tests_runner]: ---- Running test case #8 ----
+[INFO] [1770224901.406898121] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224901.654706272] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY51
+[INFO] [1770224901.657737363] [ari_sim_scalability_tests_runner]: ---- Running test case #9 ----
+[INFO] [1770224901.660208106] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224901.948297173] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY160
+[INFO] [1770224901.951920852] [ari_sim_scalability_tests_runner]: ---- Running test case #10 ----
+[INFO] [1770224901.955204848] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224902.226517583] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY193
+[INFO] [1770224902.230542278] [ari_sim_scalability_tests_runner]: ---- Running test case #11 ----
+[INFO] [1770224902.233838886] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224902.490651811] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY193
+[INFO] [1770224902.494580284] [ari_sim_scalability_tests_runner]: ---- Running test case #12 ----
+[INFO] [1770224902.497819170] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224902.740556208] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY86
+[INFO] [1770224902.745809506] [ari_sim_scalability_tests_runner]: ---- Running test case #13 ----
+[INFO] [1770224902.750062514] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224903.001431605] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY209
+[INFO] [1770224903.006818198] [ari_sim_scalability_tests_runner]: ---- Running test case #14 ----
+[INFO] [1770224903.010656506] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224903.295318392] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY77
+[INFO] [1770224903.300094508] [ari_sim_scalability_tests_runner]: ---- Running test case #15 ----
+[INFO] [1770224903.304198573] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224903.560210762] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY99
+[INFO] [1770224903.564778954] [ari_sim_scalability_tests_runner]: ---- Running test case #16 ----
+[INFO] [1770224903.567695583] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224903.813436415] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY38
+[INFO] [1770224903.816747911] [ari_sim_scalability_tests_runner]: ---- Running test case #17 ----
+[INFO] [1770224903.819066266] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224904.067170249] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY254
+[INFO] [1770224904.071727682] [ari_sim_scalability_tests_runner]: ---- Running test case #18 ----
+[INFO] [1770224904.075481175] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224904.320805529] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY50
+[INFO] [1770224904.326088530] [ari_sim_scalability_tests_runner]: ---- Running test case #19 ----
+[INFO] [1770224904.328757123] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224904.570863887] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY277
+[INFO] [1770224904.575863909] [ari_sim_scalability_tests_runner]: ---- Running test case #20 ----
+[INFO] [1770224904.578622928] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224904.818973722] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY243
+[INFO] [1770224904.822874696] [ari_sim_scalability_tests_runner]: ---- Running test case #21 ----
+[INFO] [1770224904.826495283] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224905.068049477] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY1
+[INFO] [1770224905.071987710] [ari_sim_scalability_tests_runner]: ---- Running test case #22 ----
+[INFO] [1770224905.074922783] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224905.312916167] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY205
+[INFO] [1770224905.316594476] [ari_sim_scalability_tests_runner]: ---- Running test case #23 ----
+[INFO] [1770224905.318980978] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224905.569656277] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY49
+[INFO] [1770224905.573547955] [ari_sim_scalability_tests_runner]: ---- Running test case #24 ----
+[INFO] [1770224905.576346899] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224905.815483739] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY26
+[INFO] [1770224905.819310269] [ari_sim_scalability_tests_runner]: ---- Running test case #25 ----
+[INFO] [1770224905.821657605] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224906.060017283] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY25
+[INFO] [1770224906.063781832] [ari_sim_scalability_tests_runner]: ---- Running test case #26 ----
+[INFO] [1770224906.066203815] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224906.308036878] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY196
+[INFO] [1770224906.313833394] [ari_sim_scalability_tests_runner]: ---- Running test case #27 ----
+[INFO] [1770224906.317364593] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224906.560615016] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY2
+[INFO] [1770224906.565910573] [ari_sim_scalability_tests_runner]: ---- Running test case #28 ----
+[INFO] [1770224906.569956583] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224906.820979639] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY133
+[INFO] [1770224906.825082815] [ari_sim_scalability_tests_runner]: ---- Running test case #29 ----
+[INFO] [1770224906.828471515] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224907.076535276] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY63
+[INFO] [1770224907.081027209] [ari_sim_scalability_tests_runner]: ---- Running test case #30 ----
+[INFO] [1770224907.084696832] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224907.334731099] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY1
+[INFO] [1770224907.338872163] [ari_sim_scalability_tests_runner]: ---- Running test case #31 ----
+[INFO] [1770224907.342034272] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224907.587372255] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY97
+[INFO] [1770224907.592648701] [ari_sim_scalability_tests_runner]: ---- Running test case #32 ----
+[INFO] [1770224907.596867191] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224907.831784874] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY205
+[INFO] [1770224907.838221127] [ari_sim_scalability_tests_runner]: ---- Running test case #33 ----
+[INFO] [1770224907.841826140] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224908.081396032] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY145
+[INFO] [1770224908.085194285] [ari_sim_scalability_tests_runner]: ---- Running test case #34 ----
+[INFO] [1770224908.088768779] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224908.320077653] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY51
+[INFO] [1770224908.325474931] [ari_sim_scalability_tests_runner]: ---- Running test case #35 ----
+[INFO] [1770224908.328362264] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224908.559179104] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY217
+[INFO] [1770224908.564646641] [ari_sim_scalability_tests_runner]: ---- Running test case #36 ----
+[INFO] [1770224908.566905996] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224908.802368749] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY2
+[INFO] [1770224908.808151266] [ari_sim_scalability_tests_runner]: ---- Running test case #37 ----
+[INFO] [1770224908.812190887] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224909.041520737] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY15
+[INFO] [1770224909.046141891] [ari_sim_scalability_tests_runner]: ---- Running test case #38 ----
+[INFO] [1770224909.049356462] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224909.284679661] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY113
+[INFO] [1770224909.289155427] [ari_sim_scalability_tests_runner]: ---- Running test case #39 ----
+[INFO] [1770224909.292300776] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224909.520470523] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY133
+[INFO] [1770224909.525001715] [ari_sim_scalability_tests_runner]: ---- Running test case #40 ----
+[INFO] [1770224909.528026213] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224909.760297302] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY6
+[INFO] [1770224909.764125406] [ari_sim_scalability_tests_runner]: ---- Running test case #41 ----
+[INFO] [1770224909.766782555] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224909.996878289] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY145
+[INFO] [1770224910.001079260] [ari_sim_scalability_tests_runner]: ---- Running test case #42 ----
+[INFO] [1770224910.004185369] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224910.232005192] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY145
+[INFO] [1770224910.236660902] [ari_sim_scalability_tests_runner]: ---- Running test case #43 ----
+[INFO] [1770224910.241878070] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224910.480178990] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY242
+[INFO] [1770224910.484760329] [ari_sim_scalability_tests_runner]: ---- Running test case #44 ----
+[INFO] [1770224910.487835364] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224910.718351169] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY159
+[INFO] [1770224910.722420309] [ari_sim_scalability_tests_runner]: ---- Running test case #45 ----
+[INFO] [1770224910.725850415] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224910.957141400] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY49
+[INFO] [1770224910.960897301] [ari_sim_scalability_tests_runner]: ---- Running test case #46 ----
+[INFO] [1770224910.963717023] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224911.193424759] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY145
+[INFO] [1770224911.197821026] [ari_sim_scalability_tests_runner]: ---- Running test case #47 ----
+[INFO] [1770224911.200940727] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224911.433139095] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY145
+[INFO] [1770224911.438355022] [ari_sim_scalability_tests_runner]: ---- Running test case #48 ----
+[INFO] [1770224911.441705111] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224911.673638110] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY243
+[INFO] [1770224911.676952384] [ari_sim_scalability_tests_runner]: ---- Running test case #49 ----
+[INFO] [1770224911.679283387] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224911.906189087] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY255
+[INFO] [1770224911.909973283] [ari_sim_scalability_tests_runner]: ---- Running test case #50 ----
+[INFO] [1770224911.912826431] [ari_sim_scalability_tests_runner]: Publishing conditions
+[INFO] [1770224912.144971521] [ari_sim_scalability_tests_runner]: Received result: CAPABILITY25
+[INFO] [1770224914.150630543] [ari_sim_scalability_tests_runner]: ************************ Test results ************************
+[INFO] [1770224914.154583072] [ari_sim_scalability_tests_runner]: Test #1: time: 694 ms
+[INFO] [1770224914.158604100] [ari_sim_scalability_tests_runner]: Test #2: time: 353 ms
+[INFO] [1770224914.161437637] [ari_sim_scalability_tests_runner]: Test #3: time: 309 ms
+[INFO] [1770224914.164152341] [ari_sim_scalability_tests_runner]: Test #4: time: 315 ms
+[INFO] [1770224914.166913526] [ari_sim_scalability_tests_runner]: Test #5: time: 267 ms
+[INFO] [1770224914.170282707] [ari_sim_scalability_tests_runner]: Test #6: time: 267 ms
+[INFO] [1770224914.172830523] [ari_sim_scalability_tests_runner]: Test #7: time: 271 ms
+[INFO] [1770224914.175187730] [ari_sim_scalability_tests_runner]: Test #8: time: 247 ms
+[INFO] [1770224914.177341549] [ari_sim_scalability_tests_runner]: Test #9: time: 287 ms
+[INFO] [1770224914.179589441] [ari_sim_scalability_tests_runner]: Test #10: time: 271 ms
+[INFO] [1770224914.181874333] [ari_sim_scalability_tests_runner]: Test #11: time: 256 ms
+[INFO] [1770224914.184435686] [ari_sim_scalability_tests_runner]: Test #12: time: 242 ms
+[INFO] [1770224914.186893448] [ari_sim_scalability_tests_runner]: Test #13: time: 251 ms
+[INFO] [1770224914.190419442] [ari_sim_scalability_tests_runner]: Test #14: time: 284 ms
+[INFO] [1770224914.193016999] [ari_sim_scalability_tests_runner]: Test #15: time: 255 ms
+[INFO] [1770224914.195313465] [ari_sim_scalability_tests_runner]: Test #16: time: 245 ms
+[INFO] [1770224914.197391636] [ari_sim_scalability_tests_runner]: Test #17: time: 247 ms
+[INFO] [1770224914.199519918] [ari_sim_scalability_tests_runner]: Test #18: time: 245 ms
+[INFO] [1770224914.201956513] [ari_sim_scalability_tests_runner]: Test #19: time: 241 ms
+[INFO] [1770224914.205002419] [ari_sim_scalability_tests_runner]: Test #20: time: 240 ms
+[INFO] [1770224914.207421347] [ari_sim_scalability_tests_runner]: Test #21: time: 241 ms
+[INFO] [1770224914.209685128] [ari_sim_scalability_tests_runner]: Test #22: time: 237 ms
+[INFO] [1770224914.211989594] [ari_sim_scalability_tests_runner]: Test #23: time: 250 ms
+[INFO] [1770224914.214296171] [ari_sim_scalability_tests_runner]: Test #24: time: 238 ms
+[INFO] [1770224914.216713636] [ari_sim_scalability_tests_runner]: Test #25: time: 238 ms
+[INFO] [1770224914.219182583] [ari_sim_scalability_tests_runner]: Test #26: time: 242 ms
+[INFO] [1770224914.221440234] [ari_sim_scalability_tests_runner]: Test #27: time: 242 ms
+[INFO] [1770224914.223788015] [ari_sim_scalability_tests_runner]: Test #28: time: 250 ms
+[INFO] [1770224914.225957574] [ari_sim_scalability_tests_runner]: Test #29: time: 247 ms
+[INFO] [1770224914.228187578] [ari_sim_scalability_tests_runner]: Test #30: time: 249 ms
+[INFO] [1770224914.230760838] [ari_sim_scalability_tests_runner]: Test #31: time: 245 ms
+[INFO] [1770224914.233535505] [ari_sim_scalability_tests_runner]: Test #32: time: 234 ms
+[INFO] [1770224914.236322912] [ari_sim_scalability_tests_runner]: Test #33: time: 239 ms
+[INFO] [1770224914.239076264] [ari_sim_scalability_tests_runner]: Test #34: time: 230 ms
+[INFO] [1770224914.241698895] [ari_sim_scalability_tests_runner]: Test #35: time: 230 ms
+[INFO] [1770224914.244009675] [ari_sim_scalability_tests_runner]: Test #36: time: 235 ms
+[INFO] [1770224914.246151031] [ari_sim_scalability_tests_runner]: Test #37: time: 229 ms
+[INFO] [1770224914.248518664] [ari_sim_scalability_tests_runner]: Test #38: time: 235 ms
+[INFO] [1770224914.251044943] [ari_sim_scalability_tests_runner]: Test #39: time: 227 ms
+[INFO] [1770224914.253513130] [ari_sim_scalability_tests_runner]: Test #40: time: 232 ms
+[INFO] [1770224914.255702690] [ari_sim_scalability_tests_runner]: Test #41: time: 229 ms
+[INFO] [1770224914.257767602] [ari_sim_scalability_tests_runner]: Test #42: time: 227 ms
+[INFO] [1770224914.259932457] [ari_sim_scalability_tests_runner]: Test #43: time: 237 ms
+[INFO] [1770224914.262254553] [ari_sim_scalability_tests_runner]: Test #44: time: 230 ms
+[INFO] [1770224914.264995349] [ari_sim_scalability_tests_runner]: Test #45: time: 231 ms
+[INFO] [1770224914.267440574] [ari_sim_scalability_tests_runner]: Test #46: time: 229 ms
+[INFO] [1770224914.270231999] [ari_sim_scalability_tests_runner]: Test #47: time: 232 ms
+[INFO] [1770224914.272895370] [ari_sim_scalability_tests_runner]: Test #48: time: 231 ms
+[INFO] [1770224914.275574704] [ari_sim_scalability_tests_runner]: Test #49: time: 226 ms
+[INFO] [1770224914.277756449] [ari_sim_scalability_tests_runner]: Test #50: time: 231 ms
+[INFO] [1770224914.280176266] [ari_sim_scalability_tests_runner]: ************************ Summary ************************
+[INFO] [1770224914.282811008] [ari_sim_scalability_tests_runner]: Test cases run: 50
+[INFO] [1770224914.285306750] [ari_sim_scalability_tests_runner]: Collected results for: 50
+[INFO] [1770224914.287576920] [ari_sim_scalability_tests_runner]: Total time: 13 seconds
