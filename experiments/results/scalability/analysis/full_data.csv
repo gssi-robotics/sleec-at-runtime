@@ -1,4 +1,4 @@
-,experiment,component,rules,clauses_per_rule,conditions_checked,test_case_number,delay_ms
+,experiment,component,rules,clauses_per_rule,total_clauses,test_case_number,delay_ms
 0,test_10_2,test_runner,10,2,20,1,150.0
 1,test_10_2,test_runner,10,2,20,2,62.0
 2,test_10_2,test_runner,10,2,20,3,66.0
