@@ -97,42 +97,112 @@
 
               <div class="column has-text-centered">
                 <div class="publication-links">
-                  <!-- TODO: Update with your arXiv paper ID -->
-                  <span class="link-block">
+                  <div class="buttons is-centered">
+
+                    <!-- <span class="link-block">
                     <a href="/" target="_blank" class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
                         <i class="fas fa-file-pdf"></i>
                       </span>
                       <span>Process - Paper</span>
                     </a>
-                  </span>
+                  </span> -->
 
-                  <span class="link-block">
-                    <a href="/" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Full Approach - Paper</span>
-                    </a>
-                  </span>
+                    <span class="link-block">
+                      <div class="dropdown is-hoverable is-up">
+                        <div class="dropdown-trigger">
+                          <a class="button is-normal is-rounded is-dark" aria-haspopup="true"
+                            aria-controls="process-paper-menu" href="papers/process.html" target="_blank">
+                            <span class="icon">
+                              <i class="fas fa-info"></i>
+                            </span>
+                            <span>Assurance Process</span>
+                          </a>
+                        </div>
 
-                  <span class="link-block">
-                    <a href="/" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Formalization - Paper</span>
-                    </a>
-                  </span>
+                        <div class="dropdown-menu" id="process-paper-menu" role="menu">
+                          <div class="dropdown-content">
+                            <div class="dropdown-item">
+                              <div class="content is-small">
+                                <p>
+                                  Explains the four-phase ethics assurance flow and how rule evolution
+                                  feeds back into both design-time and runtime stages.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
 
-                  <span class="link-block">
-                    <a href="#examples" class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-clipboard-list"></i>
-                      </span>
-                      <span>Examples</span>
-                    </a>
-                  </span>
+                    <span class="link-block">
+                      <div class="dropdown is-hoverable is-up">
+                        <div class="dropdown-trigger">
+                          <a class="button is-normal is-rounded is-dark" aria-haspopup="true"
+                            href="https://github.com/foselab/ethical-requirements-asm" target="_blank"
+                            aria-controls="process-paper-menu">
+                            <span class="icon">
+                              <i class="fab fa-github"></i>
+                            </span>
+                            <span>Formalization</span>
+                          </a>
+                        </div>
+
+                        <div class="dropdown-menu" id="process-paper-menu" role="menu">
+                          <div class="dropdown-content" >
+                            <div class="dropdown-item">
+                              <div class="content is-small">
+                                <p>
+                                  Go to Github repository
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+
+                    <span class="link-block">
+                      <div class="dropdown is-hoverable is-up">
+                        <div class="dropdown-trigger">
+                          <a class="button is-normal is-rounded is-dark" aria-haspopup="true"
+                            aria-controls="process-paper-menu">
+                            <span class="icon">
+                              <i class="fas fa-info"></i>
+                            </span>
+                            <span>Complete Approach</span>
+                          </a>
+                        </div>
+
+                        <div class="dropdown-menu" id="process-paper-menu" role="menu">
+                          <div class="dropdown-content" >
+                            <div class="dropdown-item">
+                              <div class="content is-small">
+                                <p>
+                                  More info coming soon!
+                                </p>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
+
+
+                  </div>
+
+                  <div class="buttons is-centered mt-3">
+
+                    <span class="link-block">
+                      <a href="#examples" class="button is-normal is-rounded is-info">
+                        <span class="icon">
+                          <i class="fas fa-clipboard-list"></i>
+                        </span>
+                        <span>Examples</span>
+                      </a>
+                    </span>
+                  </div>
 
                 </div>
               </div>
@@ -152,16 +222,14 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                This work addresses the challenge of enforcing ethical behaviors
+                SLEEC@run.time addresses the challenge of enforcing ethical behaviors
                 at runtime in autonomous systems through a structured ethics
                 assurance process. At the core of this process is a subsystem that
                 rigorously operationalizes ethical rules, specifically social, legal,
                 ethical, empathetic, and cultural (SLEEC) requirements. This subsystem enables the dynamic evaluation,
                 adaptation, and enforcement
                 of ethically compliant behavior within a formally defined runtime
-                model. The proposed approach, named SLEEC@run.time, is demonstrated through a running example involving
-                firefighter-uncrewed
-                aerial vehicles. In addition, by leveraging its flexible runtime model,
+                model. In addition, by leveraging its flexible runtime model,
                 SLEEC@run.time accommodates changes such as the addition or
                 removal of SLEEC rules, ensuring a robust and evolvable approach
                 to ethical assurance in autonomous systems.
@@ -187,22 +255,22 @@
                 <strong>(2) formal rule specification and analysis</strong>, and
                 <strong>(3) enforcement subsystem development</strong> take place at
                 <strong>design time</strong>. The fourth phase: <strong>(4) enforcement subsystem
-                operation</strong> runs at <strong>runtime</strong>.
+                  operation</strong> runs at <strong>runtime</strong>.
               </p>
-              
+
               <p>
                 These phases are executed sequentially; however, the SLEEC ruleset can be
                 revisited and evolved at any point in the process. Such evolution may be
                 triggered by signals or observations arising during any phase, prompting a
                 reassessment of the normative framework.
               </p>
-              
+
               <p>
                 When rules are reassessed, a refinement workflow propagates updates to both the
                 design-time and runtime stages, ensuring the system remains aligned with
                 evolving normative expectations.
               </p>
-              
+
             </div>
           </div>
         </div>
@@ -242,7 +310,7 @@
               <br>
 
               <div class="has-text-centered">
-                <a href="case-studies/firefighter.html" class="button is-normal is-rounded is-dark">
+                <a href="case-studies/firefighter.html" class="button is-normal is-rounded is-dark" target="_blank">
                   <span class="icon">
                     <i class="fas fa-external-link-alt"></i>
                   </span>

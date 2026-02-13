@@ -779,3 +779,11 @@ a:focus {
   inset: 0;
   cursor: zoom-out;
 }
+
+.is-info {
+  background: var(--primary-color) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: var(--gradient-primary);
+}
+

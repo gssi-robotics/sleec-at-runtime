@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="title" content="Ethics Assurance Process - SLEEC@run.time" />
+    <meta name="description"
+        content="SLEEC@run.time ethics assurance process: overview, phases, and enforcement subsystem." />
+    <meta name="language" content="English" />
+
+    <title>SLEEC@run.time — Process</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="../static/js/index.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../static/css/bulma.min.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+    <script defer src="../static/js/fontawesome.all.min.js"></script>
+</head>
+
+<body>
+    <!-- Back navigation -->
+    <section class="section pb-0">
+        <div class="container is-max-desktop">
+            <a href="../index.html" class="button is-small is-light">
+                <span class="icon">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span>Back to Project Page</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <main id="main-content">
+
+        <!-- HERO (same layout as index) -->
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered">
+                        <div class="column has-text-centered">
+
+                            <h1 class="title is-1 publication-title">SLEEC@run.time - Ethics Assurance Process</h1>
+
+                            <div class="is-size-5 publication-authors">
+                                <p class="mb-2">Process description and artifacts from the A Process to Enforce Ethical Requirements of Autonomous Systems at Runtime paper</p>
+                                <p class="is-size-7 has-text-grey">(Source: De Sanctis et al., SEAMS 2026)</p>
+                            </div>
+
+                            <!-- Buttons row (paper link + navigation) -->
+                            <div class="column has-text-centered">
+                                <div class="publication-links">
+
+
+
+                                    <span class="link-block">
+                                        <!-- Replace href with the actual PDF path on your server -->
+                                        <a href="static/pdfs/_SEAMS_2026__SLEEC_Runtime.pdf" target="_blank"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                                            <span>Open Paper</span>
+                                        </a>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Overview -->
+        <section class="section hero is-light" id="process-overview">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered has-text-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Ethics Assurance Process</h2>
+                        <div class="content has-text-justified">
+                            <p>
+                                The ethics assurance process that spans from the elicitation
+                                of ethics requirements to their operational enforcement at runtime. The process
+                                centers around executable SLEEC rules (social, legal, ethical, empathetic, cultural)
+                                expressed as an Abstract State Machine (ASM) runtime model, which is used by an
+                                enforcement subsystem to compute and apply obligations dynamically.
+                            </p>
+
+                            <figure class="mt-4">
+                                <img src="../static/images/process.png" alt="Ethics assurance process"
+                                    style="max-width:100%; border-radius:6px;">
+                                <figcaption class="has-text-grey is-size-7 mt-2">
+                                    Core lifecycle phases (design-time ↔ run-time). Diagram adapted from the accepted
+                                    paper.
+                                </figcaption>
+                            </figure>
+
+                            <p class="is-size-7 has-text-grey mt-3">
+                                This page summarizes the four main phases described in the paper. For the full text and
+                                formal details, see the accepted SEAMS'26 paper linked above.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Four Phases -->
+        <section class="section" id="four-phases">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+
+                        <h2 class="title is-3">The Four Phases</h2>
+
+                        <div class="content">
+                            <p>
+                                The process unfolds across four main phases. The first three phases occur at
+                                <strong>design time</strong>, while the fourth phase operates at
+                                <strong>runtime</strong>:
+                            </p>
+
+                            <div class="box">
+                                <ol>
+                                    <li><strong>Rule elicitation (design time)</strong>
+                                        <p class="is-size-7">
+                                            Identify high-level ethical norms and translate them into preliminary SLEEC
+                                            rules.
+                                            This involves interdisciplinary stakeholders (ethicists, lawyers, engineers)
+                                            to
+                                            derive actionable rules tailored to system capabilities and the application
+                                            context.
+                                        </p>
+                                    </li>
+
+                                    <li class="mt-3"><strong>Rule formal specification and analysis (design
+                                            time)</strong>
+                                        <p class="is-size-7">
+                                            Formalize the elicited SLEEC rules using an executable formalism. In the
+                                            paper, Abstract State Machines (ASM)
+                                            and the ASMETA toolset are used to produce an executable runtime model and
+                                            to run V&amp;V analyses
+                                            (animation, validation, verification) that check consistency, conflicts,
+                                            timing feasibility, and coverage.
+                                        </p>
+                                    </li>
+
+                                    <li class="mt-3"><strong>Enforcement Subsystem development (design
+                                            time)</strong>
+                                        <p class="is-size-7">
+                                            Implement an Enforcement Subsystem — an autonomic manager wrapping the
+                                            target system (MAPE-K architecture)
+                                            that hosts the SLEEC runtime model and interfaces with Monitor and Executor
+                                            components to realize enforcement.
+                                        </p>
+                                    </li>
+
+                                    <li class="mt-3"><strong>Enforcement Subsystem operation (run time)</strong>
+                                        <p class="is-size-7">
+                                            Deploy the Enforcement Subsystem connected to the autonomous system. The
+                                            Monitor translates sensor data into
+                                            predicates; the Enforcer executes the ASM runtime model (ASMETA) to compute
+                                            obligations; the Executor translates
+                                            obligations into concrete actions sent to the system.
+                                        </p>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <p class="mt-4">
+                                The lifecycle is sequential but supports <strong>reassessment and refinement</strong>:
+                                signals emerging at any phase
+                                can trigger rule evolution. Updated runtime models are uploaded to the running subsystem
+                                so enforcement evolves
+                                with the ruleset.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rule Elicitation -->
+        <section class="section hero is-light" id="rule-elicitation">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered has-text-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Rule elicitation process</h2>
+                        <div class="content has-text-justified">
+                            <p>
+                                Elicitation starts from high-level moral principles (e.g., benevolence, non-maleficence,
+                                autonomy)
+                                and maps them to system capabilities to identify touchpoints where base rules are
+                                needed. Rules can include
+                                hedge clauses (UNLESS ... IN WHICH CASE ...) to represent prioritized exceptions and
+                                defeaters.
+                            </p>
+
+                            <div class="box">
+                                <p class="has-text-weight-semibold">SLEEC rule pattern</p>
+                                <pre style="margin:0; white-space:pre-wrap;">
+WHEN C0 THEN O0
+UNLESS C1 IN WHICH CASE O1
+UNLESS C2 IN WHICH CASE O2
+                </pre>
+                                <p class="is-size-7 has-text-grey mt-2">
+                                    Hedge clauses are evaluated top-down; the order implies their priority (the last
+                                    true hedge takes precedence).
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formal Specification & Analysis -->
+        <section class="section" id="formal-spec">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Formal specification and analysis</h2>
+                        <div class="content has-text-justified">
+                            <p>
+                                The paper adopts ASMs and the ASMETA toolset to encode SLEEC rules in an executable form
+                                (AsmetaL). This choice
+                                enables both rigorous analysis and direct runtime execution of the same model used for
+                                enforcement.
+                            </p>
+
+                            <div class="box" style="background:#0d1117; color:#c9d1d9;">
+                                <pre style="margin:0; white-space:pre-wrap;">
+// Example (ASMETA excerpt)
+rule r_SLEEC($c0, $o0, $c1, $o1, $c2, $o2) =
+  if $c0 and not $c1 then $o0
+  else if $c0 and $c1 and not $c2 then $o1
+  else if $c0 and $c1 and $c2 then $o2 endif endif endif
+</pre>
+                            </div>
+
+                            <p class="is-size-7 has-text-grey mt-2">
+                                The formal model supports model animation and V&amp;V; results guide stakeholders in
+                                refining the ruleset.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enforcement Subsystem -->
+        <section class="section hero is-light" id="enforcement-arch">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered has-text-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Enforcement Subsystem (high-level)</h2>
+                        <div class="content has-text-justified">
+                            <p>
+                                The Enforcement Subsystem implements a distributed MAPE-K loop across three main
+                                components:
+                                <strong>Monitor</strong>, <strong>Enforcer</strong>, and <strong>Executor</strong>,
+                                sharing a SLEEC knowledge base
+                                (the ASM runtime model).
+                            </p>
+
+                            <figure class="mt-4">
+                                <img src="../static/images/light-arch.png" alt="Enforcement Subsystem Architecture"
+                                    style="max-width:50%; border-radius:6px;">
+                                <figcaption class="has-text-grey is-size-7 mt-2">
+                                    MAPE-K style Enforcement Subsystem wrapping the autonomous system (diagram adapted
+                                    from the accepted paper).
+                                </figcaption>
+                            </figure>
+
+                            <ul class="mt-4 has-text-left">
+                                <li><strong>Monitor:</strong> extracts higher-level conditions from sensor data.</li>
+                                <li><strong>Enforcer:</strong> runs the ASM runtime model (ASMETA) to compute
+                                    obligations (Analyze &amp; Plan).</li>
+                                <li><strong>Executor:</strong> maps obligations to concrete commands sent to the target
+                                    system.</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Operation & Evolution -->
+        <section class="section" id="operation-evolution">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <h2 class="title is-3">Operation and Evolution</h2>
+                        <div class="content has-text-justified">
+                            <p>
+                                During operation, the Enforcer executes the uploaded SLEEC runtime model whenever
+                                monitored conditions change,
+                                producing obligations that the Executor applies. Rule reassessment is supported: evolved
+                                runtime models can be
+                                uploaded to the running subsystem so enforcement adapts with the ruleset.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+            <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <div class="bibtex-header">
+            <h2 class="title">Cite us!</h2>
+            <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+              <i class="fas fa-copy"></i>
+              <span class="copy-text">Copy BibTeX</span>
+            </button>
+          </div>
+          <p class="is-size-7 has-text-grey">
+            Please cite as:  <br> 
+            <span class="has-text-weight-semibold">
+            Martina De Sanctis, Gianluca Filippone, Paola Inverardi, Raffaela Mirandola,
+            Sara Pettinari, and Patrizia Scandurra. “A Process to Enforce Ethical Requirements
+            of Autonomous Systems at Runtime”. 21th Symposium on Software Engineering for Adaptive and Self-Managing Systems (SEAMS). IEEE, 2026. </span>  
+            <br> or use the following BibTeX entry:
+        </p>
+          <pre id="bibtex-code"><code>
+@inproceedings{DeSanctisFIMPS2026,
+    author       = {Martina {De Sanctis} and Gianluca Filippone 
+                    and Paola Inverardi and Raffaela Mirandola 
+                    and Sara Pettinari and Patrizia Scandurra},
+    title        = {A Process to Enforce Ethical Requirements of Autonomous Systems at Runtime},
+    booktitle    = {21st {IEEE/ACM} Symposium on Software Engineering for Adaptive and
+                    Self-Managing Systems, SEAMS@ICSE 2026},
+    pages        = {},
+    publisher    = {{IEEE}},
+    year         = {2026},
+    url          = {https://doi.org/10.1145/3788550.3794876}
+    }
+          </code></pre>
+        </div>
+      </section>
+      <!--End BibTex citation -->
+  
+  
+      <footer class="footer">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-8">
+              <div class="content">
+  
+                <p style="font-size: small;">
+                  This page was customized from the <a
+                    href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic
+                    Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io"
+                    target="_blank">Nerfies</a> project page.
+                </p>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+  
+
+    </main>
+</body>
+
+</html>
