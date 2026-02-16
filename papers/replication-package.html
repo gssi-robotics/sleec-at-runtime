@@ -66,7 +66,8 @@
                             <p class="is-size-7 has-text-grey mb-4">
                                 This page describes how to build, run, and reproduce the experiments and qualitative
                                 analysis
-                                for the <em>“Enforcing Ethics at Runtime in Autonomous Systems”</em> paper submitted at IEEE Transactions on Software Engineering journal.
+                                for the <em>“Enforcing Ethics at Runtime in Autonomous Systems”</em> paper submitted at
+                                IEEE Transactions on Software Engineering journal.
                             </p>
 
                             <div class="column has-text-centered">
@@ -186,7 +187,8 @@ sleec-at-runtime
                             </div>
 
                             <p class="is-size-7 has-text-grey">
-                                See the <a href="" target="_blank"><i class="fab fa-github"></i> README</a> in the repository for the full, detailed
+                                See the <a href="" target="_blank"><i class="fab fa-github"></i> README</a> in the
+                                repository for the full, detailed
                                 directory tree and file-level
                                 documentation.
                             </p>
@@ -207,7 +209,7 @@ sleec-at-runtime
                                 The Enforcement Subsystem and ARI simulation can be deployed in different ways:
                                 via Docker Compose (recommended), in a local testing configuration, or by running
                                 components
-                                separately (for real-robot setups). 
+                                separately (for real-robot setups).
                             </p>
 
                             <h3 class="title is-5">1. Clone the repository</h3>
@@ -221,7 +223,7 @@ cd sleec-at-runtime
                             <h3 class="title is-5 mt-5">2. Run the ARI simulation (Docker Compose, recommended)</h3>
                             <p class="is-size-7">
                                 This starts the full SLEEC@run.time Enforcement Subsystem along with the ARI simulator.
-                                
+
                             </p>
                             <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                 <pre style="margin:0; white-space:pre-wrap;">
@@ -245,7 +247,7 @@ ros2 run ari_sim ari_sim_user_interface
                             <h3 class="title is-5 mt-5">3. Local (Docker) testing configuration</h3>
                             <p class="is-size-7">
                                 A lighter configuration for testing without the full ARI simulation.
-                                
+
                             </p>
                             <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                 <pre style="margin:0; white-space:pre-wrap;">
@@ -260,7 +262,8 @@ docker compose --profile ari-sim-test --env-file .env.ari-sim up --build
                                 be run separately.
                             </p>
                             <div class="has-text-left">
-                                <p class="has-text-weight-semibold mb-2" style="color: rgba(0,0,0,.7);">Enforcer + ASMETA server (Docker)</p>
+                                <p class="has-text-weight-semibold mb-2" style="color: rgba(0,0,0,.7);">Enforcer +
+                                    ASMETA server (Docker)</p>
                                 <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                     <pre style="margin:0; white-space:pre-wrap;">
 cd enforcement_subsystem
@@ -268,7 +271,8 @@ docker compose --env-file .env.ros-deployment up --build
 </pre>
                                 </div>
 
-                                <p class="has-text-weight-semibold mt-4 mb-2" style="color: rgba(0,0,0,.7);">Monitor + Executor (ROS 2)</p>
+                                <p class="has-text-weight-semibold mt-4 mb-2" style="color: rgba(0,0,0,.7);">Monitor +
+                                    Executor (ROS 2)</p>
                                 <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                     <pre style="margin:0; white-space:pre-wrap;">
 cd enforcement_subsystem
@@ -307,26 +311,26 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                             <ol class="is-size-6 has-text-left">
                                 <li>
                                     <strong>Deploy Enforcer, ASMETA Server, and RabbitMQ:</strong>
-                                <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
-                                    <pre
-                                        style="margin-top:0.5rem; white-space:pre-wrap;">
+                                    <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
+                                        <pre style="margin-top:0.5rem; white-space:pre-wrap;">
 cd sleec-at-runtime/enforcement_subsystem
 pip install -r requirements.txt
 docker compose --env-file .env.ros-deployment up --build
-</pre></div>
+</pre>
+                                    </div>
                                 </li>
 
                                 <li class="mt-3">
                                     <strong>Deploy Monitor and Executor:</strong>
-                                <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
-                                    <pre
-                                        style="margin-top:0.5rem; white-space:pre-wrap;">
+                                    <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
+                                        <pre style="margin-top:0.5rem; white-space:pre-wrap;">
 cd ros2_ws
 colcon build
 . install/setup.bash
 ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
   rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
-</pre></div>
+</pre>
+                                    </div>
                                 </li>
 
                                 <li class="mt-3">
@@ -350,7 +354,7 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                                     <strong>Collect logs:</strong> copy ASMETA server logs, Enforcer logs, and Test
                                     Runner logs into
                                     the appropriate <code>raw_data</code> folders (functional vs scalability).
-                                    
+
                                 </li>
                             </ol>
 
@@ -359,7 +363,7 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                                 The Jupyter notebooks in <code>experiments/results/analysis/analysis.ipynb</code> and
                                 <code>experiments/results/scalability/analysis/scalability_analysis.ipynb</code> compute
                                 correctness and overhead metrics from the collected logs.
-                                
+
                             </p>
                             <div class="box has-text-left">
                                 <ul class="is-size-6">
@@ -384,7 +388,7 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                     <div class="column is-four-fifths">
                         <h2 class="title is-3">Qualitative Analysis</h2>
                         <div class="content has-text-justified">
-                            
+
 
                         </div>
                     </div>
@@ -431,6 +435,69 @@ UNLESS The user has physical issues resulting from the exercises IN WHICH CASE (
                         </div>
                     </div>
                 </div>
+                <div class="box has-text-left">
+
+                    <h3 class="title is-5 mb-3">Additional Media</h3>
+
+                    <div class="columns is-variable is-3 is-multiline">
+                        <div class="column is-one-third">
+                            <figure>
+                                <div style="aspect-ratio:1/1; overflow:hidden; border-radius:6px;">
+                                    <img src="../static/images/ARI/exercise1.jpeg" alt="Proof of concept image 1"
+                                        style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing jumping jacks</figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="column is-one-third">
+                            <figure>
+                                <div style="aspect-ratio:1/1; overflow:hidden; border-radius:6px;">
+                                    <img src="../static/images/ARI/exercise2.jpeg" alt="Proof of concept image 2"
+                                        style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing push-ups</figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="column is-one-third">
+                            <figure>
+                                <div style="aspect-ratio:1/1; overflow:hidden; border-radius:6px;">
+                                    <img src="../static/images/ARI/suspended.jpeg" alt="Proof of concept image 3"
+                                        style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI suspending the session</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="columns is-variable is-4">
+                        <div class="column">
+                            <figure>
+                                <video controls playsinline style="width:100%; border-radius:6px;">
+                                    <source src="../static/images/ARI/countdown.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing the countdown</figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="column">
+                            <figure>
+                                <video controls playsinline style="width:100%; border-radius:6px;">
+                                    <source src="../static/images/ARI/choice.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing and reacting to the user
+                                    choice interface</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </section>
 
