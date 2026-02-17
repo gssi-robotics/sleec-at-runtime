@@ -9,7 +9,7 @@ class MonitorNode(Node):
     def __init__(self):
         super().__init__('ari_sim_monitor_node')
 
-        self.declare_parameter('rabbitmq_host', 'guest')
+        self.declare_parameter('rabbitmq_host', 'rabbitmq')
         rabbitmq_host = self.get_parameter('rabbitmq_host').get_parameter_value().string_value
 
         self.declare_parameter('rabbitmq_user', 'guest')

@@ -11,7 +11,7 @@ class ExecutorNode(Node):
 
         self.obligations_processor = ObligationsProcessor(self)
 
-        self.declare_parameter('rabbitmq_host', 'guest')
+        self.declare_parameter('rabbitmq_host', 'rabbitmq')
         rabbitmq_host = self.get_parameter('rabbitmq_host').get_parameter_value().string_value
 
         self.declare_parameter('rabbitmq_user', 'guest')

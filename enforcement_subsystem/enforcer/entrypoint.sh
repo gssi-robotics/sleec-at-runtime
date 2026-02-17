@@ -5,8 +5,8 @@ RABBITMQ_HOST=${RABBITMQ_HOST:-localhost}
 
 sed -e "s/\${SERVER_IP}/$SERVER_IP/g" \
   -e "s/\${RABBITMQ_HOST}/$RABBITMQ_HOST/g" \
-  -e "s/\${RABBITMQ_DEFAULT_USER}/$RABBITMQ_DEFAULT_USER/g" \
-  -e "s/\${RABBITMQ_DEFAULT_PASS}/$RABBITMQ_DEFAULT_PASS/g" \
+  -e "s/\${RABBITMQ_USER}/$RABBITMQ_USER/g" \
+  -e "s/\${RABBITMQ_PASS}/$RABBITMQ_PASS/g" \
   -e "s/\${MODEL}/$MODEL/g" \
   -e "s/\${MODEL_HEADER}/$MODEL_HEADER/g" \
   ./config.template.json > ./enforcer/config.json

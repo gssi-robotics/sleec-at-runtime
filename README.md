@@ -220,7 +220,7 @@ colcon build
 Run the Monitor and Executor (on the implementation for the ARIEC scenario):
 ```
 . install/setup.bash
-ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
+ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py rabbitmq_host:=<localhost/hostname/IP> rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
 ```
 
 #### Run simulators/tests
@@ -250,9 +250,9 @@ python3 test_cases_generator.py <number_of_cases> <test_case_name>
 Test the reference scenario:
 ```
 cp -r . ../../enforcement_subsystem/ros2_ws/reference_scenario/
-cd ../../enforcement_subststem/ros2_ws/reference_scenario
+cd ../../enforcement_subsystem/ros2_ws/reference_scenario
 chmod +x run_reference_scenario_tests.sh
-./run_testcases.sh <test_case_name>
+./run_reference_scenario_tests.sh <test_case_name>
 ```
 
 #### Run scalability tests
@@ -266,7 +266,7 @@ python3 scalability_test_cases_generator.py -r <#rules> -c <#conditions> -n <#te
 Run the scalability tests:
 ```
 cp -r . ../../enforcement_subsystem/ros2_ws/scalability/
-cd ../enforcement_subststem/ros2_ws/scalability
+cd ../../enforcement_subsystem/ros2_ws/scalability
 chmod +x run_scalability_tests.sh
 ./run_scalability_tests.sh <#rules> <#conditions> ros
 ```
@@ -313,7 +313,7 @@ On a new terminal:
 cd ros2_ws
 colcon build
 . install/setup.bash
-ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
+ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py rabbitmq_host:=localhost rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
 ```
 
 #### 3. Deploy the Test Runner:
@@ -353,7 +353,7 @@ cd reference_scenario
 
 From within the robot/device running the Test Runner:
 ```
-cd enforcer_subsystem/ros2_ws
+cd enforcement_subsystem/ros2_ws
 colcon build
 cd scalability
 ./run_scalability_tests.sh <#rules> <#conditions> ros
