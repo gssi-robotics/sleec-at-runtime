@@ -82,6 +82,14 @@
                                     </span> <br>
 
                                     <span class="link-block">
+                                        <a href="#scenario" target="_blank"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon"><i class="fas fa-robot"></i></span>
+                                            <span>Scenario</span>
+                                        </a>
+                                    </span>
+
+                                    <span class="link-block">
                                         <a href="#build-run" class="external-link button is-normal is-rounded is-dark">
                                             <span class="icon"><i class="fas fa-terminal"></i></span>
                                             <span>Build &amp; Run</span>
@@ -138,6 +146,7 @@
 
                             <div class="box">
                                 <ul>
+                                    <li><strong>Scenario:</strong> .</li>
                                     <li><strong>Code:</strong> Enforcement Subsystem, ARI simulation, communication
                                         layer.</li>
                                     <li><strong>Experiments:</strong> test cases, scalability tests, raw logs, and
@@ -155,46 +164,403 @@
             </div>
         </section>
 
-        <!-- REPOSITORY STRUCTURE -->
-        <section class="section hero" id="structure">
+        <!-- SCENARIO -->
+        <section class="section hero" id="scenario">
             <div class="container is-max-desktop">
                 <div class="columns is-centered has-text-centered">
                     <div class="column is-four-fifths">
-                        <h2 class="title is-3">Repository Structure</h2>
+                        <h2 class="title is-3">Scenario</h2>
+
                         <div class="content has-text-justified">
                             <p>
-                                At a high level, the repository is organized as follows:
+                                As a reference scenario, we propose an assistive humanoid care robot
+                                deployed in a rehabilitation center to support patients diagnosed with diabetes.
+                                Patients are required to follow a strict diet and physical training program,
+                                and the scenario captures the complexity of this rehabilitation context,
+                                integrating exercise, nutrition, and coordination with healthcare staff.
                             </p>
 
-                            <div class="box" style="text-align:left;">
-                                <pre style="margin:0; white-space:pre;">
-sleec-at-runtime
-├─ enforcement_subsystem/      # SLEEC@run.time Enforcement Subsystem
-│  ├─ asmeta_server/           # ASMETA simulation server
-│  ├─ enforcer/                # Enforcer component + ASM models
-│  ├─ ros2_ws/                 # ROS 2 workspace (Monitor, Executor, Test Runner)
-│  └─ utils/                   # ASM→Python conversion utilities
-│
-├─ ari_web_ws/                 # ROS 2 workspace for ARI web interface
-├─ experiments/                # Experiment data, test cases, and analysis
-│  ├─ results/                 # Logs, CSVs, Jupyter notebooks
-│  ├─ scalability_test_cases/  # Generated models and tests for scalability
-│  └─ test_cases/              # Generated test cases used in the paper
-│
-├─ proof_of_concept/           # Video reports of the ARI scenario
-└─ qualitative analysis/       # Inputs and results of the qualitative analysis
-</pre>
+                            <p>
+                                The robot’s main mission is to assist patients in adhering to their prescribed routines
+                                by providing personalized guidance, continuously monitoring health-related data,
+                                and facilitating communication with medical personnel when necessary.
+                            </p>
+
+                            <h3 class="title is-5 mt-5">Robot Capabilities</h3>
+
+                            <div class="box">
+                                <ul>
+                                    <li>
+                                        <strong>Continuous Data Monitoring.</strong>
+                                        Each patient wears a smartwatch that monitors heart rate, activity levels,
+                                        and glucose trends. The robot receives this data and adapts its behavior
+                                        in real time, for example, adjusting exercise routines or alerting
+                                        healthcare personnel in case of anomalies.
+                                    </li>
+
+                                    <li class="mt-3">
+                                        <strong>Exercise Support.</strong>
+                                        During training sessions, the robot uses camera-based motion recognition
+                                        to monitor and count exercise repetitions. It provides real-time verbal
+                                        feedback via text-to-speech and displays exercises on its integrated tablet.
+                                    </li>
+
+                                    <li class="mt-3">
+                                        <strong>Interaction with Humans.</strong>
+                                        The robot interacts with patients and rehabilitation staff (e.g., nurses,
+                                        physicians) through voice recognition and speech synthesis. In risky or
+                                        unexpected situations, it can autonomously request assistance and send
+                                        notifications to ensure coordination.
+                                    </li>
+
+                                    <li class="mt-3">
+                                        <strong>Dietary Guidance.</strong>
+                                        At mealtimes, the robot reminds patients of their dietary plan and supports
+                                        adherence to nutritional recommendations, ensuring meals are consumed
+                                        according to prescribed medical guidelines.
+                                    </li>
+
+                                    <li class="mt-3">
+                                        <strong>Patient Feedback Collection.</strong>
+                                        During both training sessions and mealtimes, the robot gathers patient
+                                        preferences and feedback through speech recognition or tablet-based
+                                        interfaces, enabling controlled and structured interaction.
+                                    </li>
+                                </ul>
                             </div>
-
-                            <p class="is-size-7 has-text-grey">
-                                See the <a href="" target="_blank"><i class="fab fa-github"></i> README</a> in the
-                                repository for the full, detailed
-                                directory tree and file-level
-                                documentation.
-                            </p>
                         </div>
+
                     </div>
                 </div>
+            </div>
+
+            <!-- FULL-WIDTH TABLE AREA -->
+            <div class="container is-fluid" id="ruleset">
+                <h2 class="title is-4">SLEEC Rules, Principles, and Labels</h2>
+                <p class="is-size-7 has-text-grey">
+                    Description of Principles (“-” violated, “+” ensured).
+                    P: Privacy, D: Dignity, B: Beneficence, NM: Non-Maleficence, A: Autonomy, ET:
+                    Explainability &amp; Transparency.
+                </p> <br>
+                <div class="table-container">
+                    <table class="table is-fullwidth is-striped is-hoverable sleec-table">
+                        <caption class="is-sr-only">SLEEC Rules, Principles, and Labels</caption>
+                        <thead>
+                            <tr>
+                                <th>Scope</th>
+                                <th>ID</th>
+                                <th>Rule Body</th>
+                                <th>Principles</th>
+                                <th>Labels</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <!-- Start Training Time group -->
+                            <tr>
+                                <td class="sleec-scope scope-start">Start Training Time</td>
+                                <td><strong>S1</strong></td>
+                                <td>
+                                    <pre>
+IF it's time for the exercising session THEN greet in the user's language AND start the session
+UNLESS the user cares about privacy IN WHICH CASE greet in the user's language AND close the door AND start the session
+UNLESS the room is too warm IN WHICH CASE ask for permission to keep the door open
+UNLESS permission was not asked IN WHICH CASE do nothing
+        </pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <div>
+                                            <span class="principle-tag is-bold">base:
+                                            </span>
+                                            <span class="principle-tag principle-plus">
+                                                +B</span>support physical activity
+                                        </div>
+                                        <div class="mt-1">
+                                            <span class="principle-tag is-bold">hc1:</span>
+                                            <span class="principle-tag principle-plus">+P</span> keeping door closed,
+                                            <span class="principle-tag principle-plus">+B</span> support physical
+                                            activity,
+                                            <span class="principle-tag principle-plus">+D</span> respectful treatment
+                                            for user preferences
+                                            <div class="mt-1">
+                                                <span class="principle-tag is-bold">hc2: </span>
+                                                <span class="principle-tag principle-plus">
+                                                    +NM</span>minimize harm by refreshing the room,
+                                                <span class="principle-tag principle-plus">+P</span> respect for user’s
+                                                privacy preferences,
+                                                <span class="principle-tag principle-plus">+A</span> ask permission to
+                                                keep door open
+                                            </div>
+                                        </div>
+                                </td>
+                                <td>Social, Ethical, Empathetic, Cultural</td>
+                            </tr>
+
+                            <tr>
+                                <td class="sleec-scope scope-start"></td>
+                                <td><strong>S1a</strong></td>
+                                <td>
+                                    <pre>
+IF permission asked AND the user agrees to keep the door open THEN greet in the user's language AND start the session
+            </pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <span class="principle-tag is-bold">base:</span>
+                                        <span class="principle-tag principle-minus">-P</span> violate privacy in favour
+                                        of non-maleficence,
+                                        <span class="principle-tag principle-plus">+B</span> support activity,
+                                        <span class="principle-tag principle-plus">+A</span> respect consent,
+                                        <span class="principle-tag principle-plus">+NM</span> minimize harm by
+                                        refreshing the room.
+                                    </div>
+                                </td>
+                                <td>Social, Ethical, Cultural</td>
+                            </tr>
+
+                            <tr>
+                                <td class="sleec-scope scope-start"></td>
+                                <td><strong>S1b</strong></td>
+                                <td>
+                                    <pre>
+IF (permission asked AND the room is too warm AND the user does not agree to keep the door open)
+THEN alert the nurse AND close the door
+                                          </pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <span class="principle-tag is-bold">base:
+                                        </span> <span class="principle-tag principle-plus">
+                                            +P</span> respect for user’s privacy preferences,
+                                        <span class="principle-tag principle-plus">+A</span> respect for user choice,
+                                        <span class="principle-tag principle-minus">-B</span> physical activity is not
+                                        performed,
+                                        <span class="principle-tag principle-plus">+NM</span> training session does not
+                                        start as the room is too warm
+                                        and may be dangerous
+                                    </div>
+                                </td>
+                                <td>Ethical</td>
+                            </tr>
+
+                            <!-- Training Time group -->
+                            <tr>
+                                <td class="sleec-scope scope-training">Training Time</td>
+                                <td><strong>S2</strong></td>
+                                <td>
+                                    <pre>
+IF the user is not exercising THEN show the next exercise AFTER 1 minute
+UNLESS the user did fewer repetitions than expected IN WHICH CASE encourage the user
+UNLESS the user has already been encouraged IN WHICH CASE get input via the graphical interface
+UNLESS the user has physical issues resulting from the exercises IN WHICH CASE notify user that the session is suspended AND alert the nurse
+</pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <div><span class="principle-tag is-bold">base: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +B</span>support physical activity
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc1: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +B</span>maximize outcomes with encouragement
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc2: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +A</span> follow user instructions,
+                                            <span class="principle-tag principle-plus">+D</span> respectful treatment,
+                                            <span class="principle-tag principle-minus">-B</span> penalize outcome in
+                                            favour of dignity and
+                                            autonomy
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc3: </span>
+                                            <span class="principle-tag principle-plus">+D</span> respectful treatment,
+                                            <span class="principle-tag principle-plus">+NM</span> minimize harm,
+                                            <span class="principle-tag principle-minus">-B</span> penalize outcome in
+                                            favour of non-maleficence,
+                                            <span class="principle-tag principle-plus">+ET</span> notify user
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Ethical, Empathetic</td>
+                            </tr>
+
+                            <tr>
+                                <td class="sleec-scope scope-training"></td>
+                                <td><strong>S2a</strong></td>
+                                <td>
+                                    <pre>
+IF (the user is exercising AND complains about being tired) THEN encourage the user
+UNLESS the user expressed the preference to exercise in silence IN WHICH CASE do nothing
+    </pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <div class="mt-1"><span class="principle-tag is-bold">base: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +B</span> support physical activity
+                                        </div>
+                                        <div class="mt-1"> <span class="principle-tag is-bold">hc1: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +B</span> support physical activity,
+                                            <span class="principle-tag principle-plus">+A</span> respect preferences
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Empathetic</td>
+                            </tr>
+
+                            <!-- Anytime group -->
+                            <tr>
+                                <td class="sleec-scope scope-anytime">Anytime</td>
+                                <td><strong>S3</strong></td>
+                                <td>
+                                    <pre>
+IF a person asks for user training or medical data THEN share the data
+UNLESS (the user did not grant consent OR the person is unauthorized to access that data) IN WHICH CASE do not share data AND explain why
+</pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <div><span class="principle-tag is-bold">base: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +P</span>safeguard privacy by following user’s
+                                            privacy consent (user),
+                                            <span class="principle-tag principle-plus">+B</span> support data sharing
+                                            for medical purposes (user/person)
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc1: </span>
+                                            <span class="principle-tag principle-plus"> +P</span> safeguard privacy
+                                            (user),
+                                            <span class="principle-tag principle-plus">+ET</span> explain why data
+                                            cannot be shared (person)
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Legal, Ethical</td>
+                            </tr>
+
+                            <tr>
+                                <td class="sleec-scope scope-anytime"></td>
+                                <td><strong>S4</strong></td>
+                                <td>
+                                    <pre>
+IF (the user asks for food AND it is not meal time) THEN explain why the user cannot eat at the moment
+UNLESS the user has low glucose level IN WHICH CASE give dietary-approved snack AND inform the nurse
+    </pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <div><span class="principle-tag is-bold">base: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +NM</span>minimize harm by not giving food,
+                                            <span class="principle-tag principle-plus">+ET</span>explain why the user
+                                            can not eat at the moment,
+                                            <span class="principle-tag principle-plus">+B</span>maximize dietary
+                                            objectives and compliance
+                                            <span class="principle-tag principle-minus">-D</span> imposition,
+                                            <span class="principle-tag principle-minus">-A</span> not granting autonomy
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc1: </span>
+                                            <span class="principle-tag principle-plus">+NM</span> minimize the risk of
+                                            reaching hypoglycemia,
+                                            <span class="principle-tag principle-plus">+A</span> grant permission to the
+                                            user,
+                                            <span class="principle-tag principle-plus">+D</span> accommodating user’s
+                                            will
+                                        </div>
+                                </td>
+                                <td>Ethical, Empathetic</td>
+                            </tr>
+
+                            <!-- Mealtime group -->
+                            <tr>
+                                <td class="sleec-scope scope-mealtime">Mealtime</td>
+                                <td><strong>S5</strong></td>
+                                <td>
+                                    <pre>
+IF (it's meal time AND the user is not yet ready) THEN remind the user to eat
+UNLESS the user is sleeping IN WHICH CASE gently wake up the user WITHIN 5 minutes OTHERWISE alert nurse
+UNLESS the user is in REM sleep IN WHICH CASE do not wake up the user AND inform nurse
+UNLESS the user is at risk of hypoglycemia IN WHICH CASE alert the nurse
+</pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <div><span class="principle-tag is-bold">base: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +B</span>support dietary recommendations,
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc1: </span>
+                                            <span class="principle-tag principle-plus">+B</span> support dietary
+                                            recommendation,
+                                            -D</span> penalize dignity in favour of beneficience
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc2:</span>
+                                            <span class="principle-tag principle-plus"> +D</span> respectful treatment
+                                            of not waking up,
+                                            <span class="principle-tag principle-minus">-B</span> outcome not maximized
+                                            as user does not eat at the given time,
+                                            <span class="principle-tag principle-plus">+NM</span> minimize harm of not
+                                            waking up during the REM stage
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc3: </span>
+                                            <span class="principle-tag principle-plus">+NM</span> minimize harm of
+                                            hypoglycemia
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Social, Ethical</td>
+                            </tr>
+
+                            <tr>
+                                <td class="sleec-scope scope-mealtime"></td>
+                                <td><strong>S6</strong></td>
+                                <td>
+                                    <pre>
+IF (it's meal time AND the user is ready) THEN deliver meal portions
+UNLESS the user wants to eat something outside the dietary plan IN WHICH CASE explain why the user should adhere to the diet AND deliver meal portions
+UNLESS (training results allow for a different food OR the user is particularly distressed) IN WHICH CASE deliver dietary-approved different food
+</pre>
+                                </td>
+                                <td>
+                                    <div class="is-size-7">
+                                        <div><span class="principle-tag is-bold">base: </span>
+                                            <span class="principle-tag principle-plus">
+                                                +B</span>support dietary recommendations
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc1: </span>
+                                            <span class="principle-tag principle-plus">+NM</span> minimize harm of not
+                                            following diet,
+                                            <span class="principle-tag principle-minus">-A</span> not granting autonomy,
+                                            <span class="principle-tag principle-minus">-D</span> imposition on what to
+                                            eat,
+                                            <span class="principle-tag principle-plus">+ET</span> explains why the user
+                                            should adhere to the diet
+                                        </div>
+                                        <div class="mt-1"><span class="principle-tag is-bold">hc2: </span>
+                                            <span class="principle-tag principle-plus">+B</span> still following dietary
+                                            recommendations,
+                                            <span class="principle-tag principle-plus">+A</span> grant permission to the
+                                            user,
+                                            <span class="principle-tag principle-plus">+D</span> user’s will is
+                                            accommodated,
+                                            <span class="principle-tag principle-plus">+NM</span> delivered food is
+                                            still approved by the diet
+                                        </div>
+                                </td>
+                                <td>Ethical, Empathetic</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
             </div>
         </section>
 
@@ -212,6 +578,43 @@ sleec-at-runtime
                                 separately (for real-robot setups).
                             </p>
 
+                            <div class="column">
+                                <h2 class="title is-5">Repository Structure</h2>
+                                <div class="content has-text-justified">
+                                    <p>
+                                        At a high level, the repository is organized as follows:
+                                    </p>
+
+                                    <div class="box" style="text-align:left;">
+                                        <pre style="margin:0; white-space:pre;">
+sleec-at-runtime
+├─ enforcement_subsystem/      # SLEEC@run.time Enforcement Subsystem
+│  ├─ asmeta_server/           # ASMETA simulation server
+│  ├─ enforcer/                # Enforcer component + ASM models
+│  ├─ ros2_ws/                 # ROS 2 workspace (Monitor, Executor, Test Runner)
+│  └─ utils/                   # ASM→Python conversion utilities
+│
+├─ ari_web_ws/                 # ROS 2 workspace for ARI web interface
+├─ experiments/                # Experiment data, test cases, and analysis
+│  ├─ results/                 # Logs, CSVs, Jupyter notebooks
+│  ├─ scalability_test_cases/  # Generated models and tests for scalability
+│  └─ test_cases/              # Generated test cases used in the paper
+│
+├─ proof_of_concept/           # Video reports of the ARI scenario
+└─ qualitative analysis/       # Inputs and results of the qualitative analysis
+</pre>
+                                    </div>
+
+                                    <p class="is-size-7 has-text-grey">
+                                        See the <a href="" target="_blank"><i class="fab fa-github"></i> README</a>
+                                        in the
+                                        repository for the full, detailed
+                                        directory tree and file-level
+                                        documentation.
+                                    </p>
+                                </div>
+                            </div>
+
                             <h3 class="title is-5">1. Clone the repository</h3>
                             <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                 <pre style="margin:0; white-space:pre-wrap;">
@@ -222,7 +625,8 @@ cd sleec-at-runtime
 
                             <h3 class="title is-5 mt-5">2. Run the ARI simulation (Docker Compose, recommended)</h3>
                             <p class="is-size-7">
-                                This starts the full SLEEC@run.time Enforcement Subsystem along with the ARI simulator.
+                                This starts the full SLEEC@run.time Enforcement Subsystem along with the ARI
+                                simulator.
 
                             </p>
                             <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
@@ -258,7 +662,8 @@ docker compose --profile ari-sim-test --env-file .env.ari-sim up --build
 
                             <h3 class="title is-5 mt-5">4. Run components separately</h3>
                             <p class="is-size-7">
-                                For real-robot deployments, components (ASMETA server, Enforcer, Monitor, Executor) can
+                                For real-robot deployments, components (ASMETA server, Enforcer, Monitor, Executor)
+                                can
                                 be run separately.
                             </p>
                             <div class="has-text-left">
@@ -271,7 +676,8 @@ docker compose --env-file .env.ros-deployment up --build
 </pre>
                                 </div>
 
-                                <p class="has-text-weight-semibold mt-4 mb-2" style="color: rgba(0,0,0,.7);">Monitor +
+                                <p class="has-text-weight-semibold mt-4 mb-2" style="color: rgba(0,0,0,.7);">Monitor
+                                    +
                                     Executor (ROS 2)</p>
                                 <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                     <pre style="margin:0; white-space:pre-wrap;">
@@ -301,7 +707,8 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                         <h2 class="title is-3">Experiments</h2>
                         <div class="content has-text-justified">
                             <p>
-                                The <code>experiments</code> folder contains the full dataset and analysis pipeline used
+                                The <code>experiments</code> folder contains the full dataset and analysis pipeline
+                                used
                                 to evaluate
                                 SLEEC@run.time: test cases, scalability tests, raw logs, and Jupyter notebooks for
                                 analysis.
@@ -334,9 +741,11 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                                 </li>
 
                                 <li class="mt-3">
-                                    <strong>Deploy the Test Runner:</strong> copy the ROS 2 workspace, test cases, and
+                                    <strong>Deploy the Test Runner:</strong> copy the ROS 2 workspace, test cases,
+                                    and
                                     runner scripts
-                                    to the robot or device that will run the tests, or clone the repository there and
+                                    to the robot or device that will run the tests, or clone the repository there
+                                    and
                                     copy from
                                     <code>experiments/</code>.
                                 </li>
@@ -344,7 +753,8 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                                 <li class="mt-3">
                                     <strong>Run test campaigns:</strong>
                                     <ul>
-                                        <li>Functional test cases (e.g., <code>ariec250</code>, <code>ariec500</code>).
+                                        <li>Functional test cases (e.g., <code>ariec250</code>,
+                                            <code>ariec500</code>).
                                         </li>
                                         <li>Scalability tests with generated rules and conditions.</li>
                                     </ul>
@@ -360,8 +770,10 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
 
                             <h3 class="title is-5 mt-5">Analyzing results</h3>
                             <p class="is-size-6">
-                                The Jupyter notebooks in <code>experiments/results/analysis/analysis.ipynb</code> and
-                                <code>experiments/results/scalability/analysis/scalability_analysis.ipynb</code> compute
+                                The Jupyter notebooks in <code>experiments/results/analysis/analysis.ipynb</code>
+                                and
+                                <code>experiments/results/scalability/analysis/scalability_analysis.ipynb</code>
+                                compute
                                 correctness and overhead metrics from the collected logs.
 
                             </p>
@@ -389,6 +801,119 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                         <h2 class="title is-3">Qualitative Analysis</h2>
                         <div class="content has-text-justified">
 
+                            <p>
+                                To validate the SLEEC rules elicited for the assistive rehabilitation robot scenario,
+                                we conducted a qualitative study based on semi-structured interviews with domain
+                                experts.
+                                The validation process was guided by the following validation question:
+                            </p>
+
+                            <div class="box">
+                                <p class="has-text-weight-semibold">
+                                    Validation Question (VQ)
+                                </p>
+                                <p class="is-size-6">
+                                    Do the elicited SLEEC ruleset, their connected principles, and associated
+                                    SLEEC labels provide a clear, complete, correct, and value-aligned representation
+                                    of ethical considerations with respect to the reference scenario?
+                                </p>
+                            </div>
+
+                            <h3 class="title is-5 mt-5">Methodological Approach</h3>
+
+                            <p>
+                                We followed the <a href="https://github.com/acmsigsoft/EmpiricalStandards/blob/master/docs/standards/QualitativeSurveys.md"><em>Qualitative Survey Empirical Standards</em></a> (ACM SIGSOFT)
+                                for conducting semi-structured interviews. The study aimed to gather
+                                expert feedback on the expressiveness, coherence, and practical adequacy
+                                of the SLEEC ruleset in relation to the rehabilitation scenario.
+                            </p>
+
+                            <p>
+                                Participants were recruited using <em>convenience sampling</em>,
+                                a non-probability sampling method commonly adopted in qualitative research.
+                                Experts were selected based on their availability and prior collaboration
+                                with the research team, as well as their demonstrated expertise in
+                                software engineering, formal methods, AI ethics, and SLEEC-based systems.
+                            </p>
+
+                            <p>
+                                We interviewed four domain experts. Each interview was conducted
+                                synchronously in a one-on-one setting by two authors of the study.
+                                Interviews were structured around a predefined protocol and
+                                lasted between 60 and 90 minutes.
+                            </p>
+
+                            <h3 class="title is-5 mt-5">Interview Procedure</h3>
+
+                            <ul>
+                                <li>
+                                    A brief introductory presentation outlined the study objectives,
+                                    the rehabilitation scenario, and the SLEEC rules.
+                                </li>
+                                <li>
+                                    Experts were presented with the elicited SLEEC ruleset,
+                                    associated principles, and SLEEC labels.
+                                </li>
+                                <li>
+                                    Open-ended questions explored clarity, completeness,
+                                    correctness, alignment with ethical values, and potential
+                                    ambiguities or missing aspects.
+                                </li>
+                                <li>
+                                    All interviews were audio-recorded and transcribed.
+                                </li>
+                            </ul>
+
+                            <h3 class="title is-5 mt-5">Data Analysis</h3>
+
+                            <p>
+                                We applied qualitative data analysis focusing on the relevance,
+                                expressiveness, and coherence of expert responses.
+                                Feedback was analyzed iteratively and discussed among all authors.
+                            </p>
+
+                            <p>
+                                Suggested modifications to the SLEEC ruleset were incorporated
+                                after collective agreement and after addressing concerns related
+                                to clarity, practical applicability, and ethical consistency.
+                                The final validated SLEEC ruleset was then used in the implementation
+                                and is available in the <a href="#ruleset" title="See ruleset">Scenario section <i class="fas fa-arrow-up"></i></a>.
+                            </p>
+
+                            <h3 class="title is-5 mt-5">Expert Profiles</h3>
+
+                            <div class="box has-text-left">
+
+                                <p><strong>[ID1]</strong> PhD in Artificial Intelligence; assistant professor in
+                                    computer science.
+                                    Research in logic-based AI, multi-agent systems, ontologies, social choice,
+                                    and formal philosophy.</p>
+
+                                <hr>
+
+                                <p><strong>[ID2]</strong> PhD candidate in Computer Science.
+                                    Background in data science and software engineering,
+                                    focusing on testing and verification of ethical-aware autonomous systems.</p>
+
+                                <hr>
+
+                                <p><strong>[ID3]</strong> PhD in Computer Science; faculty member.
+                                    Expertise in formal verification, temporal logic, safety-critical systems,
+                                    and development of practical verification tools.</p>
+
+                                <hr>
+
+                                <p><strong>[ID4]</strong> PhD in Information and Communication Technology; assistant
+                                    professor.
+                                    Research in privacy-enhancing technologies, empirical software engineering,
+                                    and human-centered ethical system design.</p>
+
+                            </div>
+
+                            <div class="box" style="background-color: #667eea3a; text-align: center;">
+                            <p class="mt-4 is-bold">
+                                Full anonymized transcripts and SLEEC ruleset iterations are available on GitHub <a href="https://github.com/gianlucafilippone/sleec-at-runtime/tree/main/qualitative_analysis" target="_blank"><i class="fab fa-github"></i></a>
+                            </p> </div>
 
                         </div>
                     </div>
@@ -446,7 +971,8 @@ UNLESS The user has physical issues resulting from the exercises IN WHICH CASE (
                                     <img src="../static/images/ARI/exercise1.jpeg" alt="Proof of concept image 1"
                                         style="width:100%; height:100%; object-fit:cover;">
                                 </div>
-                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing jumping jacks</figcaption>
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing jumping jacks
+                                </figcaption>
                             </figure>
                         </div>
 
@@ -466,7 +992,8 @@ UNLESS The user has physical issues resulting from the exercises IN WHICH CASE (
                                     <img src="../static/images/ARI/suspended.jpeg" alt="Proof of concept image 3"
                                         style="width:100%; height:100%; object-fit:cover;">
                                 </div>
-                                <figcaption class="has-text-grey is-size-7 mt-2">ARI suspending the session</figcaption>
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI suspending the session
+                                </figcaption>
                             </figure>
                         </div>
                     </div>
@@ -480,7 +1007,8 @@ UNLESS The user has physical issues resulting from the exercises IN WHICH CASE (
                                     <source src="../static/images/ARI/countdown.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
-                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing the countdown</figcaption>
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing the countdown
+                                </figcaption>
                             </figure>
                         </div>
 
@@ -490,7 +1018,8 @@ UNLESS The user has physical issues resulting from the exercises IN WHICH CASE (
                                     <source src="../static/images/ARI/choice.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
-                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing and reacting to the user
+                                <figcaption class="has-text-grey is-size-7 mt-2">ARI showing and reacting to the
+                                    user
                                     choice interface</figcaption>
                             </figure>
                         </div>
@@ -508,7 +1037,8 @@ UNLESS The user has physical issues resulting from the exercises IN WHICH CASE (
                     <div class="column is-8">
                         <div class="content">
                             <p style="font-size: small;">
-                                This page is part of the SLEEC@run.time project website and summarizes the replication
+                                This page is part of the SLEEC@run.time project website and summarizes the
+                                replication
                                 package
                                 for the TSE submission <em>“Enforcing Ethics at Runtime in Autonomous Systems”</em>.
                             </p>
