@@ -46,7 +46,7 @@ sleec-at-runtime
 |       README.md                                   # Instructions for running the web interface
 |
 ├---enforcement_subsystem                           # Folder containing the full implementation of the SLEEC@run.time Enforcement Subsystem
-|   |   .env.docker-ari-sim                                # Environment variables for runnig the Enforcement Subsystem over Docker for ARI interaction
+|   |   .env.docker-ari-sim                         # Environment variables for runnig the Enforcement Subsystem over Docker for ARI interaction
 |   |   .env.ros-deployment                         # Environment variables for runnig the ARI simulator on ROS 2
 |   |   docker-compose.yml                          # Docker compose file for running SLEEC@run.time in a containerized environment
 |   |   requirements.txt                            # Pip requirements file
