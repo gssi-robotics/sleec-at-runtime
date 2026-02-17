@@ -46,7 +46,7 @@ sleec-at-runtime
 |       README.md                                   # Instructions for running the web interface
 |
 ├---enforcement_subsystem                           # Folder containing the full implementation of the SLEEC@run.time Enforcement Subsystem
-|   |   .env.ari-sim                                # Environment variables for runnig the Enforcement Subsystem over Docker for ARI interaction
+|   |   .env.docker-ari-sim                                # Environment variables for runnig the Enforcement Subsystem over Docker for ARI interaction
 |   |   .env.ros-deployment                         # Environment variables for runnig the ARI simulator on ROS 2
 |   |   docker-compose.yml                          # Docker compose file for running SLEEC@run.time in a containerized environment
 |   |   requirements.txt                            # Pip requirements file
@@ -130,7 +130,7 @@ Docker Compose is the recommended way for running the whole system.
 
 ```
 cd enforcement_subsystem
-docker compose --profile ari-sim --env-file .env.ari-sim up --build
+docker compose --profile ari-sim --env-file .env.docker-ari-sim up --build
 ```
 
 #### Interact with the system
@@ -145,7 +145,7 @@ ros2 run ari_sim ari_sim_user_interface
 ### Run in local (Docker) testing configuration
 ```
 cd enforcement_subsystem
-docker compose --profile ari-sim-test --env-file .env.ari-sim up --build
+docker compose --profile ari-sim-test --env-file .env.docker-ari-sim up --build
 ```
 
 #### Run tests on the reference scenario
@@ -162,7 +162,7 @@ python3 test_cases_generator.py <number_of_cases> <test_case_name>
 
 Then run:
 ```
-./run_testcases.sh <test_case_name>
+./run_reference_scenario_tests.sh <test_case_name>
 ```
 
 #### Run scalability tests

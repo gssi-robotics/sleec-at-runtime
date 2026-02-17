@@ -11,6 +11,9 @@ class ExecutorNode(Node):
 
         self.obligations_processor = ObligationsProcessor(self)
 
+        self.declare_parameter('rabbitmq_host', 'guest')
+        rabbitmq_host = self.get_parameter('rabbitmq_host').get_parameter_value().string_value
+
         self.declare_parameter('rabbitmq_user', 'guest')
         rabbitmq_user = self.get_parameter('rabbitmq_user').get_parameter_value().string_value
 
@@ -19,7 +22,7 @@ class ExecutorNode(Node):
 
         # Initialize RabbitMQ subscriber
         self.pika_subscriber = PikaSubscriber(
-            host="rabbitmq",
+            host=rabbitmq_host,
             port=5672,
             user=rabbitmq_user,
             password=rabbitmq_pass,
