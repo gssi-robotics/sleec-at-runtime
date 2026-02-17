@@ -8,20 +8,22 @@ This is the replication package for the paper _Enforcing Ethics at Runtime in Au
   - [Run the ARI simulation over Docker compose](#run-the-ari-simulation-over-docker-compose)
     - [Interact with the system](#interact-with-the-system)
   - [Run in local (Docker) testing configuration](#run-in-local-docker-testing-configuration)
-    - [Run tests](#run-tests)
+    - [Run tests on the reference scenario](#run-tests-on-the-reference-scenario)
     - [Run scalability tests](#run-scalability-tests)
   - [Run the components separately](#run-the-components-separately)
     - [Enforcer and ASMETA Server components](#enforcer-and-asmeta-server-components)
     - [Monitor and Executor (Communication Layer)](#monitor-and-executor-communication-layer)
     - [Run simulators/tests](#run-simulatorstests)
-    - [Interact with the system](#interact-with-the-system-1)
+    - [Interact with the (simulated) system](#interact-with-the-simulated-system)
+    - [Run tests on the reference scenario](#run-tests-on-the-reference-scenario-1)
+    - [Run scalability tests](#run-scalability-tests-1)
 - [Experiments](#experiments)
   - [Reproducing experiments](#reproducing-experiments)
     - [1. Deploy and run the Enforcer, ASMETA Server, and RabbitMQ broker](#1-deploy-and-run-the-enforcer-asmeta-server-and-rabbitmq-broker)
     - [2. Deploy and run the Monitor and the Executor](#2-deploy-and-run-the-monitor-and-the-executor)
     - [3. Deploy the Test Runner](#3-deploy-the-test-runner)
-    - [4a. Start the tests](#4a-start-the-tests)
-    - [4b. Start the scalability tests](#4b-start-the-scalability-tests)
+    - [4a. Run tests on the reference scenario](#4a-run-tests-on-the-reference-scenario)
+    - [4b. Run scalability tests](#4b-run-scalability-tests)
     - [5. Collect log files](#5-collect-log-files)
   - [Analyzing results](#analyzing-results)
 - [Architecture components detail](#architecture-components-detail)
@@ -30,7 +32,7 @@ This is the replication package for the paper _Enforcing Ethics at Runtime in Au
     - [Running the ASMETA server (Docker)](#running-the-asmeta-server-docker)
   - [Enforcer](#enforcer)
     - [Running the Enforcer (standalone)](#running-the-enforcer-standalone)
-    - [Running the enforcer (Docker)](#running-the-enforcer-docker)
+    - [Running the Enforcer (Docker)](#running-the-enforcer-docker)
   - [Monitor and Executor](#monitor-and-executor)
     - [Running the SLEEC Enforcement Subsystem (standalone)](#running-the-sleec-enforcement-subsystem-standalone)
 - [Installing dependencies (only for standalone deployment)](#installing-dependencies-only-for-standalone-deployment)
@@ -74,29 +76,37 @@ sleec-at-runtime
 |
 ├---experiments                                     # Experiment data and results
 |   |   Dockerfile                                  # Dockerfile for running experiments in a containerized environment
-|   |   run_testcases.sh                            # Test running entrypoint
-|   |   test_cases_generator.py                     # Test cases generator script
+|   ├---reference_scenario
+|   |   |   run_reference_scenario_tests.sh         # Reference scenario test running entrypoint
+|   |   |   test_cases_generator.py                 # Reference scenario test cases generator script
+|   |   └---test_cases                              # Generated test cases used for the refernence scenario experiments
 |   ├---results
-|   |   ├---analysis                                # Results analysis
-|   |   |       analysis.ipynb                      # Jupyter notebook containing results analysis code, data, and charts
-|   |   |       extracted_asmeta_data.csv           # CSV containing summary of ASMETA server running data
-|   |   |       extracted_enforcer_data.csv         # CSV containing summary of Enforcer running data
-|   |   |       extracted_test_results.csv          # CSV containing extracted data for all the test cases run
-|   |   ├---raw_data                                # Folder containing all the raw log files collected for all the tests
+|   |   ├---reference_scenario
+|   |   |   ├---analysis                            # Results analysis for the reference scenario
+|   |   |   |   |   analysis.ipynb                  # Jupyter notebook containing results analysis code, data, and charts
+|   |   |   |   |   extracted_asmeta_data.csv       # CSV containing summary of ASMETA server running data
+|   |   |   |   |   extracted_enforcer_data.csv     # CSV containing summary of Enforcer running data
+|   |   |   |   |   extracted_test_results.csv      # CSV containing extracted data for all the test cases run
+|   |   |   |   └---charts                          # Exporterd pdf charts from the analysis
+|   |   |   └---raw_data                            # Folder containing all the raw log files collected for all the tests
 |   |   └---scalability
 |   |       ├---analysis                            # Results analysis for the scalability tests
-|   |       |       extracted_asmeta_data.csv       # CSV containing summary of ASMETA server running data
-|   |       |       extracted_enforcer_data.csv     # CSV containing summary of Enforcer running data
-|   |       |       extracted_test_runner_data.csv  # CSV containing summary of Test Runner running data
-|   |       |       scalability_analysis.ipynb      # Jupyter notebook containing results analysis code, data, and charts
+|   |       |   |   extracted_asmeta_data.csv       # CSV containing summary of ASMETA server running data
+|   |       |   |   extracted_enforcer_data.csv     # CSV containing summary of Enforcer running data
+|   |       |   |   extracted_test_runner_data.csv  # CSV containing summary of Test Runner running data
+|   |       |   |   full_aggregated_data.csv        # CSV containing aggregated data for each ASM model and component
+|   |       |   |   extracted_test_runner_data.csv  # CSV full data for each test case
+|   |       |   |   scalability_analysis.ipynb      # Jupyter notebook containing results analysis code, data, and charts
+|   |       |   └---charts                          # Exporterd pdf charts from the analysis
 |   |       └---raw_data                            # Folder containing all the raw log files collected for all scalability the tests
-|   ├---scalability_test_cases                      # Generators and generated test cases for scalability tests
-|   |       ├---configurators                       # Configurator script for dynamically uploading ASM models to ASMETA Server
-|   |       ├---generators                          # Generators for SLEECLibrary, ASM models, and test cases for scalability tests
-|   |       ├---libraries                           # Generated SLEECLibrary models for scalability tests
-|   |       ├---models                              # Generated ASM models for scalability tests
-|   |       └---test_cases                          # Generated test cases used for scalability tests
-|   └---test_cases                                  # Generated test cases used for experiments
+|   └---scalability
+|       |   run_scalability_tests.sh                # Scalability test running entrypoint
+|       |   scalability_test_cases_generator.py     # Scalability test cases generator script
+|       ├---configurators                           # Configurator script for dynamically uploading ASM models to ASMETA Server
+|       ├---generators                              # Generators for SLEECLibrary, ASM models, and test cases for scalability tests
+|       ├---libraries                               # Generated SLEECLibrary models for scalability tests
+|       ├---models                                  # Generated ASM models for scalability tests
+|       └---test_cases                              # Generated test cases used for scalability tests
 |
 ├---proof_of_concept                                # Video reports of the execution of the ARIEC running scenario over PAL ARI humanoid robot
 └---qualitative analysis                            # Inputs and results of the qualitative analysis
@@ -138,10 +148,11 @@ cd enforcement_subsystem
 docker compose --profile ari-sim-test --env-file .env.ari-sim up --build
 ```
 
-#### Run tests
+#### Run tests on the reference scenario
 On a new terminal:
 ```
 docker exec -it sleec-runtime-enforcer-ari-sim-test-runner-1 bash
+cd reference_scenario
 ```
 
 Generate a new test case if needed (optional):
@@ -158,6 +169,7 @@ Then run:
 On a new terminal:
 ```
 docker exec -it sleec-runtime-enforcer-ari-sim-test-runner-1 bash
+cd scalability
 ```
 
 Generate a new test case if needed (optional):
@@ -196,7 +208,7 @@ This command will run the Enforcer component, the ASMETA server, and a RabbitMQ 
 Install the package dependencies:
 ```
 cd enforcement_subsystem
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 Install the ROS 2 packages:
@@ -211,7 +223,6 @@ Run the Monitor and Executor (on the implementation for the ARIEC scenario):
 ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
 ```
 
-
 #### Run simulators/tests
 Run the ARI simulator:
 On a new terminal in the `ros2_ws` folder, then run:
@@ -220,40 +231,7 @@ On a new terminal in the `ros2_ws` folder, then run:
 ros2 launch ari_sim ari_sim_launch.py
 ```
 
-Run the Test Runner:
-Open a new terminal in the `experiments` folder.
-
-Generate a new test cases if needed (optional). For testing the usecase:
-```
-python3 test_cases_generator.py <number_of_cases> <test_case_name>
-```
-
-For scalability tests:
-```
-cd scalability_test_cases
-python3 scalability_test_cases_generator.py -r <#rules> -c <#conditions> -n <#test_cases>
-cd ..
-```
-
-Test the usecase:
-```
-cp -r test_cases ../enforcement_subsystem/ros2_ws/
-cp run_testcases.sh ../enforcement_subsystem/ros2_ws/
-cd ../enforcement_subststem/ros2_ws
-chmod +x run_testcases.sh
-./run_testcases.sh <test_case_name>
-```
-
-Run the scalability tests:
-```
-cp -r scalability_test_cases ../enforcement_subsystem/ros2_ws/
-cp run_scalability_tests.sh ../enforcement_subsystem/ros2_ws/
-cd ../enforcement_subststem/ros2_ws
-chmod +x run_scalability_tests.sh
-./run_scalability_tests.sh <#rules> <#conditions> ros
-```
-
-#### Interact with the system
+#### Interact with the (simulated) system
 Run the simulator as described above and open a new terminal in the `ros2_ws` folder, then run:
 ```
 . install/setup.bash
@@ -261,16 +239,62 @@ ros2 run ari_sim ari_sim_user_interface
 ```
 ...and follow the prompted instructions
 
+#### Run tests on the reference scenario:
+Open a new terminal in the `experiments/reference_scenario/` folder.
+
+Generate a new test cases if needed (optional):
+```
+python3 test_cases_generator.py <number_of_cases> <test_case_name>
+```
+
+Test the reference scenario:
+```
+cp -r . ../../enforcement_subsystem/ros2_ws/reference_scenario/
+cd ../../enforcement_subststem/ros2_ws/reference_scenario
+chmod +x run_reference_scenario_tests.sh
+./run_testcases.sh <test_case_name>
+```
+
+#### Run scalability tests
+Open a new terminal in the `experiments/scalability/` folder.
+
+Generate new test cases if needed (optional):
+```
+python3 scalability_test_cases_generator.py -r <#rules> -c <#conditions> -n <#test_cases>
+```
+
+Run the scalability tests:
+```
+cp -r . ../../enforcement_subsystem/ros2_ws/scalability/
+cd ../enforcement_subststem/ros2_ws/scalability
+chmod +x run_scalability_tests.sh
+./run_scalability_tests.sh <#rules> <#conditions> ros
+```
+
 ## Experiments
-The `experiments` folder contains all the data collected data, analysis software, and results for the experimentation (Section 7.2 in the paper).
+The `experiments` folder contains all the tools, collected data, analysis software, and results for the experimentation (Section 7.2 in the paper).
 
-- The `results` folder contains:
-    - All the collected logs during the experiments: local execution of 250 test cases (`local-ariec250`), robot execution of 250 and 500 test cases (`ariec250`, `ariec500`) and  _ping_ result logs (`ping.txt`).
-    - The Jupyter notebook used for running the log results analysis (`analysis.ipynb`) with output attached, the .csv files containing the results summary: ASMETA server running data (`extracted_asmeta_data.csv`), Enforcer running data (`extracted_enforcer_data.csv`), and Test Runner results (`extracted_test_results.csv`).
+- The `reference_scenario` folder contains the input data and tools for running the tests on the reference scenario (paper's EQ1 & EQ2):
+    - The set of .json files for test cases used in the experimentation (`test_cases` sub folder). The test cases sets in `ariec250.json` and `ariec500.json` are the one used in the paper.
+    - The Python script for the test cases generator (`test_cases_generator.py`). Run it using `python3 test_cases_generator.py <number_of_cases> <name>`.
+    - The Shell script for running the test cases (`run_reference_scenario_tests.sh`). Place it into the `ros2_ws/reference_scenario` folder together with the `test_cases` folder and run it as `./run_reference_scenario_tests.sh`.
 
-- The `test_cases` folder contains a set of .json files for test cases of different sizes. The test cases sets in `ariec250.json` and `ariec500.json` are the one used in the paper.
+- The `scalability` folder contains:
+    - The set of .json files used for scalability tests (`test_cases` sub folder).
+    - The set of SLEEC ASM models and ASM SLEEC Libraries files used for scalability tests (`models` and `libraries` sub folder).
+    - The Python scripts for the test cases generatore (`scalability_test_cases_generator.py`). Run it using `python3 scalability_test_cases_generator.py -r <#rules> -c <#conditions> -n <#test_cases>`
+    - The Python script for configuring the ASMETA server by uploading the SLEEC ASM model to be tested for scalability (`configurators` subfolder).
+    - The Shell script for running the scalability tests (`run_scalability_tests.sh`) Place it into the `ros2_ws/scalability` folder together with test cases, libraries, models and configurators and run it as `./run_scalability_tests.sh <#rules> <#conditions> ros/docker`.
 
-- The Python script for the test cases generator (`test_cases_generator.py`). Run it using `python3 test_cases_generator.py <number_of_cases> <name>`.
+- The `results` folder contains the results for both the reference scenario and the scalability tests:
+    - The `reference_scenario` folder contains the results for the reference scenario tests:
+      - In the `raw_data` folder, the collected logs during the experiments: local execution of 250 test cases (`local-ariec250`), robot execution of 250 and 500 test cases (`ariec250`, `ariec500`) and  _ping_ result logs (`ping.txt`).
+      - In the `analysis` folder, the Jupyter notebook used for running the log results analysis (`analysis.ipynb`) with output attached, the .csv files containing the results summary: ASMETA server running data (`extracted_asmeta_data.csv`), Enforcer running data (`extracted_enforcer_data.csv`), and Test Runner results (`extracted_test_results.csv`).
+      - The obtained charts in pdf format.
+    - The `scalability` folder contians the results of the scalability tests:
+      - In the `raw_data` folder, the collected logs during the experiments, for each test case (from 10 to 60 rules and from 2 to 20 clauses per rule).
+      - In the `analysis` folder, the Jupyter notebook used for running the log results analysis (`scalability_analysis.ipynb`) with output attached, the .csv files containing the results sumary: ASMETA server running data (`extracted_asmeta_data.csv`), Enforcer running data (`extracted_enforcer_data.csv`), Test Runner data (`extracted_test_runner_data.csv`), plus the computed data for each test and component (`full_data.csv`), and the aggregated data (`full_aggregated_data.csv`)
+      - The obtained charts in pdf format.
 
 ### Reproducing experiments
 Follow the steps below to reproduce the experiments in the same setting as in the paper:
@@ -294,36 +318,36 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py rabbitmq_user:=robot
 
 #### 3. Deploy the Test Runner:
 Copy the ros2 workspace, the test cases folders, and the experiment runner on the robot/device that will run the Test Runner.
-If using scp, e.g.:
+If using scp, e.g. (from the repository root):
 ```
 scp -r enforcement_subsystem/ros2_ws/ <user>@<host>:<folder_path>
-scp -r experiments/test_cases <user>@<host>:<folder_path>/ros2_ws
-scp experiments/run_testcases.sh <user>@<host>:<folder_path>/ros2_ws
-scp experiments/run_testcasesrun_scalability_tests.sh <user>@<host>:<folder_path>/ros2_ws
-scp -r experiments/scalability_test_cases <user>@<host>:<folder_path>/ros2_ws
+scp -r experiments/reference_scenario <user>@<host>:<folder_path>/ros2_ws
+scp -r experiments/scalability <user>@<host>:<folder_path>/ros2_ws
 ```
 
-Or, alternatively, download/clone the whole repository on the robot/device and:
+Or, alternatively, download/clone the whole repository on the robot/device and (from the repository root):
 ```
-cd sleec-at-runtime/experiments
-cp -r test_cases ../enforcement_subsystem/ros2_ws/
-cp run_testcases.sh ../enforcement_subsystem/ros2_ws/
-cp -r run_scalability_tests ../enforcement_subsystem/ros2_ws/
-cp run_scalability_tests.sh ../enforcement_subsystem/ros2_ws/
+cd experiments
+cp -r reference_scenario ../enforcement_subsystem/ros2_ws/
+cp -r scalability ../enforcement_subsystem/ros2_ws/
 cd ../enforcement_subsystem/ros2_ws
-chmod +x run_testcases.sh
-chmod +x run_scalability_tests.sh
+chmod +x reference_scenario/run_reference_scenario_tests.sh
+chmod +x scalability/run_scalability_tests.sh
 ```
 
-#### 4a. Start the tests:
+#### 4a. Run tests on the reference scenario:
 From within the robot/device running the Test Runner:
 ```
-cd enforcer_subsystem/ros2_ws
+cd enforcement_subsystem/ros2_ws
 colcon build
-./run_testcases.sh <test_case_name>
+cd reference_scenario
+./run_reference_scenario_tests.sh <test_case_name>
 ```
 
-#### 4b. Start the scalability tests:
+> [!NOTE]
+> `ariec250` and `ariec500` are the test cases run for the experimentation reported in the paper.
+
+#### 4b. Run scalability tests:
 > [!NOTE]
 > `requests` python package is required. Install using `pip install requests`.
 
@@ -331,7 +355,8 @@ From within the robot/device running the Test Runner:
 ```
 cd enforcer_subsystem/ros2_ws
 colcon build
-./run_scalability_tests.sh <test_name> <#rules> <#conditions> ros
+cd scalability
+./run_scalability_tests.sh <#rules> <#conditions> ros
 ```
 
 #### 5. Collect log files
@@ -382,6 +407,13 @@ cd asmeta_server
 python3 asmeta_runtime_server.py
 ```
 
+Or:
+
+```
+cd asmeta_server
+java -jar AsmetaServer.jar
+```
+
 #### Running the ASMETA server (Docker)
 Build the Docker image
 ```
@@ -406,7 +438,7 @@ python3 enforcer.py
 > [!NOTE]
 > `httpx`, `requests`, and `aio-pika` packages are required. [Installing dependencies](#installing-dependencies-(only-for-standalone-deployment))
 
-#### Running the enforcer (Docker)
+#### Running the Enforcer (Docker)
 Build the Docker image
 ```
 cd enforcer
