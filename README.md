@@ -13,7 +13,7 @@ This is the replication package for the paper _Enforcing Ethics at Runtime in Au
   - [Run in robot deployment configuration](#run-in-robot-deployment-configuration)
     - [Enforcer and ASMETA Server components](#enforcer-and-asmeta-server-components)
     - [Monitor and Executor (Communication Layer)](#monitor-and-executor-communication-layer)
-    - [Run simulators/tests](#run-simulatorstests)
+    - [Run the CLI simulator](#run-the-cli-simulator)
     - [Interact with the (simulated) system](#interact-with-the-simulated-system)
     - [Run tests on the reference scenario](#run-tests-on-the-reference-scenario-1)
     - [Run scalability tests](#run-scalability-tests-1)
@@ -223,8 +223,7 @@ Run the Monitor and Executor (on the implementation for the ARIEC scenario):
 ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py rabbitmq_host:=<localhost/hostname/IP> rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
 ```
 
-#### Run simulators/tests
-Run the ARI simulator:
+#### Run the CLI simulator
 On a new terminal in the `ros2_ws` folder, then run:
 ```
 . install/setup.bash
