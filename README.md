@@ -10,7 +10,7 @@ This is the replication package for the paper _Enforcing Ethics at Runtime in Au
   - [Run in local (Docker) testing configuration](#run-in-local-docker-testing-configuration)
     - [Run tests on the reference scenario](#run-tests-on-the-reference-scenario)
     - [Run scalability tests](#run-scalability-tests)
-  - [Run the components separately](#run-the-components-separately)
+  - [Run in robot deployment configuration](#run-in-robot-deployment-configuration)
     - [Enforcer and ASMETA Server components](#enforcer-and-asmeta-server-components)
     - [Monitor and Executor (Communication Layer)](#monitor-and-executor-communication-layer)
     - [Run simulators/tests](#run-simulatorstests)
@@ -122,8 +122,8 @@ cd sleec-at-runtime
 
 SLEEC@run.time may be run in different deployment options, described below:
 - On a single Docker compose ([instructions](#run-the-ari-simulation-over-docker-compose))
-- In local testing configuration ([instructions](#run-in-local-testing-configuration))
-- Separately ([instructions](#run-the-components-separately))
+- In local testing configuration over Docker ([instructions](#run-in-local-docker-testing-configuration))
+- In robot deployment configuration ([instructions](#run-in-robot-deployment-configuration))
 
 ### Run the ARI simulation over Docker compose
 Docker Compose is the recommended way for running the whole system.
@@ -182,11 +182,8 @@ Then run:
 ./run_scalability_tests.sh <#rules> <#conditions> docker
 ```
 
-### Run the components separately
+### Run in robot deployment configuration
 Alternatively, components can be run separately. This is useful if running the Enforcement Subsystem with a real robot.
-
-> [!NOTE]
-> All the components can be run [standalone](#components-detail), although discouraged.
 
 #### Enforcer and ASMETA Server components
 
@@ -199,6 +196,9 @@ docker compose --env-file .env.ros-deployment up --build
 ```
 
 This command will run the Enforcer component, the ASMETA server, and a RabbitMQ broker. It will load at the startup the ARIEC .asm models. To change default model, change the referenced .env file. The uploaded enforce model must be placed into the `enforcement_subsystem/enforcer/resources/` folder.
+
+> [!NOTE]
+> ASMETA server and the Enforcer can be run standalone without Docker, although discouraged. See [here](#running-the-asmeta-server-standalone) and [here](#running-the-enforcer-standalone) the guides for such deployments.
 
 #### Monitor and Executor (Communication Layer)
 
@@ -389,8 +389,8 @@ docker logs sleec-runtime-enforcer-asmeta-server-1 > <path/to/raw_data/test_name
   ```
   And select the newest file.
 
-  > [!NOTE]
-  > Using the on-screen logs from the Test Runner window is preferred as ROS2 may not have flushed the entire stdout buffer in the log file.
+> [!NOTE]
+> Using the on-screen logs from the Test Runner window is preferred as ROS2 may not have flushed the entire stdout buffer in the log file.
 
 ### Analyzing results
 The Jupyter notebook file `analysis.ipynb` within the `experiments/results/analysis/` folder contains the analysis of the results for the test cases run. To run it over newly collected data, update the `log_dirs` list with the list of experiments whose log files are collected and stored in the `raw_data/` folder, and run again the Jupyter notebook to view the results. The analysis reports the consistency of the enforced obligations againts the expected ones, and the time overhead over the observed components.
@@ -436,7 +436,7 @@ python3 enforcer.py
 ```
 
 > [!NOTE]
-> `httpx`, `requests`, and `aio-pika` packages are required. [Installing dependencies](#installing-dependencies-(only-for-standalone-deployment))
+> `httpx`, `requests`, and `aio-pika` packages are required. See [installing dependencies](#installing-dependencies-only-for-standalone-deployment).
 
 #### Running the Enforcer (Docker)
 Build the Docker image
@@ -458,7 +458,7 @@ docker run -it --rm enforcer enforcer
 Monitor and Executor are two ROS2-based package located inside the `enforcement/subsystem/ros2_ws/src/ari_sim_comm_layer/` folder.
 
 #### Running the SLEEC Enforcement Subsystem (standalone)
-Please refer to the instructions for running this component [separately](#run-the-components-separately)
+Please refer to the instructions for running these components [in robot deployment setting](#monitor-and-executor-communication-layer)
 
 ## Installing dependencies (only for standalone deployment)
 Run
