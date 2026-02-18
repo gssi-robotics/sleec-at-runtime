@@ -262,7 +262,7 @@
                                 <td><strong>S1</strong></td>
                                 <td>
                                     <pre>
-IF it's time for the exercising session THEN greet in the user's language AND start the session
+IF the user is ready THEN greet in the user's language AND start the session
 UNLESS the user cares about privacy IN WHICH CASE greet in the user's language AND close the door AND start the session
 UNLESS the room is too warm IN WHICH CASE ask for permission to keep the door open
 UNLESS permission was not asked IN WHICH CASE do nothing
@@ -480,7 +480,7 @@ UNLESS the user has low glucose level IN WHICH CASE give dietary-approved snack 
                                 <td><strong>S5</strong></td>
                                 <td>
                                     <pre>
-IF (it's meal time AND the user is not yet ready) THEN remind the user to eat
+IF user is not yet ready THEN remind the user to eat
 UNLESS the user is sleeping IN WHICH CASE gently wake up the user WITHIN 5 minutes OTHERWISE alert nurse
 UNLESS the user is in REM sleep IN WHICH CASE do not wake up the user AND inform nurse
 UNLESS the user is at risk of hypoglycemia IN WHICH CASE alert the nurse
@@ -519,7 +519,7 @@ UNLESS the user is at risk of hypoglycemia IN WHICH CASE alert the nurse
                                 <td><strong>S6</strong></td>
                                 <td>
                                     <pre>
-IF (it's meal time AND the user is ready) THEN deliver meal portions
+IF the user is ready THEN deliver meal portions
 UNLESS the user wants to eat something outside the dietary plan IN WHICH CASE explain why the user should adhere to the diet AND deliver meal portions
 UNLESS (training results allow for a different food OR the user is particularly distressed) IN WHICH CASE deliver dietary-approved different food
 </pre>
@@ -605,7 +605,7 @@ sleec-at-runtime
                                     </div>
 
                                     <p class="is-size-7 has-text-grey">
-                                        See the <a href="" target="_blank"><i class="fab fa-github"></i> README</a>
+                                        See the <a href="https://github.com/gssi-robotics/sleec-at-runtime" target="_blank"><i class="fab fa-github"></i> README</a>
                                         in the
                                         repository for the full, detailed
                                         directory tree and file-level
@@ -915,7 +915,7 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                             <div class="box" style="background-color: #667eea3a; text-align: center;">
                                 <p class="mt-4 is-bold">
                                     Anonymized transcripts and SLEEC ruleset iterations are available on GitHub <a
-                                        href="https://github.com/gianlucafilippone/sleec-at-runtime/tree/main/qualitative_analysis"
+                                        href="https://github.com/gssi-robotics/sleec-at-runtime/tree/main/qualitative_analysis"
                                         target="_blank"><i class="fab fa-github"></i></a>
                                 </p>
                             </div>
