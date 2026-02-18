@@ -9,6 +9,9 @@ class MonitorNode(Node):
     def __init__(self):
         super().__init__('ari_sim_monitor_node')
 
+        self.declare_parameter('rabbitmq_host', 'rabbitmq')
+        rabbitmq_host = self.get_parameter('rabbitmq_host').get_parameter_value().string_value
+
         self.declare_parameter('rabbitmq_user', 'guest')
         rabbitmq_user = self.get_parameter('rabbitmq_user').get_parameter_value().string_value
 
@@ -17,7 +20,7 @@ class MonitorNode(Node):
 
         # Setup RabbitMQ Connection 
         self.pika_publisher = PikaPublisher(
-            host="rabbitmq",
+            host=rabbitmq_host,
             port=5672,
             user=rabbitmq_user,
             password=rabbitmq_pass,

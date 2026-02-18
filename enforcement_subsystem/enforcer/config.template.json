@@ -9,8 +9,8 @@
   "rabbitmq": {
     "host": "${RABBITMQ_HOST}",
     "port": 5672,
-    "user": "${RABBITMQ_DEFAULT_USER}",
-    "pass": "${RABBITMQ_DEFAULT_PASS}",
+    "user": "${RABBITMQ_USER}",
+    "pass": "${RABBITMQ_PASS}",
     "conditions_queue_name": "conditions",
     "obligations_queue_name": "obligations"
   },

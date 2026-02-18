@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-. ./install/setup.bash
+. ../install/setup.bash
 
 if [ $# -ne 3 ]; then
     echo "Usage: $0 <rules> <conditions> <deployment>"
@@ -13,7 +13,7 @@ CONDITIONS="$2"
 DEPLOYMENT="$3"
 
 TEST_NAME="test_${RULES}_$CONDITIONS"
-TEST_DIR="./scalability_test_cases"
+TEST_DIR="."
 LIBRARIES_DIR="$TEST_DIR/libraries"
 MODELS_DIR="$TEST_DIR/models"
 TEST_CASES_DIR="$TEST_DIR/test_cases"
@@ -35,7 +35,7 @@ fi
 
 echo "Running with test file: $TEST_FILE_ABS"
 
-CONFIGURATORS_DIR="./scalability_test_cases/configurators"
+CONFIGURATORS_DIR="$TEST_DIR/configurators"
 if [ ! -d "$CONFIGURATORS_DIR" ]; then
     echo "No such directory: $CONFIGURATORS_DIR"
     exit 1

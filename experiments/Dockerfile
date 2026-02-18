@@ -1,14 +1,9 @@
-# Use the official ROS 2 Humble image
 FROM ros:humble-ros-base
 
-# Set the working directory
 WORKDIR /ros2_ws
 
-# Copy your source code
 COPY ../enforcement_subsystem/ros2_ws/src/ari_test_runner ./src/ari_test_runner
-COPY ./experiments .
 
-# Install dependencies and build
 RUN apt update && apt install -y \
     python3-pip \
     python3-colcon-common-extensions \
@@ -19,11 +14,12 @@ RUN apt-get update && rosdep install --from-paths src -y --ignore-src
     
 RUN pip install requests
 
-# Build the workspace
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"
 
-RUN chmod +x ./run_testcases.sh
-RUN chmod +x ./run_scalability_tests.sh
+COPY ./experiments/reference_scenario ./reference_scenario
+COPY ./experiments/scalability ./scalability
 
-# Source the workspace when starting the container
+RUN chmod +x ./reference_scenario/run_reference_scenario_tests.sh
+RUN chmod +x ./scalability/run_scalability_tests.sh
+
 ENTRYPOINT ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && bash"]

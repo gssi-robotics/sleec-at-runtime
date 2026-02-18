@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-. ./install/setup.bash
+. ../install/setup.bash
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <test_name>"
