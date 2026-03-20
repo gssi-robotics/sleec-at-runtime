@@ -7,7 +7,7 @@
 
     <meta name="title" content="Replication Package – SLEEC@run.time">
     <meta name="description"
-        content="Replication package for Enforcing Ethics at Runtime in Autonomous Systems: code, experiments, and qualitative analysis.">
+        content="Replication package for Runtime Enforcement for Operationalizing Ethics in Autonomous Systems: code, experiments, and qualitative analysis.">
     <meta name="language" content="English">
 
     <title>Replication Package – SLEEC@run.time</title>
@@ -28,17 +28,29 @@
 </head>
 
 <body>
-    <!-- Back navigation -->
-    <section class="section pb-0">
+    <!-- Navbar -->
+    <section class="section py-3" style="background:#fafafa; border-bottom:1px solid #eaeaea;">
         <div class="container is-max-desktop">
-            <a href="../index.html" class="button is-small is-light">
+          <div class="level is-mobile">
+      
+            <div class="level-left">
+              <a href="../index.html" class="button is-small is-light">
                 <span class="icon">
-                    <i class="fas fa-arrow-left"></i>
+                  <i class="fas fa-arrow-left"></i>
                 </span>
                 <span>Back to Project Page</span>
-            </a>
+              </a>
+            </div>
+      
+            <div class="level-right">
+              <p class="is-size-6 has-text-weight-semibold">
+                SLEEC@run.time
+              </p>
+            </div>
+      
+          </div>
         </div>
-    </section>
+      </section>
 
     <!-- Scroll to Top Button -->
     <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
@@ -59,14 +71,14 @@
 
                             <div class="is-size-5">
                                 <p class="mb-2">
-                                    Enforcing Ethics at Runtime in Autonomous Systems
+                                    Runtime Enforcement for Operationalizing Ethics in Autonomous Systems
                                 </p>
                             </div>
 
                             <p class="is-size-7 has-text-grey mb-4">
                                 This page describes how to build, run, and reproduce the experiments and qualitative
                                 analysis
-                                for the <em>“Enforcing Ethics at Runtime in Autonomous Systems”</em> paper submitted at
+                                for the <em>“Runtime Enforcement for Operationalizing Ethics in Autonomous Systems”</em> paper submitted at
                                 IEEE Transactions on Software Engineering journal.
                             </p>
 
@@ -786,12 +798,145 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                                 </ul>
                             </div>
 
+                            <div class="content has-text-justified">
+                    
+          
+                                <h3 class="title is-5 mt-5">Metrics</h3>
+                                <p class="is-size-6">
+                                  From the collected logs, we computed: (i) the <strong>Enforcement Subsystem overhead</strong>,
+                                  measured from contextual change simulation to obligation reception; (ii) the
+                                  <strong>Enforcer overhead</strong>, including the analysis and planning phases;
+                                  and (iii) the <strong>ASMETA server overhead</strong>, corresponding to the model
+                                  execution step itself. We also checked whether the enforced obligation matched the
+                                  expected ground truth for each test case.
+                                </p>
+                      
+                                <h3 class="title is-5 mt-5">Results</h3>
+                      
+                                <div class="box has-text-left">
+                                  <p class="mb-3">
+                                    <strong>Effectiveness.</strong>
+                                    Across all <strong>750 test cases</strong>, the obligation enforced by the system
+                                    was always consistent with the expected one. This shows that the SLEEC rules were
+                                    correctly formalized as ASM transition rules and that the Enforcement Subsystem
+                                    consistently drove the system back to the ethics-respectful region.
+                                  </p>
+                      
+                                  <p class="mb-3">
+                                    <strong>Overhead.</strong>
+                                    The overall measured overhead was <strong>76.1 ms on average</strong>
+                                    (minimum 63 ms, maximum 104 ms, standard deviation 5.7). Of this,
+                                    <strong>43.6 ms</strong> came from the Enforcer and only <strong>1.68 ms</strong>
+                                    from the ASMETA server, showing that model execution itself contributes very little
+                                    to the end-to-end overhead. Most enforced actions were received in less than
+                                    <strong>0.1 seconds</strong> (93 ms at the 99th percentile).
+                                  </p>
+                      
+                                  <p>
+                                    <strong>Scalability.</strong>
+                                    The scalability analysis showed that the dominant source of growth is the ASMETA
+                                    server, whose overhead increases approximately quadratically with the total number
+                                    of clauses in the SLEEC ruleset. In contrast, the other components of the Enforcement
+                                    Subsystem are only marginally affected by the ruleset size. For real-world-sized
+                                    SLEEC rulesets, however, the overhead remains limited and practically manageable.
+                                  </p>
+                                </div>
+                      
+                                <!-- Plot 1 -->
+                                <div class="box mt-5">
+                                  <h4 class="title is-5 has-text-centered">Scalability Overview</h4>
+                                  <figure class="mt-3">
+                                    <a href="#scalability-overview-lightbox">
+                                      <img src="../static/images/scalability-overview.png"
+                                           alt="Scalability overview"
+                                           style="max-width:100%; border-radius:6px; cursor:zoom-in;">
+                                    </a>
+                                    <figcaption class="has-text-grey is-size-7 mt-2">
+                                      Scalability overview showing time overhead per component over SLEEC ruleset size.
+                                    </figcaption>
+                                  </figure>
+                                </div>
+                      
+                                <!-- Plot 2 -->
+                                <div class="box mt-5">
+                                  <h4 class="title is-5 has-text-centered">Overhead Breakdown</h4>
+                                  <figure class="mt-3">
+                                    <a href="#overhead-lightbox">
+                                      <img src="../static/images/overhead.png"
+                                           alt="Overhead results"
+                                           style="max-width:100%; border-radius:6px; cursor:zoom-in;">
+                                    </a>
+                                    <figcaption class="has-text-grey is-size-7 mt-2">
+                                      Average overhead measured for the Enforcement Subsystem, the Enforcer,
+                                      and the ASMETA server.
+                                    </figcaption>
+                                  </figure>
+                                </div>
+                      
+                                <!-- Plot 3 -->
+                                <div class="box mt-5">
+                                  <h4 class="title is-5 has-text-centered">Scalability Results</h4>
+                                  <div class="columns is-variable is-5">
+                                    <div class="column">
+                                      <figure class="mt-3">
+                                        <a href="#overhead-comparison-lightbox">
+                                          <img src="../static/images/overhead-comparison.png"
+                                               alt="Overhead comparison across ruleset sizes"
+                                               style="max-width:100%; border-radius:6px; cursor:zoom-in;">
+                                        </a>
+                                        <figcaption class="has-text-grey is-size-7 mt-2">
+                                          Overhead growth as the total number of clauses in the SLEEC ruleset increases.
+                                        </figcaption>
+                                      </figure>
+                                    </div>
+                                  </div>
+                                </div>
+                      
+                                <h3 class="title is-5 mt-5">Analysis artifacts</h3>
+                                <p class="is-size-6">
+                                  The notebooks in
+                                  <code>experiments/results/analysis/analysis.ipynb</code> and
+                                  <code>experiments/results/scalability/analysis/scalability_analysis.ipynb</code>
+                                  compute correctness and overhead metrics from the collected logs.
+                                </p>
+                      
+                                <div class="box has-text-left">
+                                  <ul class="is-size-6">
+                                    <li><code>extracted_asmeta_data.csv</code>: ASMETA server runtime data</li>
+                                    <li><code>extracted_enforcer_data.csv</code>: Enforcer runtime data</li>
+                                    <li><code>extracted_test_results.csv</code>: aggregated test case results</li>
+                                    <li><code>test_cases/ariec250.json</code>, <code>ariec500.json</code>: representative test sets</li>
+                                  </ul>
+                                </div>
+                      
+                                <p class="is-size-7 has-text-grey mt-4">
+                                  This section summarizes the quantitative evaluation reported in Section 8.2 of the paper. :contentReference[oaicite:7]{index=7}
+                                </p>
+                      
+                              </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+          
+          <!-- Lightboxes -->
+          <div id="scalability-overview-lightbox" class="lightbox">
+            <a href="#" class="lightbox-close"></a>
+            <img src="../static/images/scalability-overview.png" alt="Scalability overview enlarged">
+          </div>
+          
+          <div id="overhead-lightbox" class="lightbox">
+            <a href="#" class="lightbox-close"></a>
+            <img src="../static/images/overhead.png" alt="Overhead results enlarged">
+          </div>
+          
+          <div id="overhead-comparison-lightbox" class="lightbox">
+            <a href="#" class="lightbox-close"></a>
+            <img src="../static/images/overhead-comparison.png" alt="Overhead comparison enlarged">
+          </div>
         <!-- QUALITATIVE ANALYSIS -->
         <section class="section hero is-light" id="qualitative">
             <div class="container is-max-desktop">
@@ -1045,7 +1190,7 @@ UNLESS The user has physical issues resulting from the exercises IN WHICH CASE (
                                 This page is part of the SLEEC@run.time project website and summarizes the
                                 replication
                                 package
-                                for the <em>“Enforcing Ethics at Runtime in Autonomous Systems”</em> work submitted at the IEEE Transactions on Software Engineering journal.
+                                for the <em>“Runtime Enforcement for Operationalizing Ethics in Autonomous Systems”</em> work submitted at the IEEE Transactions on Software Engineering journal.
                             </p>
                         </div>
                     </div>
