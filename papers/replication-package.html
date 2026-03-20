@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="title" content="Replication Package – SLEEC@run.time">
+    <meta name="title" content="Replication Package - SLEEC@run.time">
     <meta name="description"
         content="Replication package for Runtime Enforcement for Operationalizing Ethics in Autonomous Systems: code, experiments, and qualitative analysis.">
     <meta name="language" content="English">
 
-    <title>Replication Package – SLEEC@run.time</title>
+    <title>Replication Package - SLEEC@run.time</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -75,9 +75,8 @@
                                 </p>
                             </div>
 
-                            <p class="is-size-7 has-text-grey mb-4">
-                                This page describes how to build, run, and reproduce the experiments and qualitative
-                                analysis
+                            <p class="is-size-6 has-text-grey mb-4">
+                                This page overviews the <i>AssistiveCareRobot</i> scenario, describes how to run the system and reproduce the experiments, and details qualitative analysis
                                 for the <em>“Runtime Enforcement for Operationalizing Ethics in Autonomous Systems”</em> paper submitted at
                                 IEEE Transactions on Software Engineering journal.
                             </p>
@@ -246,9 +245,9 @@
             </div>
 
             <!-- FULL-WIDTH TABLE AREA -->
-            <div class="container is-fluid" id="ruleset">
+            <div class="container is-fluid mt-6" id="ruleset">
                 <h2 class="title is-4">SLEEC Rules, Principles, and Labels</h2>
-                <p class="is-size-7 has-text-grey">
+                <p class="is-size-6 has-text-grey">
                     Description of Principles (“-” violated, “+” ensured). <br>
                     P: Privacy, D: Dignity, B: Beneficence, NM: Non-Maleficence, A: Autonomy, ET:
                     Explainability &amp; Transparency.
@@ -569,10 +568,6 @@ UNLESS (training results allow for a different food OR the user is particularly 
                     </table>
                 </div>
             </div>
-            </div>
-            </div>
-            </div>
-            </div>
         </section>
 
         <!-- BUILD & RUN -->
@@ -581,12 +576,18 @@ UNLESS (training results allow for a different food OR the user is particularly 
                 <div class="columns is-centered has-text-centered">
                     <div class="column is-four-fifths">
                         <h2 class="title is-3">Build and Run</h2>
+                        <div class="box">
+                            <p class="is-size-9">
+                                See the <a href="https://github.com/gssi-robotics/sleec-at-runtime/blob/main/README.md" target="_blank" class="">
+                                    <i class="fab fa-github"></i> README
+                                </a> in the repository for the full, detailed documentation.
+                            </p>
+                        </div>
                         <div class="content has-text-justified">
                             <p>
                                 The Enforcement Subsystem and ARI simulation can be deployed in different ways:
                                 via Docker Compose (recommended), in a local testing configuration, or by running
-                                components
-                                separately (for real-robot setups).
+                                components separately (for real-robot setups).
                             </p>
 
                             <div class="column">
@@ -615,82 +616,108 @@ sleec-at-runtime
 └─ qualitative analysis/       # Inputs and results of the qualitative analysis
 </pre>
                                     </div>
-
-                                    <p class="is-size-7 has-text-grey">
-                                        See the <a href="https://github.com/gssi-robotics/sleec-at-runtime" target="_blank"><i class="fab fa-github"></i> README</a>
-                                        in the
-                                        repository for the full, detailed
-                                        directory tree and file-level
-                                        documentation.
-                                    </p>
                                 </div>
                             </div>
 
                             <h3 class="title is-5">1. Clone the repository</h3>
-                            <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
-                                <pre style="margin:0; white-space:pre-wrap;">
+                            <pre>
 git clone &lt;REPO_URL&gt;
 cd sleec-at-runtime
 </pre>
-                            </div>
 
                             <h3 class="title is-5 mt-5">2. Run the ARI simulation (Docker Compose, recommended)</h3>
-                            <p class="is-size-7">
-                                This starts the full SLEEC@run.time Enforcement Subsystem along with the ARI
-                                simulator.
-
+                            <p class="is-size-6 mt-2 mb-2">
+                                Start the full SLEEC@run.time Enforcement Subsystem along with the ARI
+                                simulator:
                             </p>
-                            <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                 <pre style="margin:0; white-space:pre-wrap;">
 cd enforcement_subsystem
-docker compose --profile ari-sim --env-file .env.ari-sim up --build
+docker compose --profile ari-sim --env-file .env.docker-ari-sim up --build
 </pre>
-                            </div>
 
-                            <h4 class="title is-6 mt-4">Interact with the system</h4>
-                            <p class="is-size-7">
+                            
+                            <p class="has-text-weight-semibold mt-4 mb-2">Interact with the system</h4>
+                            <p class="is-size-6 mt-2 mb-2">
                                 In a new terminal, run the ARI user interface:
                             </p>
-                            <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                 <pre style="margin:0; white-space:pre-wrap;">
 docker exec -it sleec-runtime-enforcer-ari-sim-1 bash
 . install/setup.bash
 ros2 run ari_sim ari_sim_user_interface
 </pre>
-                            </div>
 
                             <h3 class="title is-5 mt-5">3. Local (Docker) testing configuration</h3>
-                            <p class="is-size-7">
+                            <p class="is-size-6 mt-4 mb-2">
                                 A lighter configuration for testing without the full ARI simulation.
-
                             </p>
-                            <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                 <pre style="margin:0; white-space:pre-wrap;">
 cd enforcement_subsystem
-docker compose --profile ari-sim-test --env-file .env.ari-sim up --build
+docker compose --profile ari-sim-test --env-file .env.docker-ari-sim up --build
 </pre>
-                            </div>
+
+                            <p class="has-text-weight-semibold mt-4 mb-2">Run tests on the reference scenario</p>
+                            <p class="is-size-6 mt-2 mb-2">
+                                In a new terminal:
+                            </p>
+                                <pre style="margin:0; white-space:pre-wrap;">
+docker exec -it sleec-runtime-enforcer-ari-sim-test-runner-1 bash
+cd reference_scenario
+</pre>
+
+                            <p class="is-size-6 mt-4 mb-2">
+                                Generate a new test case if needed (optional):
+                            </p>
+                                <pre style="margin:0; white-space:pre-wrap;">
+python3 test_cases_generator.py &lt;number_of_cases&gt; &lt;test_case_name&gt;
+</pre>
+
+                            <p class="is-size-6 mt-4 mb-2">
+                                Then run:
+                            </p>
+                                <pre style="margin:0; white-space:pre-wrap;">
+./run_reference_scenario_tests.sh &lt;test_case_name&gt;
+</pre>
+
+                            <p class="has-text-weight-semibold mt-4 mb-2">Run scalability tests</p>
+                            <p class="is-size-6 mt-2 mb-2">
+                                In a new terminal:
+                            </p>
+                                <pre style="margin:0; white-space:pre-wrap;">
+docker exec -it sleec-runtime-enforcer-ari-sim-test-runner-1 bash
+cd scalability
+</pre>
+
+                            <p class="is-size-6 mt-4 mb-2">
+                                Generate a new test case if needed (optional):
+                            </p>
+                                <pre style="margin:0; white-space:pre-wrap;">
+python3 scalability_test_cases_generator.py -r &lt;#rules&gt; -c &lt;#conditions&gt; -n &lt;#test_cases&gt;
+</pre>
+
+                            <p class="is-size-6 mt-4 mb-2">
+                                Then run:
+                            </p>
+                                <pre style="margin:0; white-space:pre-wrap;">
+./run_scalability_tests.sh &lt;#rules&gt; &lt;#conditions&gt; docker
+</pre>
 
                             <h3 class="title is-5 mt-5">4. Run components separately</h3>
-                            <p class="is-size-7">
+                            <p class="is-size-6 mt-4 mb-2">
                                 For real-robot deployments, components (ASMETA server, Enforcer, Monitor, Executor)
-                                can
-                                be run separately.
+                                can be run separately.
                             </p>
                             <div class="has-text-left">
-                                <p class="has-text-weight-semibold mb-2" style="color: rgba(0,0,0,.7);">Enforcer +
-                                    ASMETA server (Docker)</p>
-                                <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
+                                <p class="has-text-weight-semibold mb-2" style="color: rgba(0,0,0,.7);">
+                                    Enforcer + ASMETA server (Docker)
+                                </p>
                                     <pre style="margin:0; white-space:pre-wrap;">
 cd enforcement_subsystem
 docker compose --env-file .env.ros-deployment up --build
 </pre>
-                                </div>
 
-                                <p class="has-text-weight-semibold mt-4 mb-2" style="color: rgba(0,0,0,.7);">Monitor
-                                    +
-                                    Executor (ROS 2)</p>
-                                <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
+                                <p class="has-text-weight-semibold mt-4 mb-2" style="color: rgba(0,0,0,.7);">
+                                    Monitor + Executor (ROS 2)
+                                </p>
                                     <pre style="margin:0; white-space:pre-wrap;">
 cd enforcement_subsystem
 pip install -r requirements.txt
@@ -699,9 +726,24 @@ cd ros2_ws
 colcon build
 . install/setup.bash
 ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
-  rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
+  rabbitmq_host:=&lt;localhost/hostname/IP&gt; rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
 </pre>
-                                </div>
+
+                                <p class="has-text-weight-semibold mt-4 mb-2" style="color: rgba(0,0,0,.7);">
+                                    Run the CLI simulator
+                                </p>
+                                    <pre style="margin:0; white-space:pre-wrap;">
+. install/setup.bash
+ros2 launch ari_sim ari_sim_launch.py
+</pre>
+
+                                <p class="has-text-weight-semibold mt-4 mb-2" style="color: rgba(0,0,0,.7);">
+                                    Interact with the (simulated) system
+                                </p>
+                                    <pre style="margin:0; white-space:pre-wrap;">
+. install/setup.bash
+ros2 run ari_sim ari_sim_user_interface
+</pre>
                             </div>
 
                         </div>
@@ -729,18 +771,15 @@ ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
                             <ol class="is-size-6 has-text-left">
                                 <li>
                                     <strong>Deploy Enforcer, ASMETA Server, and RabbitMQ:</strong>
-                                    <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                         <pre style="margin-top:0.5rem; white-space:pre-wrap;">
 cd sleec-at-runtime/enforcement_subsystem
 pip install -r requirements.txt
 docker compose --env-file .env.ros-deployment up --build
 </pre>
-                                    </div>
                                 </li>
 
                                 <li class="mt-3">
                                     <strong>Deploy Monitor and Executor:</strong>
-                                    <div class="box" style="background:#0d1117; color:#c9d1d9; text-align:left;">
                                         <pre style="margin-top:0.5rem; white-space:pre-wrap;">
 cd ros2_ws
 colcon build
@@ -748,7 +787,6 @@ colcon build
 ros2 launch ari_sim_comm_layer ari_sim_comm_layer_launch.py \
   rabbitmq_user:=robotuser rabbitmq_pass:=robotpass
 </pre>
-                                    </div>
                                 </li>
 
                                 <li class="mt-3">
