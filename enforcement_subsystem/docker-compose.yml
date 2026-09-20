@@ -48,8 +48,21 @@ services:
     networks:
       - enforcer-network
 
+  ari-comm-layer:
+    profiles: ["ari"]
+    build:
+      context: ./ros2_ws
+    environment:
+      RABBITMQ_HOST: ${RABBITMQ_HOST:-rabbitmq}
+      RABBITMQ_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_PASS: ${RABBITMQ_PASS:-guest}
+      ROBOT_HOST: ${ROBOT_HOST:-10.68.0.1}
+    entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch ari_comm_layer ari_comm_layer_launch.py rabbitmq_host:=${RABBITMQ_HOST:-rabbitmq} rabbitmq_user:=${RABBITMQ_USER:-guest} rabbitmq_pass:=${RABBITMQ_USER:-guest} robot_host:=${ROBOT_HOST:-10.68.0.1}'"
+    networks:
+      - enforcer-network
+
   ari-sim:
-    profiles: ["ari-sim"]
+    profiles: ["ari-sim", "ari"]
     build:
       context: ./ros2_ws    
     entrypoint: "/bin/bash -c 'source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 launch ari_sim ari_sim_launch.py'"

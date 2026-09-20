@@ -26,6 +26,7 @@ This is the replication package for the paper _Enforcing Ethics at Runtime in Au
     - [4b. Run scalability tests](#4b-run-scalability-tests)
     - [5. Collect log files](#5-collect-log-files)
   - [Analyzing results](#analyzing-results)
+- [End-to-end tests](#end-to-end-tests)
 - [Architecture components detail](#architecture-components-detail)
   - [ASMETA server](#asmeta-server)
     - [Running the ASMETA server (standalone)](#running-the-asmeta-server-standalone)
@@ -395,6 +396,19 @@ docker logs sleec-runtime-enforcer-asmeta-server-1 > <path/to/raw_data/test_name
 The Jupyter notebook file `analysis.ipynb` within the `experiments/results/analysis/` folder contains the analysis of the results for the test cases run. To run it over newly collected data, update the `log_dirs` list with the list of experiments whose log files are collected and stored in the `raw_data/` folder, and run again the Jupyter notebook to view the results. The analysis reports the consistency of the enforced obligations againts the expected ones, and the time overhead over the observed components.
 
 The Jupyter notebook file `scalability_analysis.ipynb` within the `experiments/results/scalabilty/analysis/` folder contains the analysis of the scalability tests. To run it over newly collected, data, update the `log_dirs` list with the list of experiments whose log files are collected and stored in the `scalability/raw_data/` folder, and run again the Jupyter notebook to view the results. The analysis reports the overhead on each observed component with respect to the scalability tests executed with test cases of different sizes.
+
+
+## End-to-end tests
+
+Clone the repository on the machine that will execute the Enforcement Subsystem (Docker required), then:
+```
+docker compose --profile ari --env-file .env.docker-ari up --build
+```
+
+> [!NOTE]
+> Update the .enf.docker-ari file with the actual robot IP address to allow communication with the robot.
+> 
+> A CLI for simulating actual parameters will be run.
 
 ## Architecture components detail
 ### ASMETA server
