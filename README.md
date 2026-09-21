@@ -407,8 +407,22 @@ docker compose --profile ari --env-file .env.docker-ari up --build
 
 > [!NOTE]
 > Update the .enf.docker-ari file with the actual robot IP address to allow communication with the robot.
-> 
-> A CLI for simulating actual parameters will be run.
+
+> [!NOTE]
+> Presentations must be created or loaded on ARI in order to execute the action corresponding to the enforced obligations.
+
+A mock of the ARI web interface (to be used instead of the actual robot) can be run using the following command instead of the previous one:
+```
+docker compose --profile ari-web-mock --env-file .env.docker-ari-web-mock up --build
+```
+
+To simulate conditions, run the CLI simulator from a new terminal window:
+```
+docker exec -it sleec-runtime-enforcer-ari-sim-1 bash
+. install/setup.bash
+ros2 run ari_sim ari_sim_user_interface
+```
+
 
 ## Architecture components detail
 ### ASMETA server

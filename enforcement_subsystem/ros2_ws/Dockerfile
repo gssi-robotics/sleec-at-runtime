@@ -17,6 +17,7 @@ RUN apt update && apt install -y \
 RUN apt-get update && rosdep install --from-paths src -y --ignore-src
 
 RUN pip install aio-pika
+RUN pip install requests
 
 # Build the workspace
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build"

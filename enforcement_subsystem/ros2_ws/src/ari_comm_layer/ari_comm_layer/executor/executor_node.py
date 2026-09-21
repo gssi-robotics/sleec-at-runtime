@@ -3,7 +3,6 @@ import time
 import rclpy
 import requests
 from rclpy.node import Node
-from std_msgs.msg import String
 from ari_comm_layer.executor.pika_subscriber import PikaSubscriber
 from ari_comm_layer.executor.obligations_processor import ObligationsProcessor
 
@@ -15,16 +14,18 @@ class ExecutorNode(Node):
 
         # ARI Parameters
         self.declare_parameter('robot_host', '10.68.0.1')
+        self.declare_parameter('robot_port', 80)
         self.declare_parameter('presentation_endpoint', '/action/pal_play_presentation_from_name')
         self.declare_parameter('tts_endpoint', '/action/tts')
 
         # Complete URLs
         robot_host = self.get_parameter('robot_host').get_parameter_value().string_value
+        robot_port = self.get_parameter('robot_port').get_parameter_value().integer_value
         presentation_ep = self.get_parameter('presentation_endpoint').get_parameter_value().string_value
         tts_ep = self.get_parameter('tts_endpoint').get_parameter_value().string_value
 
-        self.presentation_url = f'http://{robot_host}{presentation_ep}'
-        self.tts_url = f'http://{robot_host}{tts_ep}'
+        self.presentation_url = f'http://{robot_host}:{robot_port}{presentation_ep}'
+        self.tts_url = f'http://{robot_host}:{robot_port}{tts_ep}'
 
         self.get_logger().info(f'Presentation endpoint: {self.presentation_url}')
         self.get_logger().info(f'TTS endpoint: {self.tts_url}')
@@ -51,7 +52,7 @@ class ExecutorNode(Node):
             requeue_on_error=True,
         )
 
-        self.get_logger().info("Effector ready...")
+        self.get_logger().info("Effector (REST communication) ready")
 
     def call_presentation(self, presentation_name):
             payload = {"presentation_name": presentation_name}
